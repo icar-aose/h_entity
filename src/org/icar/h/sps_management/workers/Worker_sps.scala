@@ -33,3 +33,4 @@ class Worker_sps(val bridge : Akka2Jade) extends Actor with ActorLogging {
         case _ ⇒ println("unspecied message")
     }
 }
+

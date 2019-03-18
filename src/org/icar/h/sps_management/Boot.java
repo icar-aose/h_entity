@@ -39,8 +39,7 @@ public class Boot {
 		//	AgentController diplomat  = ac.createNewAgent("diplomat", Diplomat.class.getName(), new Object[] {} );
 		//	diplomat.start();
 
-			
-		    AgentParameters ap = new AgentParameters();
+			AgentParameters ap = new AgentParameters();
             ap.asSource = new File("src/org/icar/h/sps_management/head.asl");
 			AgentController head = ac.createNewAgent("head", JadeAgArch.class.getName(), new Object[] { ap });
 			head.start();

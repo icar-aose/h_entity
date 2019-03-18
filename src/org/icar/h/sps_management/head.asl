@@ -1,16 +1,11 @@
 /* Initial beliefs and rules */
-
-/* Initial goals */
 mission(on_shore).
 
-/* automatic */
-shareable(Plans).
-
+/* Initial goals */
 !continuity_of_service.
 
 /* Plans */
-
-+!continuity_of_service 
++!continuity_of_service
 : 
 	true 
 <- 
@@ -18,28 +13,17 @@ shareable(Plans).
 	!failure_detection;
 .
 
-+!failure_prediciton
-:	
-	true
-<-
-	true
-.
-
-
 +!failure_detection
 :	
 	true
 <-
 	
-	.wait(5000)
+	.wait(500)
 	.send(workersystem,tell,check_failure)
 .
 
 
-
-
-+failure(FailureDescription)
-: true
++failure(FailureDescription) : true
 <-  
 	.print("Find failure: ", FailureDescription)
 	!management_and_recovery(Mission,FailureDescription)
@@ -47,10 +31,7 @@ shareable(Plans).
 .
 
 
-
-+!management_and_recovery(Mission,FailureDescription)
-:	
-	true
++!management_and_recovery(Mission,FailureDescription) :	true
 <-
 	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription)
 	.wait(2000)
@@ -82,5 +63,17 @@ shareable(Plans).
 	.print("messages Alive from ",X);
 	.abolish(alive);
 .
+
+
+
+
++!failure_prediciton
+:
+	true
+<-
+	true
+.
+
+
 
 
