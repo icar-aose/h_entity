@@ -19,13 +19,13 @@ class Worker_plan(val bridge : Akka2Jade,worker_sps : ActorRef) extends Actor wi
         case x : String ⇒
            if(x.startsWith("sol"))
           {
-            println("i'm plan enactor, now contact worker_sps for require the plan for solution: "+x)
+            log.info("i'm plan enactor, now contact worker_sps for require the plan for solution: "+x)
             sol = x
             worker_sps ! x
           }
           else 
           {
-            println("Now enact: "+x)
+            log.info("Now enact: "+x)
             Thread.sleep(2000)
           }
         case _ ⇒ println("unspecied message")

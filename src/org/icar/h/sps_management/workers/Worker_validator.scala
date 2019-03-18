@@ -19,14 +19,13 @@ class Worker_validator(val bridge : Akka2Jade, worker_sps : ActorRef) extends Ac
         case x : String ⇒
           if(x.startsWith("sol"))
           {
-            println("i'm validator, now contact worker sps reconfigurator for require the solution: "+x)
+            log.info("i'm validator, now contact worker sps reconfigurator for require the solution: "+x)
             sol = x
             worker_sps ! x
           }
           else 
-          {
-            println("Matlab test with solution: "+x)
-            Thread.sleep(2000)
+          { Thread.sleep(2000)
+            log.info("Validator: Matlab test with solution "+x)
             bridge.sendHead("selected("+sol+")")
           }
         //case "

@@ -1,13 +1,10 @@
 package org.icar.h.sps_management.workers
 
 import akka.actor.{Actor, ActorLogging, Props}
-import org.icar.h.Akka2Jade;
-import cartago.ArtifactId;
-import cartago.CartagoException;
-import cartago.Op;
-import cartago.util.agent.CartagoBasicContext;
-
-import cartago.events._;
+import org.icar.h.Akka2Jade
+import cartago.{ArtifactId, CartagoException, Op, Tuple}
+import cartago.util.agent.CartagoBasicContext
+import cartago.events._
 import cartago.util.agent._;
 
 object Worker_check {
@@ -41,14 +38,14 @@ class Worker_check(val bridge : Akka2Jade) extends Actor with ActorLogging {
         case "check_failure" ⇒
           println("i'm worker check failure!\n")
 				  var p :Percept = null
+          val sig : String = null
 				  do
 				  {
-				    //println("tick")
 			 	    p = my_context.waitForPercept()
-		        log.info("percept: "+p.getSignal);
+		        log.info("percept: "+p.getSignal)
 				  }
 				  while (!p.hasSignal());
-				  bridge.sendHead("failure(f1)")
+          bridge.sendHead("failure(f1)")
           
         case _ ⇒ println("unspecied message")
     }

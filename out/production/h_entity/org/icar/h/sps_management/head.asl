@@ -31,8 +31,8 @@ shareable(Plans).
 	true
 <-
 	
-	.wait(3000);
-	.send(workersystem,tell,check_failure);
+	.wait(5000)
+	.send(workersystem,tell,check_failure)
 .
 
 
@@ -53,6 +53,7 @@ shareable(Plans).
 	true
 <-
 	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription)
+	.wait(2000)
 	.send(workersystem,achive,sps_reconfigurator(FailureDescription));
 .
 
@@ -60,6 +61,7 @@ shareable(Plans).
 <-
 	.print("The worker sps reconfigurator finds a solution: ",Plan)
 	.print("Now contact the worker validator")
+	.wait(2000)
 	.send(workersystem,achive,validator(Plan));
 	//validate_emergency_management(Plan,/*-->*/Problems);
 	//notify_commander(Plan,Results,Problems);
@@ -69,6 +71,7 @@ shareable(Plans).
 <-
     .print("The worker_validator validate the solution: ",Plan)
     .print("Now contact the Worker plan enactor for enact the Plan")
+    .wait(2000)
 	.send(workersystem,achive,enact(Plan));
 .
 

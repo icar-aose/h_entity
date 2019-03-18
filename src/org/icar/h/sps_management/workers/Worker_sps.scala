@@ -20,14 +20,15 @@ class Worker_sps(val bridge : Akka2Jade) extends Actor with ActorLogging {
           if(x.startsWith("f"))
           {
             Thread.sleep(2000)    //find a solution
-            println("i'm sps reconfigurator, find solution for the failures: "+ x+"\n")
+            log.info("i'm sps reconfigurator, find solution for the failures: "+ x+"\n")
             hashMap += ("solution1" -> "cap1_cap2_cap3")
             bridge.sendHead("discovered(solution1)")
           }
           else 
           {
-            val x  = hashMap("solution1")
-            sender() ! x
+            val sol  = hashMap(x)
+            log.info("now send solution to sps validator!")
+            sender() ! sol
           }
         case _ ⇒ println("unspecied message")
     }
