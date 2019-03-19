@@ -42,12 +42,12 @@ public class Boot {
 			AgentParameters ap = new AgentParameters();
             ap.asSource = new File("src/org/icar/h/sps_management/head.asl");
 			AgentController head = ac.createNewAgent("head", JadeAgArch.class.getName(), new Object[] { ap });
-			head.start();
-			
+
 
 			AgentController workersystem  = ac.createNewAgent("workersystem", WorkerSystem.class.getName(), new Object[] {} );
 			workersystem.start();
-			
+			head.start();
+
 		} catch (StaleProxyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

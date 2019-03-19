@@ -1,7 +1,7 @@
 package org.icar.h.sps_management;
 
 import org.icar.h.Akka2Jade;
-import org.icar.h.sps_management.workers.*;
+import org.icar.h.Worker;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -12,28 +12,20 @@ import jade.lang.acl.ACLMessage;
 @SuppressWarnings("serial")
 public class WorkerSystem extends Agent {
 	final private ActorSystem system = ActorSystem.create("worker-system");
-	private ActorRef worker_check = null;
-	private ActorRef worker_sps = null;
-	private ActorRef worker_validator = null;
-	private ActorRef worker_plan = null;
-	
+	private ActorRef root = null;
+
+	//private ActorRef worker_check = null;
+	//private ActorRef worker_sps = null;
+	//private ActorRef worker_validator = null;
+	//private ActorRef worker_plan = null;
+
 	  protected void setup() {
-		  	System.out.println("I am the workers representative and i create->worker_check,worker_sps,worker_validator,worker_plan");
+		  	System.out.println("I am the jade/akka wrapper");
 		  	
 		  	Akka2Jade bridge = new Akka2Jade(this);
-		  	
-		  	//worker for check failure
-		    worker_check = system.actorOf(Worker_check.props(bridge), "worker_check");
-		    
-		    //worker for sps_reconfigurator
-		    worker_sps = system.actorOf(Worker_sps.props(bridge), "worker_sps");
-		    
-		    //worker for validator matlab
-		    worker_validator = system.actorOf(Worker_validator.props(bridge,worker_sps), "worker_validator");
-		    
-		    //worker for plan enactor
-		    worker_plan = system.actorOf(Worker_plan.props(bridge,worker_sps), "worker_plan");
-		    
+
+		  	root = system.actorOf(Root.props(bridge), "root-worker");
+
 		    addBehaviour(new ForwardIncomingMessages());
 	  }
 	  
@@ -42,8 +34,16 @@ public class WorkerSystem extends Agent {
 		  
 		@Override
 		public void action() {
-				
-			  int indB = -1;
+
+			ACLMessage msg = myAgent.receive();
+			if (msg != null) {
+				String content = msg.getContent();
+				System.out.println("received and forwaded: "+content);
+
+				root.tell(content, null);
+			}
+
+/*			  int indB = -1;
 			  int indF = -1;
 			  String element = null;
 			  ACLMessage msg = myAgent.receive();
@@ -86,7 +86,8 @@ public class WorkerSystem extends Agent {
 				 // worker_sps.tell(content,null);
 				 // worker_validator.tell(content,null);
 				  
-			 }
+			 }*/
+
 		  }
 		  
 	  }

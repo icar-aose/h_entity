@@ -1,4 +1,4 @@
-package org.icar.h.sps_management.workers
+package org.icar.h.sps_management.worker
 
 import akka.actor.{Actor, ActorLogging, Props}
 import org.icar.h.Akka2Jade
@@ -7,11 +7,11 @@ import cartago.util.agent.CartagoBasicContext
 import cartago.events._
 import cartago.util.agent._;
 
-object Worker_check {
-   def props(bridge : Akka2Jade) : Props = Props(classOf[Worker_check],bridge)  
+object PowerFailureMonitor {
+   def props(bridge : Akka2Jade) : Props = Props(classOf[PowerFailureMonitor],bridge)
 }
 
-class Worker_check(val bridge : Akka2Jade) extends Actor with ActorLogging {
+class PowerFailureMonitor(val bridge : Akka2Jade) extends Actor with ActorLogging {
       
   var my_context : CartagoBasicContext = new CartagoBasicContext("my_agent")
 	var my_device : ArtifactId = null
@@ -35,7 +35,8 @@ class Worker_check(val bridge : Akka2Jade) extends Actor with ActorLogging {
       }
     
       override def receive: Receive = {
-        case "check_failure" ⇒
+
+        case CheckFailure() =>
           println("i'm worker check failure!\n")
 				  var p :Percept = null
           val sig : String = null
@@ -47,6 +48,7 @@ class Worker_check(val bridge : Akka2Jade) extends Actor with ActorLogging {
 				  while (!p.hasSignal());
           bridge.sendHead("failure(f1)")
           
-        case _ ⇒ println("unspecied message")
+        case _ =>
+          println("FailureMonitor: unspecied message")
     }
 }

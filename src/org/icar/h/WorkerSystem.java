@@ -32,7 +32,6 @@ public class WorkerSystem extends Agent {
 			  if (msg != null) {
 				  String content = msg.getContent();
 				  worker.tell(content, null);
-				  System.out.println("suca");
 			 }
 		  }
 		  

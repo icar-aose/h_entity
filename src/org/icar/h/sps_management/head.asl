@@ -18,7 +18,7 @@ mission(on_shore).
 	true
 <-
 	
-	.wait(500)
+	.wait(1000)
 	.send(workersystem,tell,check_failure)
 .
 
@@ -35,7 +35,7 @@ mission(on_shore).
 <-
 	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription)
 	.wait(2000)
-	.send(workersystem,achive,sps_reconfigurator(FailureDescription));
+	.send(workersystem,achive,find_reconfigurations(FailureDescription));
 .
 
 +discovered(Plan)
@@ -43,7 +43,7 @@ mission(on_shore).
 	.print("The worker sps reconfigurator finds a solution: ",Plan)
 	.print("Now contact the worker validator")
 	.wait(2000)
-	.send(workersystem,achive,validator(Plan));
+	.send(workersystem,achive,validate(Plan));
 	//validate_emergency_management(Plan,/*-->*/Problems);
 	//notify_commander(Plan,Results,Problems);
 .
