@@ -19,33 +19,28 @@ class PowerFailureMonitor(val bridge : Akka2Jade) extends Actor with ActorLoggin
 		  
 		  override def preStart : Unit = {
         log.info("ready")
-        try
-        {
+        try {
           my_device = my_context.makeArtifact("device", "org.icar.h.Device");
-		     // my_context.doAction(my_device, new Op("welcome"));
-		    } 
-        catch
-        {
+          my_context.focus(my_device)
+
+        } catch {
 		      case e : CartagoException =>
 		        e.printStackTrace();
-		     }
-        
-          my_context.focus(my_device)
+        }
 
       }
     
       override def receive: Receive = {
 
         case CheckFailure() =>
-          println("i'm worker check failure!\n")
+          //println("i'm worker check failure!\n")
 				  var p :Percept = null
           val sig : String = null
-				  do
-				  {
+				  do {
 			 	    p = my_context.waitForPercept()
 		        log.info("percept: "+p.getSignal)
-				  }
-				  while (!p.hasSignal());
+				  } while (!p.hasSignal());
+
           bridge.sendHead("failure(f1)")
           
         case _ =>

@@ -27,7 +27,6 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
 
       structure.getFunctor match {
         case "check_failure" =>
-          println("identified a check failure order")
           worker_check ! CheckFailure()
 
         case "find_reconfigurations" if structure.getTerm(0).isAtom =>

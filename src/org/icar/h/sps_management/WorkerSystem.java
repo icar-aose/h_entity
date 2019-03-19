@@ -38,7 +38,7 @@ public class WorkerSystem extends Agent {
 			ACLMessage msg = myAgent.receive();
 			if (msg != null) {
 				String content = msg.getContent();
-				System.out.println("received and forwaded: "+content);
+				//System.out.println("received and forwaded: "+content);
 
 				root.tell(content, null);
 			}
@@ -65,7 +65,7 @@ public class WorkerSystem extends Agent {
 					//  System.out.println("new Element!:>>"+element);
 				  switch (content)
 				  {
-				  case "check_failure":
+				  case "jason.stdlib.check_failure":
 					  //System.out.println("i'm in check\n");
 					  worker_check.tell(content,null);
 					  break;

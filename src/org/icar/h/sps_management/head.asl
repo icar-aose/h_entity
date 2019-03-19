@@ -18,8 +18,9 @@ mission(on_shore).
 	true
 <-
 	
-	.wait(1000)
-	.send(workersystem,tell,check_failure)
+	.wait(1000);
+	.check_failure;
+	//.send(workersystem,tell,jason.stdlib.check_failure)
 .
 
 
@@ -33,9 +34,10 @@ mission(on_shore).
 
 +!management_and_recovery(Mission,FailureDescription) :	true
 <-
-	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription)
-	.wait(2000)
-	.send(workersystem,achive,find_reconfigurations(FailureDescription));
+	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription);
+	.wait(2000);
+	.find_reconfigurations(FailureDescription);
+	//.send(workersystem,achive,find_reconfigurations(FailureDescription));
 .
 
 +discovered(Plan)
@@ -43,7 +45,7 @@ mission(on_shore).
 	.print("The worker sps reconfigurator finds a solution: ",Plan)
 	.print("Now contact the worker validator")
 	.wait(2000)
-	.send(workersystem,achive,validate(Plan));
+	.validate(Plan);
 	//validate_emergency_management(Plan,/*-->*/Problems);
 	//notify_commander(Plan,Results,Problems);
 .
@@ -53,7 +55,7 @@ mission(on_shore).
     .print("The worker_validator validate the solution: ",Plan)
     .print("Now contact the Worker plan enactor for enact the Plan")
     .wait(2000)
-	.send(workersystem,achive,enact(Plan));
+	.enact(Plan);
 .
 
 +alive [source(X)]

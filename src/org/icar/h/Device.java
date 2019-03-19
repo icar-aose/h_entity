@@ -7,7 +7,7 @@ import cartago.OPERATION;
 public class Device extends Artifact {
 	
 	void init() {
-		System.out.println("I am an artifact");
+		//System.out.println("I am an artifact");
 		//defineObsProperty("count",0);
 		execInternalOp("add");
 
@@ -15,7 +15,7 @@ public class Device extends Artifact {
 	@OPERATION
 	void add() throws InterruptedException {
 
-			Thread.sleep(5000);
+			Thread.sleep(3000);
     	//	ObsProperty prop = getObsProperty("count");
     	//	prop.updateValue(prop.intValue()+1);
     	//	System.out.println(prop);
