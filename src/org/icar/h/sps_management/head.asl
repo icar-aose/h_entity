@@ -19,7 +19,8 @@ mission(on_shore).
 <-
 	
 	.wait(1000);
-	.check_failure;
+	?mission(Mission);
+	.check_failure(Mission);
 	//.send(workersystem,tell,jason.stdlib.check_failure)
 .
 
@@ -36,7 +37,8 @@ mission(on_shore).
 <-
 	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription);
 	.wait(2000);
-	.find_reconfigurations(FailureDescription);
+	?mission(Mission);
+	.find_reconfigurations(Mission,FailureDescription);
 	//.send(workersystem,achive,find_reconfigurations(FailureDescription));
 .
 

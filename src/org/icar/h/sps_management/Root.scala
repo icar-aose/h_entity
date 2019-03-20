@@ -26,20 +26,22 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
       val structure : Structure = Structure.parse(x)
 
       structure.getFunctor match {
-        case "check_failure" =>
-          worker_check ! CheckFailure()
+        case "check_failure" if check_structure(structure,1) =>
+          val par = get_structure_arg(structure,0)
+          worker_check ! CheckFailure(par)
 
-        case "find_reconfigurations" if structure.getTerm(0).isAtom =>
-          val par = structure.getTerm(0)
-          worker_sps ! FindSolutions(par.asInstanceOf[Atom].getFunctor)
+        case "find_reconfigurations" if check_structure(structure,2) =>
+          val par1 = get_structure_arg(structure,0)
+          val par2 = get_structure_arg(structure,1)
+          worker_sps ! FindSolutions(par1,par2)
 
-        case "validate" if structure.getTerm(0).isAtom =>
-          val par = structure.getTerm(0)
-          worker_validator ! Validate(par.asInstanceOf[Atom].getFunctor)
+        case "validate" if check_structure(structure,1) =>
+          val par = get_structure_arg(structure,0)
+          worker_validator ! Validate(par)
 
-        case "enact" if structure.getTerm(0).isAtom =>
-          val par = structure.getTerm(0)
-          worker_plan ! Enact(par.asInstanceOf[Atom].getFunctor)
+        case "enact" if check_structure(structure,1) =>
+          val par = get_structure_arg(structure,0)
+          worker_plan ! Enact(par)
 
         case _ =>
           println("Root: unspecied message")
@@ -49,4 +51,23 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
     case _ ⇒
       println("Root: wrong serialization format")
   }
+
+  private def check_structure(structure : Structure, arg_number : Int) : Boolean = {
+    // prima controlla che il numero di argomenti coincida con quello indicato
+    if (structure.getTerms.size()!=arg_number)
+      false
+
+    // poi controlla che ogni argomento sia un atomo
+    else {
+      var res = true
+      for (i <- 0 until arg_number if res==true)
+        if (!structure.getTerm(i).isAtom)
+          res = false
+
+      res
+    }
+
+  }
+
+  private def get_structure_arg(structure : Structure, index : Int) = structure.getTerm(index).asInstanceOf[Atom].getFunctor
 }

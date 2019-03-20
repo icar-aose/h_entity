@@ -32,7 +32,7 @@ class PowerFailureMonitor(val bridge : Akka2Jade) extends Actor with ActorLoggin
     
       override def receive: Receive = {
 
-        case CheckFailure() =>
+        case CheckFailure( mission_ref ) =>
           //println("i'm worker check failure!\n")
 				  var p :Percept = null
           val sig : String = null

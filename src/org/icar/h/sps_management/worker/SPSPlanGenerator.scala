@@ -17,9 +17,9 @@ class SPSPlanGenerator(val bridge : Akka2Jade) extends Actor with ActorLogging {
 
     override def receive: Receive = {
 
-      case FindSolutions(failure) =>
+      case FindSolutions(mission,failure) =>
         Thread.sleep(2000)    //find a solution
-        log.info("i'm the sps reconfigurator, finding solution for the failures: "+ failure +"\n")
+        log.info(s"i'm the sps reconfigurator, finding solution for the failures: $failure in mission $mission \n")
         discovered_solutions += ("solution1" -> "cap1_cap2_cap3")
         bridge.sendHead("discovered(solution1)")
 
