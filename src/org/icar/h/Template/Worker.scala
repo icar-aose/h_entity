@@ -1,6 +1,7 @@
-package org.icar.h
+package org.icar.h.Template
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import org.icar.h.Akka2Jade
 object Worker {
    def props(bridge : Akka2Jade) : Props = Props(classOf[Worker],bridge)  
 }

@@ -1,5 +1,6 @@
-package org.icar.h
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+package org.icar.h.Template
+
+import akka.actor.{Actor, ActorLogging, Props}
 
 object SubWorker {
    def props : Props = Props(classOf[SubWorker])  

@@ -2,7 +2,7 @@ package org.icar.h.sps_management
 
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import org.icar.h.{Akka2Jade, SubWorker}
+import org.icar.h.Akka2Jade
 import org.icar.h.sps_management.worker._
 import jason.asSyntax.{Atom, StringTerm, Structure}
 

@@ -1,4 +1,4 @@
-package org.icar.h;
+package org.icar.h.Template;
 
 import cartago.ArtifactId;
 import cartago.CartagoException;
