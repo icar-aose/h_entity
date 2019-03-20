@@ -8,6 +8,7 @@
       <root url="jar://$PROJECT_DIR$/lib/akka-actor_2.12-2.5.20.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/cartago-2.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jade.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/musa-core.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -32,7 +32,7 @@ shareable(Plans).
 <-
 	
 	.wait(3000);
-	.send(workersystem,tell,check_failure);
+	.send(workersystem,tell,jason.stdlib.check_failure);
 .
 
 
