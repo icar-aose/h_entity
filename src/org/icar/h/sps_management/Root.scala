@@ -11,10 +11,11 @@ object Root {
 }
 
 class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
-  private lazy val worker_check = context.actorOf(PowerFailureMonitor.props(bridge), "sensor_checkers")
-  private lazy val worker_sps = context.actorOf(SPSPlanGenerator.props(bridge), "sps_reconfigurator")
-  private lazy val worker_validator = context.actorOf(SPSPlanValidator.props(bridge,worker_sps), "plan_validator")
-  private lazy val worker_plan : ActorRef = context.actorOf(ReconfigurationEnactor.props(bridge,worker_sps), "plan_executor")
+  private lazy val mission_manager : ActorRef = context.actorOf(MissionManager.props(bridge), "mission_manager")
+  private lazy val sensor_checkers = context.actorOf(PowerFailureMonitor.props(bridge), "sensor_checkers")
+  private lazy val sps_reconfigurator = context.actorOf(SPSPlanGenerator.props(bridge), "sps_reconfigurator")
+  private lazy val plan_validator = context.actorOf(SPSPlanValidator.props(bridge,sps_reconfigurator), "plan_validator")
+  private lazy val plan_executor : ActorRef = context.actorOf(ReconfigurationEnactor.props(bridge,sps_reconfigurator), "plan_executor")
 
 
   override def preStart : Unit = {
@@ -28,20 +29,20 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
       structure.getFunctor match {
         case "check_failure" if check_structure(structure,1) =>
           val par = get_structure_arg(structure,0)
-          worker_check ! CheckFailure(par)
+          sensor_checkers ! CheckFailure(par)
 
         case "find_reconfigurations" if check_structure(structure,2) =>
           val par1 = get_structure_arg(structure,0)
           val par2 = get_structure_arg(structure,1)
-          worker_sps ! FindSolutions(par1,par2)
+          sps_reconfigurator ! FindSolutions(par1,par2)
 
         case "validate" if check_structure(structure,1) =>
           val par = get_structure_arg(structure,0)
-          worker_validator ! Validate(par)
+          plan_validator ! Validate(par)
 
         case "enact" if check_structure(structure,1) =>
           val par = get_structure_arg(structure,0)
-          worker_plan ! Enact(par)
+          plan_executor ! Enact(par)
 
         case _ =>
           println("Root: unspecied message")

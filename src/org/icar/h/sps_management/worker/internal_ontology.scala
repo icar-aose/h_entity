@@ -7,3 +7,7 @@ case class Enact( plan_reference : String )
 
 case class GetSolution( plan_reference : String )
 case class Solution(plan_reference : String,plan:String)
+
+case class GetMission(mission_ref:String)
+case class Mission(mission_ref:String,mission:String)
+
