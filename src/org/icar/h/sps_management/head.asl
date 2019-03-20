@@ -1,5 +1,5 @@
 /* Initial beliefs and rules */
-mission(on_shore).
+mission(undefined).
 
 /* Initial goals */
 !continuity_of_service.
@@ -15,21 +15,34 @@ mission(on_shore).
 
 +!failure_detection
 :	
-	true
+	not mission(undefined)
 <-
-	
 	.wait(1000);
 	?mission(Mission);
 	.check_failure(Mission);
 	//.send(workersystem,tell,jason.stdlib.check_failure)
 .
++!failure_detection
+:
+	mission(undefined)
+<-
+	.print("waiting a mission");
+	.wait(1000);
+	!!failure_detection
+.
 
+
++current_mission(Mission) : true
+<-
+    -+mission(Mission);
+    .abolish(current_mission(Mission));
+.
 
 +failure(FailureDescription) : true
 <-  
 	.print("Find failure: ", FailureDescription)
 	!management_and_recovery(Mission,FailureDescription)
-	.abolish(failure(X))
+	.abolish(failure(FailureDescription))
 .
 
 

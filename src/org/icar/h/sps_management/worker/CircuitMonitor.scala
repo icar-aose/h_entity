@@ -7,11 +7,11 @@ import cartago.util.agent.CartagoBasicContext
 import cartago.events._
 import cartago.util.agent._;
 
-object PowerFailureMonitor {
-   def props(bridge : Akka2Jade) : Props = Props(classOf[PowerFailureMonitor],bridge)
+object CircuitMonitor {
+   def props(bridge : Akka2Jade) : Props = Props(classOf[CircuitMonitor],bridge)
 }
 
-class PowerFailureMonitor(val bridge : Akka2Jade) extends Actor with ActorLogging {
+class CircuitMonitor(val bridge : Akka2Jade) extends Actor with ActorLogging {
       
   var my_context : CartagoBasicContext = new CartagoBasicContext("my_agent")
 	var my_device : ArtifactId = null
