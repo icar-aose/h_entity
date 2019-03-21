@@ -3,7 +3,9 @@
 
 **/target
 **/out
+**/bin
 **/build
+**/.idea
 
 *.DS_Store
 
