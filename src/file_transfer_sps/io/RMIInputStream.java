@@ -1,4 +1,4 @@
-package io;
+package file_transfer_sps.io;
 
 import java.io.IOException;
 import java.io.InputStream;

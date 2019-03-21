@@ -2,7 +2,7 @@ package org.icar.h.sps_management.worker
 
 import scala.collection.mutable.HashMap
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import org.icar.h.Akka2Jade;
+import org.icar.h.Akka2Jade
 
 object SPSPlanGenerator {
    def props(bridge : Akka2Jade) : Props = Props(classOf[SPSPlanGenerator],bridge)

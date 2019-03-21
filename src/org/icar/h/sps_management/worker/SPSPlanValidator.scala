@@ -1,8 +1,7 @@
 package org.icar.h.sps_management.worker
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import org.icar.h.Akka2Jade;
-import file_transfer_sps._
+import org.icar.h.Akka2Jade
 
 object SPSPlanValidator {
    def props(bridge : Akka2Jade, worker_sps : ActorRef) : Props = Props(classOf[SPSPlanValidator],bridge,worker_sps)
@@ -23,11 +22,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef) extends Ac
         Thread.sleep(2000)
 
 
-//        var x : SimpleClient = new SimpleClient
-//        var arg : Array[String] =  new Array[String](2)
-//        arg(0)="upload"
-//        arg(1)="circuito3_exp2_4guasti_sc1_v0.slx"
-//        x.transfer(arg)
+
 
 
 

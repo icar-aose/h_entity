@@ -1,28 +1,24 @@
-package io;
+package file_transfer_sps.io;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.Serializable;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * from https://www.censhare.com/en/insight/overview/article/file-streaming-using-java-rmi
  */
 
+
 /**
  * @author pothoven
  *
  */
-public class RMIOutputStream extends OutputStream implements Serializable {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private RMIOutputStreamInterf out;
+public class RMIOutputStreamImpl implements RMIOutputStreamInterf {
+    private OutputStream out;
     
-    public RMIOutputStream(RMIOutputStreamImpl out) {
+    public RMIOutputStreamImpl(OutputStream out) throws IOException {
         this.out = out;
+        UnicastRemoteObject.exportObject(this, 1099);
     }
     
     public void write(int b) throws IOException {
@@ -33,8 +29,8 @@ public class RMIOutputStream extends OutputStream implements Serializable {
             IOException {
         out.write(b, off, len);
     }
-    
+
     public void close() throws IOException {
         out.close();
-    }   
+    }
 }

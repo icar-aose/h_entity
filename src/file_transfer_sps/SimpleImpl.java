@@ -1,9 +1,9 @@
 package file_transfer_sps;
 
-import io.RMIInputStream;
-import io.RMIInputStreamImpl;
-import io.RMIOutputStream;
-import io.RMIOutputStreamImpl;
+import file_transfer_sps.io.RMIInputStream;
+import file_transfer_sps.io.RMIInputStreamImpl;
+import file_transfer_sps.io.RMIOutputStream;
+import file_transfer_sps.io.RMIOutputStreamImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
