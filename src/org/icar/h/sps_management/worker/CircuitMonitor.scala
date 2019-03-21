@@ -6,14 +6,19 @@ import cartago.{ArtifactId, CartagoException, Op, Tuple}
 import cartago.util.agent.CartagoBasicContext
 import cartago.events._
 import cartago.util.agent._
+
 import file_transfer_sps.SimpleClient;
+
+import org.icar.musa.scenarios.sps.ReconfigurationScenario;
+
 
 object CircuitMonitor {
    def props(bridge : Akka2Jade) : Props = Props(classOf[CircuitMonitor],bridge)
 }
 
 class CircuitMonitor(val bridge : Akka2Jade) extends Actor with ActorLogging {
-      
+  val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
+
   var my_context : CartagoBasicContext = new CartagoBasicContext("my_agent")
 	var my_device : ArtifactId = null
 	var p : Percept  = null
@@ -43,7 +48,7 @@ class CircuitMonitor(val bridge : Akka2Jade) extends Actor with ActorLogging {
           var x : SimpleClient = new SimpleClient
           var arg : Array[String] =  new Array[String](2)
           arg(0)="upload"
-          arg(1)="test.slx"
+          arg(1)="dir_test\\test.slx"
           x.transfer(arg)
 
 				  do {

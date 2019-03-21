@@ -24,7 +24,7 @@ import jade.wrapper.StaleProxyException;
 import jason.infra.jade.JadeAgArch;
 import jason.mas2j.AgentParameters;
 import jade.util.ExtendedProperties;
-import org.icar.h.WorkerSystem;
+import org.icar.h.Template.WorkerSystem;
 
 
 public class Boot {
