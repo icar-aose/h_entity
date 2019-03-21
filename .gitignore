@@ -5,7 +5,8 @@
 **/out
 **/bin
 **/build
-**/.idea
+
+**/workspace.xml
 
 *.DS_Store
 
