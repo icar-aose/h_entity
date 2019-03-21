@@ -43,13 +43,8 @@ class CircuitMonitor(val bridge : Akka2Jade) extends Actor with ActorLogging {
 				  var p :Percept = null
           val sig : String = null
 
-          log.info("test upload")
 
-          var x : SimpleClient = new SimpleClient
-          var arg : Array[String] =  new Array[String](2)
-          arg(0)="upload"
-          arg(1)="dir_test\\test.slx"
-          x.transfer(arg)
+          SimpleClient.transfer
 
 				  do {
 			 	    p = my_context.waitForPercept()

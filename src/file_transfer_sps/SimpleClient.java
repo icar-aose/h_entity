@@ -36,6 +36,7 @@ public class SimpleClient
     }
     
     public static void upload(Simple server, File src, File dest) throws IOException {
+
         copy (new FileInputStream(src), server.getOutputStream(dest));
     }
 
@@ -43,9 +44,13 @@ public class SimpleClient
         copy (server.getInputStream(src), new FileOutputStream(dest));
     }
 	
-    public void transfer(String[] arg)
+    public static void transfer()
     {
+    	String[] arg = new String[2];
     	ResourceBundle properties = PropertyResourceBundle.getBundle("Simple");
+		arg[0] = properties.getString("file.op");
+    	arg[1] = properties.getString("file.name");
+
 		int port = Registry.REGISTRY_PORT;
 		try {
 			port = Integer.parseInt(properties.getString("server.port"));
