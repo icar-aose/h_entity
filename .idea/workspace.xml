@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d36f749b-4898-442b-9178-1aa8e515cd98" name="Default Changelist" comment="Default Changelist">
-      <change afterPath="$PROJECT_DIR$/src/Simple.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/circuito3_exp2_4guasti_sc1_v0.slx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/file_transfer_sps/README.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/file_transfer_sps/Simple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/file_transfer_sps/SimpleClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/file_transfer_sps/SimpleImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/file_transfer_sps/SimpleServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/file_transfer_sps/rmi.policy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/APDescription.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MTPs-Main-Container.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MTPs-Main-Container.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/h_entity/org/icar/h/sps_management/WorkerSystem$ForwardIncomingMessages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/h_entity/org/icar/h/sps_management/WorkerSystem$ForwardIncomingMessages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/h_entity/org/icar/h/sps_management/WorkerSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/h_entity/org/icar/h/sps_management/WorkerSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/Boot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/Template/Boot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/Diplomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/Template/Diplomat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/SubWorker.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/Template/SubWorker.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/Worker.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/Template/Worker.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/WorkerSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/Template/WorkerSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/head.asl" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/Template/head.asl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/sps_management/Root.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/sps_management/Root.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/sps_management/WorkerSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/sps_management/WorkerSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/icar/h/sps_management/worker/SPSPlanValidator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/icar/h/sps_management/worker/SPSPlanValidator.scala" afterDir="false" />
-    </list>
+    <list default="true" id="d36f749b-4898-442b-9178-1aa8e515cd98" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +13,7 @@
     <session id="-94011798">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.20" value="1" />
@@ -71,7 +48,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="178" />
-          <entry key="PLAIN_TEXT" value="35" />
+          <entry key="PLAIN_TEXT" value="71" />
           <entry key="Properties" value="9" />
           <entry key="Scala" value="596" />
         </counts>
@@ -95,7 +72,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/icar/h/sps_management/worker/SPSPlanValidator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
+            <state relative-caret-position="435">
               <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
               <folding>
                 <element signature="e#42#98#0" expanded="true" />
@@ -180,9 +157,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="35" />
-    <option name="y" value="95" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="24" />
     <option name="width" value="1440" />
     <option name="height" value="831" />
   </component>
@@ -203,39 +179,7 @@
             <path>
               <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
               <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-              <item name="file_transfer_sps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
-              <item name="h_entity" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="file_transfer_sps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="h_entity" type="b2602c69:ProjectViewProjectNode" />
@@ -249,7 +193,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="S&#9;FILE&#9;file:///Users/giovannirenda/Documents/GitHub/h_entity/src/org/icar/h/sps_management/File_transfer_sps/SimpleClient.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553099295252" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553099361355" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -258,13 +202,14 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/file_transfer_sps" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/out/production/h_entity/file_transfer_sps" />
       <recent name="$PROJECT_DIR$/src/file_transfer_sps" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/file_trasfer_sps" />
       <recent name="$PROJECT_DIR$/src/org/icar/h/sps_management/File_transfer_sps" />
-      <recent name="$PROJECT_DIR$/src/org/icar/h/Template" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -407,14 +352,20 @@
       <option name="project" value="LOCAL" />
       <updated>1553084145636</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="File IO - Server Matlab with actor">
+      <created>1553099331188</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1553099331189</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="831" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24678111" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24678111" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -423,7 +374,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32953683" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36400542" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36400542" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -455,7 +406,8 @@
     <MESSAGE value="added mission parameter to check_failure and find_solutions" />
     <MESSAGE value="added a Mission Manager actor" />
     <MESSAGE value="mission manager set the current mission for the head" />
-    <option name="LAST_COMMIT_MESSAGE" value="mission manager set the current mission for the head" />
+    <MESSAGE value="File IO - Server Matlab with actor" />
+    <option name="LAST_COMMIT_MESSAGE" value="File IO - Server Matlab with actor" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$PROJECT_DIR$/lib/cartago-2.3.jar!/cartago/util/agent/Percept.class">
@@ -806,7 +758,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/icar/h/sps_management/worker/SPSPlanValidator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
+        <state relative-caret-position="435">
           <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
           <folding>
             <element signature="e#42#98#0" expanded="true" />
