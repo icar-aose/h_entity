@@ -12,7 +12,7 @@ class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
   case class SetCurrentMission(mission_ref : String)
 
   var missions : Map[String,Mission] = Map(
-    "on_shore" -> Mission.circuit3_mission_1
+    "on_shore" -> Mission.circuit3_file_mission_1
   )
   var current_mission_ref : String = ""
 
@@ -24,7 +24,7 @@ class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
 
   override def receive: Receive = {
     case SetCurrentMission(mission_ref) =>
-      println(s"set the current mission to $mission_ref")
+      log.info(s"set the current mission to $mission_ref")
       current_mission_ref = mission_ref
       bridge.sendHead(s"current_mission($mission_ref)" )
 
@@ -33,7 +33,7 @@ class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
       sender() ! MissionDescription(mission_ref,missions(mission_ref))
 
     case _ ⇒
-      println("PlanGen: unspecied message")
+      log.info("PlanGen: unspecified message")
 
   }
 }

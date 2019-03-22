@@ -9,8 +9,22 @@
       <root url="jar://$PROJECT_DIR$/lib/cartago-2.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jade.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/musa-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-parser-combinators_2.12-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.translators-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.lp.asp-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.fol-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.commons-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.commons-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-simple-1.7.25.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.translators-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.lp.asp-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.fol-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.commons-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.commons-1.10.jar!/" />
+    </SOURCES>
   </library>
 </component>

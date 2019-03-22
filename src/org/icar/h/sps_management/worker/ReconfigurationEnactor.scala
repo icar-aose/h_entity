@@ -18,13 +18,13 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
     override def receive: Receive = {
       case Enact(plan_reference) =>
         log.info("i'm plan enactor, now contact worker_sps for require the plan for solution: "+plan_reference)
-        worker_sps ! GetSolution(plan_reference)
+        worker_sps ! GetPlan(plan_reference)
 
-      case Solution(plan_reference,plan) =>
+      case Plan(plan_reference,plan) =>
         log.info("Now enacting: "+plan_reference)
         Thread.sleep(2000)
 
       case _ =>
-        println("Enactor: unspecied message")
+        println("Enactor: unspecified message")
     }
 }

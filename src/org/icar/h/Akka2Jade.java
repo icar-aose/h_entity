@@ -14,7 +14,10 @@ public class Akka2Jade {
 	}
 	
 	public void sendHead(String msg) {
-		myAgent.addBehaviour( new SendToHead(msg));
+		if (myAgent != null)
+			myAgent.addBehaviour( new SendToHead(msg));
+		else
+			System.out.println("Message for the Head: "+msg);
 	}
 	
 	  @SuppressWarnings("unused")
