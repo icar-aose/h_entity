@@ -29,11 +29,11 @@ class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
       bridge.sendHead(s"current_mission($mission_ref)" )
 
     case GetMissionDescription(mission_ref) =>
-      log.info("sending back the requested mission!")
+      log.debug("sending back the requested mission!")
       sender() ! MissionDescription(mission_ref,missions(mission_ref))
 
     case _ ⇒
-      log.info("PlanGen: unspecified message")
+      log.error("PlanGen: unspecified message")
 
   }
 }

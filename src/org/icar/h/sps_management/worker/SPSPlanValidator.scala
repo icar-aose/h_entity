@@ -21,15 +21,14 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef) extends Ac
       case Plan(plan_ref,plan) =>
         Thread.sleep(2000)
 
-
-
-
-
-
         log.info("Validator: executing Matlab script with the solution "+plan_ref)
-        bridge.sendHead("selected("+plan_ref+")")
+        // HERE THE CODE TO VALIDATE
+
+
+        // IF THE PLAN IS CORRECT THEN...
+        bridge.sendHead("validated("+plan_ref+")")
 
       case _ =>
-        println("Validator: unspecified message")
+        log.error("unspecified message")
     }
 }

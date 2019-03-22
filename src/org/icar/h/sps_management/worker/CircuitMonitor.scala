@@ -40,7 +40,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
     case CheckFailure(mission_ref) =>
       //println("i'm worker check failure!\n")
-      var p: Percept = null
+      /*var p: Percept = null
       val sig: String = null
 
 
@@ -50,7 +50,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         p = my_context.waitForPercept()
         log.info("percept: " + p.getSignal)
       } while (!p.hasSignal());
-
+*/
+      Thread.sleep(500 )
       bridge.sendHead("failure(f1)")
 
 
@@ -60,6 +61,6 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
 
     case _ =>
-      println("FailureMonitor: unspecified message")
+      log.error("unspecified message")
   }
 }

@@ -23,6 +23,8 @@ object SPSPlanGenerator {
 }
 
 class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val circ_sens_ref: ActorRef) extends Actor with ActorLogging {
+  private val term = TimeTermination((2 minutes).toMillis)
+
   private val path: String = "sps_data/circuit3.txt"
   private val circuit = Circuit.load_from_file(path)
 
@@ -43,12 +45,12 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
 
       val mission = Await.result(future_mission, timeout.duration).asInstanceOf[MissionDescription].mission
-      log.info("list of vitals:")
-      mission.vitals.foreach(log.info)
+      //log.info("list of vitals:")
+      //mission.vitals.foreach(log.info)
 
       val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
-      log.info("list of active generators:")
-      scenario.up_generators.foreach(log.info)
+      //log.info("list of active generators:")
+      //scenario.up_generators.foreach(log.info)
 
       val wi = initial_state(circuit,scenario)
       val goal = goal_specification(circuit, mission)
@@ -57,8 +59,6 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       val quality_asset = new SPSQualityAsset(circuit, mission, assumptions)
 
       val problem_specification = SingleGoalProblemSpecification(assumptions, goal, quality_asset)
-
-      val term = TimeTermination((2 minutes).toMillis)
 
       context.actorOf(PMRActor.props(problem_specification,wi,cap_set,term), "pmr_actor")
 
@@ -70,11 +70,11 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
 
     case GetPlan(sol_ref) =>
       val sol: Solution = discovered_solutions(sol_ref)
-      log.info("sending back the requested solution!")
+      log.debug("sending back the requested solution!")
       sender() ! Plan(sol_ref, sol)
 
     case _ ⇒
-      log.info("PlanGen: unspecified message")
+      log.error("unspecified message")
   }
 
 

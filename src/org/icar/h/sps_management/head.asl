@@ -17,10 +17,10 @@ mission(undefined).
 :	
 	not mission(undefined)
 <-
+	.print("checking the state of circuits");
 	.wait(1000);
 	?mission(Mission);
 	.check_failure(Mission);
-	//.send(workersystem,tell,jason.stdlib.check_failure)
 .
 +!failure_detection
 :
@@ -34,6 +34,7 @@ mission(undefined).
 
 +current_mission(Mission) : true
 <-
+    .print("changing mission: ",Mission);
     -+mission(Mission);
     .abolish(current_mission(Mission));
 .
@@ -57,18 +58,24 @@ mission(undefined).
 
 +discovered(Plan)
 <-
-	.print("The worker sps reconfigurator finds a solution: ",Plan)
-	.print("Now contact the worker validator")
+	.print("The worker sps reconfigurator has found a solution: ",Plan)
+	.print("contacting the validator")
 	.wait(2000)
 	.validate(Plan);
 	//validate_emergency_management(Plan,/*-->*/Problems);
 	//notify_commander(Plan,Results,Problems);
 .
 
++validated(Plan)
+<-
+    .print("The solution: ",Plan, " is valid according the Physical Simulator")
+.
+
+
 +selected(Plan)
 <-
     .print("The worker_validator validate the solution: ",Plan)
-    .print("Now contact the Worker plan enactor for enact the Plan")
+    .print("Now contact the plan enactor for enact the Plan")
     .wait(2000)
 	.enact(Plan);
 .
