@@ -14,9 +14,9 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef) extends Ac
     }
     
     override def receive: Receive = {
-      case Validate( plan ) =>
-        log.info("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: "+plan)
-        worker_sps ! GetPlan(plan)
+      case Validate( plan_ref ) =>
+        log.info("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: "+plan_ref)
+        worker_sps ! GetPlan(plan_ref)
 
       case Plan(plan_ref,plan) =>
         Thread.sleep(2000)
@@ -26,7 +26,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef) extends Ac
 
 
         // IF THE PLAN IS CORRECT THEN...
-        bridge.sendHead("validated("+plan_ref+")")
+        bridge.sendHead(s"validated($plan_ref)")
 
       case _ =>
         log.error("unspecified message")
