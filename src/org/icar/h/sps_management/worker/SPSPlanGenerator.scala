@@ -17,6 +17,7 @@ import org.icar.musa.main_entity.{AbstractCapability, EvolutionScenario, Grounde
 import org.icar.musa.pmr.{SingleGoalProblemSpecification, Solution, TimeTermination}
 import org.icar.musa.scenarios.sps.{Circuit, Mission, ReconfigurationScenario}
 
+import scala.collection.mutable
 import scala.concurrent.{Await, Future}
 
 object SPSPlanGenerator {
@@ -30,7 +31,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
   private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)
 
-  private val discovered_solutions: HashMap[String, Solution] = HashMap.empty[String, Solution]
+  private val discovered_solutions: mutable.HashMap[String, Solution] = mutable.HashMap.empty[String, Solution]
 
   override def preStart: Unit = {
     log.info("ready")
@@ -42,7 +43,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       //Thread.sleep(2000)    //find a solution
       log.info(s"finding solutions for the failure: $failure_ref in mission $mission_ref \n")
 
-      implicit val timeout = Timeout(5 seconds)
+      implicit val timeout: Timeout = Timeout(5 seconds)
       val future_mission: Future[Any] = mission_man_ref ? GetMissionDescription(mission_ref)
       val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
 

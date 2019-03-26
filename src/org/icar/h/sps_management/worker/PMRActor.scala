@@ -1,6 +1,6 @@
 package org.icar.h.sps_management.worker
 
-import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
+import akka.actor.{Actor, ActorLogging, Props}
 import org.icar.musa.context.StateOfWorld
 import org.icar.musa.main_entity.AbstractCapability
 import org.icar.musa.pmr._

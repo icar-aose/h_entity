@@ -4,7 +4,7 @@ package org.icar.h.sps_management
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import org.icar.h.Akka2Jade
 import org.icar.h.sps_management.worker._
-import jason.asSyntax.{Atom, StringTerm, Structure}
+import jason.asSyntax.{Atom, Structure}
 
 object Root {
   def props(bridge : Akka2Jade) : Props = Props(classOf[Root],bridge)
@@ -61,7 +61,7 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
     // poi controlla che ogni argomento sia un atomo
     else {
       var res = true
-      for (i <- 0 until arg_number if res==true)
+      for (i <- 0 until arg_number if res)
         if (!structure.getTerm(i).isAtom)
           res = false
 

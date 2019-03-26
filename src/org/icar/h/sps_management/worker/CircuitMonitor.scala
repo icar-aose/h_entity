@@ -2,14 +2,11 @@ package org.icar.h.sps_management.worker
 
 import akka.actor.{Actor, ActorLogging, Props}
 import org.icar.h.Akka2Jade
-import cartago.{ArtifactId, CartagoException, Op, Tuple}
+import cartago.{ArtifactId, CartagoException}
 import cartago.util.agent.CartagoBasicContext
-import cartago.events._
 import cartago.util.agent._
 
-import file_transfer_sps.SimpleClient;
-
-import org.icar.musa.scenarios.sps.ReconfigurationScenario;
+import org.icar.musa.scenarios.sps.ReconfigurationScenario
 
 
 object CircuitMonitor {
@@ -20,8 +17,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
 
   var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
-  var my_device: ArtifactId = null
-  var p: Percept = null
+  var my_device: ArtifactId = _
+  var p: Percept = _
 
   override def preStart: Unit = {
     log.info("ready")

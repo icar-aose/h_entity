@@ -46,7 +46,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
   var stub: MatRemote = _
 
   val host = properties.getString("server.ip")
-  val port = 1099
+  val port = properties.getString("server.port").toInt;
 
   override def preStart : Unit = {
       log.info("ready")
