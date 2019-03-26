@@ -26,7 +26,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   override def preStart: Unit = {
     log.info("ready")
     try {
-      my_device = my_context.makeArtifact("device", "org.icar.h.Device");
+      my_device = my_context.makeArtifact("device", "org.icar.h.Device")
       my_context.focus(my_device)
 
     } catch {

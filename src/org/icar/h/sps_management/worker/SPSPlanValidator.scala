@@ -17,6 +17,9 @@ import matMusa.MatRemote
 
 import java.util.ResourceBundle
 
+import file_transfer_sps._
+
+
 object SPSPlanValidator {
    def props(bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_ref : ActorRef) : Props = Props(classOf[SPSPlanValidator],bridge,worker_sps,circ_sens_ref)
 }
@@ -59,6 +62,11 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
         System.err.println("Client exception: " + e.toString)
         e.printStackTrace()
     }
+
+    //send circuit to matlab Server set on Simple.properties
+
+    //SimpleClient.transfer()
+
     }
 
     override def receive: Receive = {
