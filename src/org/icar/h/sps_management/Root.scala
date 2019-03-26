@@ -14,7 +14,7 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
   private val mission_manager : ActorRef = context.actorOf(MissionManager.props(bridge), "mission_manager")
   private lazy val sensor_checkers = context.actorOf(CircuitMonitor.props(bridge), "sensor_checkers")
   private lazy val sps_reconfigurator = context.actorOf(SPSPlanGenerator.props(bridge,mission_manager,sensor_checkers), "sps_reconfigurator")
-  private lazy val plan_validator = context.actorOf(SPSPlanValidator.props(bridge,sps_reconfigurator), "plan_validator")
+  private lazy val plan_validator = context.actorOf(SPSPlanValidator.props(bridge,sps_reconfigurator,sensor_checkers), "plan_validator")
   private lazy val plan_executor : ActorRef = context.actorOf(ReconfigurationEnactor.props(bridge,sps_reconfigurator), "plan_executor")
 
 

@@ -88,9 +88,6 @@ mission(undefined).
 	.abolish(alive);
 .
 
-
-
-
 +!failure_prediciton
 :
 	true

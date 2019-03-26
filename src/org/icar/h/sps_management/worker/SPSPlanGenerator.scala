@@ -1,6 +1,7 @@
 package org.icar.h.sps_management.worker
 
-import java.io.File
+
+import java.util.ResourceBundle
 
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
@@ -25,7 +26,8 @@ object SPSPlanGenerator {
 class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val circ_sens_ref: ActorRef) extends Actor with ActorLogging {
   private val term = TimeTermination((2 minutes).toMillis)
 
-  private val path: String = "sps_data/circuit3.txt"
+  val properties: ResourceBundle = ResourceBundle.getBundle("Simple")
+  private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)
 
   private val discovered_solutions: HashMap[String, Solution] = HashMap.empty[String, Solution]
