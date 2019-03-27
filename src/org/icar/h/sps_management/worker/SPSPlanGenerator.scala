@@ -1,7 +1,6 @@
 package org.icar.h.sps_management.worker
 
 
-import java.util.ResourceBundle
 
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
@@ -17,6 +16,9 @@ import org.icar.musa.main_entity.{AbstractCapability, EvolutionScenario, Grounde
 import org.icar.musa.pmr.{SingleGoalProblemSpecification, Solution, TimeTermination}
 import org.icar.musa.scenarios.sps.{Circuit, Mission, ReconfigurationScenario}
 
+import java.util.ResourceBundle
+
+
 import scala.collection.mutable
 import scala.concurrent.{Await, Future}
 
@@ -27,7 +29,8 @@ object SPSPlanGenerator {
 class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val circ_sens_ref: ActorRef) extends Actor with ActorLogging {
   private val term = TimeTermination((2 minutes).toMillis)
 
-  val properties: ResourceBundle = ResourceBundle.getBundle("Simple")
+  val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.core.matlab.Simple")
+
   private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)
 

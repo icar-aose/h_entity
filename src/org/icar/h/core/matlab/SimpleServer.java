@@ -14,10 +14,10 @@ public class SimpleServer
 
 	public static void main(String args[])
     {
-		ResourceBundle properties = PropertyResourceBundle.getBundle("Simple");
+		ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.core.matlab.Simple");
 		int port = Registry.REGISTRY_PORT;
 		try {
-			port = Integer.parseInt(properties.getString("server.port"));
+			port = Integer.parseInt(properties.getString("simulator.server.port"));
 		} catch (Exception e) {
 			// default to Registry.REGISTRY_PORT
 		}

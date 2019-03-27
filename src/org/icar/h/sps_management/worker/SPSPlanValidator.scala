@@ -31,7 +31,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
   //load circuit
 
-  val properties: ResourceBundle = ResourceBundle.getBundle("Simple")
+  val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.core.matlab.Simple")
 
   private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)
@@ -46,8 +46,8 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
   //MatRemote
   var stub: MatRemote = _
 
-  val host = properties.getString("server.ip")
-  val port = properties.getString("server.port").toInt;
+  val host = properties.getString("simulator.server.ip")
+  val port = properties.getString("simulator.server.port").toInt
 
   override def preStart : Unit = {
     println("Connecting to Matlab...")
@@ -65,7 +65,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
     //send circuit to matlab Server set on Simple.properties
 
-    //SimpleClient.transfer()
+    SimpleClient.transfer()
 
     log.info("ready")
   }
@@ -81,7 +81,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
       case CheckSolutionQueue() =>
 
         // HERE THE CODE TO VALIDATE
-        if (!solutions_to_be_validated.isEmpty) {
+        if (solutions_to_be_validated.nonEmpty) {
           val next : Plan = solutions_to_be_validated.dequeue
 
           log.info("Validator: executing Matlab script with the solution "+next.plan_reference)
@@ -89,7 +89,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
           val result_of_validation = validate(next.plan)
 
           // IF THE PLAN IS CORRECT THEN...
-          if (result_of_validation==true)
+          if (result_of_validation)
             bridge.sendHead("validated("+next.plan_reference+")")
 
         }
@@ -97,13 +97,14 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
         Thread.sleep(100 )
         self ! CheckSolutionQueue()
 
+
       case _ =>
         log.error("unspecified message")
     }
 
 
   private def validate(sol: Solution): Boolean = {
-    var result = new Array[Boolean](25) //circuit.loads.size
+    var result = new Array[Boolean](circuit.loads.size) //circuit.loads.size
 
     val w: Boolean = validate_well_formedness(sol, sol.start, List())
 
@@ -123,21 +124,17 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
         result = stub.evaluateSolution(solution_for_matlab, all_switchers, open_switchers)
         var xsize = 0
 
-        for (x <- result) {
-          if (xsize == 0) {
-            println("result of generators:" + x)
-            xsize = 1
-          }
-          else {
-            if (x)
+        println("result of generators:" + result(0))
+        for (i <- 1 until result.length) {
+          if (i != 10 && i != 20) {    //perchè nel circuito sono stati eliminati questi carichi quindi inesistenti
+            if (result(i))
               print(1)
             else
               print(0)
-            xsize = xsize + 1
           }
         }
         println("\n")
-      } catch {
+      }catch {
         case e: Exception =>
           println("Client exception: " + e.toString)
           e.printStackTrace()

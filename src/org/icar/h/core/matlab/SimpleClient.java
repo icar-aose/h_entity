@@ -12,126 +12,62 @@ import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class SimpleClient
-{
+public class SimpleClient {
     final public static int BUF_SIZE = 1024 * 64;
-    
+
     /**
      * Copy the input stream to the output stream
-     * 
+     *
      * @param in
      * @param out
      * @throws IOException
      */
-    public static void copy(InputStream in, OutputStream out) 
+    public static void copy(InputStream in, OutputStream out)
             throws IOException {
-    	
-    	byte[] b = new byte[BUF_SIZE];
+
+        byte[] b = new byte[BUF_SIZE];
         int len;
         while ((len = in.read(b)) >= 0) {
-        	out.write(b, 0, len);
+            out.write(b, 0, len);
         }
         in.close();
         out.close();
     }
-    
+
     public static void upload(Simple server, File src, File dest) throws IOException {
 
-        copy (new FileInputStream(src), server.getOutputStream(dest));
+        copy(new FileInputStream(src), server.getOutputStream(dest));
     }
 
     public static void download(Simple server, File src, File dest) throws IOException {
-        copy (server.getInputStream(src), new FileOutputStream(dest));
+        copy(server.getInputStream(src), new FileOutputStream(dest));
     }
-	
-    public static void transfer()
-    {
-    	String[] arg = new String[2];
-    	ResourceBundle properties = PropertyResourceBundle.getBundle("Simple");
-		arg[0] = properties.getString("file.op");
-    	arg[1] = properties.getString("file.name");
 
-		int port = Registry.REGISTRY_PORT;
-		try {
-			port = Integer.parseInt(properties.getString("server.port"));
-		} catch (Exception e) {
-			port = Registry.REGISTRY_PORT;
-		}
-    	String command = null;
-    	if (arg.length > 0) {
-    		command = arg[0];
-    	}
+    public static void transfer() throws Exception {
 
-    	if (command != null && command.length() > 0) {
+        ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.core.matlab.Simple");
 
-    		boolean useSecurityManager = false;
-    		try {
-    			Boolean.valueOf(properties.getString("useSecurityManager"));
-    		} catch (Exception e) {
-    			// default to false
-    		}
-        	if (useSecurityManager && System.getSecurityManager() == null) {
-                System.setSecurityManager(new SecurityManager());
-            }
-        	
-    		try
-    		{
-    			String serverIP = System.getProperty("server.ip");
-    			if (null == serverIP) {
-    				try {
-    					serverIP = properties.getString("server.ip");
-    				} catch (MissingResourceException e) {
-    					throw new Exception("Undefined server IP.  Please define 'server.ip' as system property (ex. java -Dserver.ip=xxx) or in the Simple.properties file.");
-    				}
-    			}
+        String serverIP = properties.getString("simulator.server.ip");
+        int port = Integer.parseInt(properties.getString("simulator.server.port"));
+        System.out.println(port);
+        String files = properties.getString("simulator.script.files");
+        String path = properties.getString("simulator.script.path");
+        String[] file = files.split(",");
 
-    			Simple server = (Simple) Naming.lookup( "rmi://" +
-    					serverIP +
-    					":" + port +
-    					"/SimpleServer");
 
-    			if ( command.equalsIgnoreCase("ping") ) {
-    				System.out.println(server.ping());
+        try{
+            Simple server = (Simple) Naming.lookup("//" +
+                    serverIP +
+                    ":" + port +
+                    "/SimpleServer");
 
-    			} else if (command.equalsIgnoreCase("upload") ) {
-    				if (arg.length > 1) {
-    					String srcFilename = arg[1];
-    					if (srcFilename != null && srcFilename.length() > 0) {
-    						String destFilename = srcFilename;
-    	    				if (arg.length > 2) {
-    	    					destFilename = arg[2];
-    	    				} 
-    						upload(server, new File(srcFilename), new File(destFilename));
-    					}
-    				}
+            for(int i=0;i<file.length;i++)
+                upload(server, new File(path+file[i].trim()), new File(path+file[i].trim()));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-    			} else if (command.equalsIgnoreCase("download") ) {
-    				if (arg.length > 1) {
-    					String srcFilename = arg[1];
-    					if (srcFilename != null && srcFilename.length() > 0) {
-    						String destFilename = srcFilename;
-    	    				if (arg.length > 2) {
-    	    					destFilename = arg[2];
-    	    				} 
-    	    				download(server, new File(srcFilename), new File(destFilename));
-    					}
-    				}
 
-    			} else {
-    				System.out.println(server.runCommand(command, null));
-    			}
-    		}
-    		catch (Exception e)
-    		{
-    			System.out.println("SimpleClient exception: " + e.getMessage());
-    			e.printStackTrace();
-    		}
-    	} else {
-    		System.out.println("Usage: SimpleClient command");
-    		System.out.println("\nExample: java [-Djava.security.policy=rmi.policy] -jar simple-client.jar ping");
-    		System.out.println("\n         java [-Djava.security.policy=rmi.policy] -jar simple-client.jar upload srcfile.txt [destfile.txt]");
-    		System.out.println("\n         java [-Djava.security.policy=rmi.policy] -jar simple-client.jar download afile.txt [destfile.txt]");
-    		System.out.println("\n         java [-Djava.security.policy=rmi.policy] -jar simple-client.jar \"db2 reorg indexes all for table ADWSRNCT.F_INCIDENT\"");
-    	}
+        }
     }
-} 
