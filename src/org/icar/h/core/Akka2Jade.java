@@ -1,4 +1,4 @@
-package org.icar.h;
+package org.icar.h.core;
 
 
 import jade.core.AID;

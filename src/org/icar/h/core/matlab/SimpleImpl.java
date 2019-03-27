@@ -1,9 +1,9 @@
-package file_transfer_sps;
+package org.icar.h.core.matlab;
 
-import file_transfer_sps.io.RMIInputStream;
-import file_transfer_sps.io.RMIInputStreamImpl;
-import file_transfer_sps.io.RMIOutputStream;
-import file_transfer_sps.io.RMIOutputStreamImpl;
+import org.icar.h.core.matlab.io.RMIInputStream;
+import org.icar.h.core.matlab.io.RMIInputStreamImpl;
+import org.icar.h.core.matlab.io.RMIOutputStream;
+import org.icar.h.core.matlab.io.RMIOutputStreamImpl;
 
 import java.io.BufferedReader;
 import java.io.File;

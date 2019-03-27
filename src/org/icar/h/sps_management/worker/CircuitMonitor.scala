@@ -1,11 +1,10 @@
 package org.icar.h.sps_management.worker
 
 import akka.actor.{Actor, ActorLogging, Props}
-import org.icar.h.Akka2Jade
 import cartago.{ArtifactId, CartagoException}
 import cartago.util.agent.CartagoBasicContext
 import cartago.util.agent._
-
+import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.ReconfigurationScenario
 
 

@@ -10,7 +10,7 @@ import akka.util.Timeout
 
 import scala.concurrent.duration._
 import org.icar.fol._
-import org.icar.h.Akka2Jade
+import org.icar.h.core.Akka2Jade
 import org.icar.ltl.{Finally, LogicConjunction, ltlFormula}
 import org.icar.musa.context.{AddEvoOperator, EvoOperator, RemoveEvoOperator, StateOfWorld}
 import org.icar.musa.main_entity.{AbstractCapability, EvolutionScenario, GroundedAbstractCapability, LTLGoal}

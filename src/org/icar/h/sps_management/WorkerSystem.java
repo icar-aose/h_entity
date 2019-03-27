@@ -1,6 +1,6 @@
 package org.icar.h.sps_management;
 
-import org.icar.h.Akka2Jade;
+import org.icar.h.core.Akka2Jade;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;

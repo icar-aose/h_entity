@@ -1,4 +1,4 @@
-package file_transfer_sps;
+package org.icar.h.core.matlab;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

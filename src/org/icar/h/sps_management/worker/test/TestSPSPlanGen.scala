@@ -2,7 +2,7 @@ package org.icar.h.sps_management.worker.test
 
 import akka.actor.{ActorRef, ActorSystem}
 import cartago.{CartagoService, NodeId}
-import org.icar.h.Akka2Jade
+import org.icar.h.core.Akka2Jade
 import org.icar.h.sps_management.Root
 import org.icar.h.sps_management.worker._
 

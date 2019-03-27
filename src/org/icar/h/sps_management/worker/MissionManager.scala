@@ -1,7 +1,7 @@
 package org.icar.h.sps_management.worker
 
 import akka.actor.{Actor, ActorLogging, Props}
-import org.icar.h.Akka2Jade
+import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.Mission
 
 object MissionManager {

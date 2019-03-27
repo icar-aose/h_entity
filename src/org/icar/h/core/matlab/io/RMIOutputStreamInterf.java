@@ -1,4 +1,4 @@
-package file_transfer_sps.io;
+package org.icar.h.core.matlab.io;
 
 import java.io.IOException;
 import java.rmi.Remote;
@@ -12,10 +12,8 @@ import java.rmi.RemoteException;
  * @author pothoven
  *
  */
-public interface RMIInputStreamInterf extends Remote {
-    
-    public byte[] readBytes(int len) throws IOException, RemoteException;
-    public int read() throws IOException, RemoteException;
+public interface RMIOutputStreamInterf extends Remote {
+    public void write(int b) throws IOException, RemoteException;
+    public void write(byte[] b, int off, int len) throws IOException, RemoteException;
     public void close() throws IOException, RemoteException;
-
 }
