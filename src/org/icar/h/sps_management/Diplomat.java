@@ -16,11 +16,11 @@ public class Diplomat extends Agent {
 	
 	  protected void setup() {
 	  	System.out.println("Hello World! My name is "+getLocalName());
-	  	System.out.println("Pronto per comunicare con altre Head");
+	  	//System.out.println("Pronto per comunicare con altre Head");
 	  	
 		//addBehaviour(new mySend());
 	  	
-		CartagoBasicContext my_context = new CartagoBasicContext("my_agent");
+		/*CartagoBasicContext my_context = new CartagoBasicContext("my_agent");
 		ArtifactId my_device;
 		try {
 			my_device = my_context.makeArtifact("device", "org.icar.h.Device");
@@ -29,7 +29,7 @@ public class Diplomat extends Agent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		*/
 	}
 
 	  
