@@ -52,22 +52,21 @@ public class SimpleClient {
         System.out.println(port);
         String files = properties.getString("simulator.script.files");
         String path = properties.getString("simulator.script.path");
-        String[] file = files.split(",");
+        if (!files.equals("")) {
+            String[] file = files.split(",");
 
+            try {
+                Simple server = (Simple) Naming.lookup("//" +
+                        serverIP +
+                        ":" + port +
+                        "/SimpleServer");
 
-        try{
-            Simple server = (Simple) Naming.lookup("//" +
-                    serverIP +
-                    ":" + port +
-                    "/SimpleServer");
+                for (int i = 0; i < file.length; i++)
+                    upload(server, new File(path + file[i].trim()), new File(path + file[i].trim()));
 
-            for(int i=0;i<file.length;i++)
-                upload(server, new File(path+file[i].trim()), new File(path+file[i].trim()));
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+}

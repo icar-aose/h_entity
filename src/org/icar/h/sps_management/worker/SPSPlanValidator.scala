@@ -12,11 +12,13 @@ import scala.concurrent.duration._
 import scala.collection.mutable.Queue
 import scala.concurrent.{Await, Future}
 import akka.pattern.ask
-import matMusa.MatRemote
+import org.icar.h.core.matlab.matEngine.MatRemote
 import java.util.ResourceBundle
 
 import org.icar.h.core.matlab._
 import org.icar.h.core.Akka2Jade
+
+import scala.collection.JavaConverters._
 
 
 object SPSPlanValidator {
@@ -66,6 +68,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
     //send circuit to matlab Server set on Simple.properties
 
     SimpleClient.transfer()
+    stub.startEngine()
 
     log.info("ready")
   }
@@ -104,7 +107,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
 
   private def validate(sol: Solution): Boolean = {
-    var result = new Array[Boolean](circuit.loads.size) //circuit.loads.size
+    var result = new util.HashMap[String,java.lang.Double](circuit.loads.size+circuit.generators.size) //numbers of loads and generators
 
     val w: Boolean = validate_well_formedness(sol, sol.start, List())
 
@@ -121,18 +124,17 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
       //println(all_switchers)
 
       try {
-        result = stub.evaluateSolution(solution_for_matlab, all_switchers, open_switchers)
+        result = stub.evaluateSolution(solution_for_matlab, all_switchers, open_switchers,circuit.loads.size)
         var xsize = 0
-
-        println("result of generators:" + result(0))
-        for (i <- 1 until result.length) {
-          if (i != 10 && i != 20) {    //perchè nel circuito sono stati eliminati questi carichi quindi inesistenti
-            if (result(i))
-              print(1)
-            else
-              print(0)
+        println("result of generators:" + result.get("genResult"))
+        var list : util.Set[String]  = result.keySet()
+        var iter : util.Iterator[String] = list.iterator()
+        while(iter.hasNext)
+          {
+            var key = iter.next()
+            println(key+": " + result.get(key))
           }
-        }
+
         println("\n")
       }catch {
         case e: Exception =>
@@ -140,7 +142,10 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
           e.printStackTrace()
       }
     }
-    result(0)
+    if(result.get("genResult")==1)
+      true
+    else
+      false
   }
 
 

@@ -12,16 +12,10 @@ import java.util.ResourceBundle;
 public class SimpleServer 
 {
 
-	public static void main(String args[])
+	public static void server(Registry registry)
     {
 		ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.core.matlab.Simple");
-		int port = Registry.REGISTRY_PORT;
-		try {
-			port = Integer.parseInt(properties.getString("simulator.server.port"));
-		} catch (Exception e) {
-			// default to Registry.REGISTRY_PORT
-		}
-		
+		int port = 1099;
         try
         {
     		boolean useSecurityManager = false;
@@ -35,12 +29,10 @@ public class SimpleServer
                 System.setSecurityManager(new SecurityManager());
             }
         	
-        	Registry registry = LocateRegistry.createRegistry(port);
-        	
             SimpleImpl obj = new SimpleImpl();
             /* Bind this object instance to the name "SimpleServer" */
             // Naming.rebind("SimpleServer", obj);
-            registry.rebind("SimpleServer", obj);
+            registry.bind("SimpleServer", obj);
             
             System.out.println("SimpleServer started on port " + port);
         }

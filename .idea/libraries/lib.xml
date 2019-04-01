@@ -17,7 +17,7 @@
       <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.commons-1.10.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-simple-1.7.25.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/MatMusa.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/engine.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
