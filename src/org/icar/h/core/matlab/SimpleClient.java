@@ -67,6 +67,23 @@ public class SimpleClient {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else
+        {
+            Simple server = (Simple) Naming.lookup("//" +
+                serverIP +
+                ":" + port +
+                "/SimpleServer");
+
+            String textFile =null;
+            File dir = new File(path);
+            for (File file : dir.listFiles())
+            if(!file.getName().startsWith("."))
+            {
+                System.out.println(file.getName());
+                upload(server, new File(path + file.getName()), new File(path + file.getName()));
+            }
+
         }
     }
 }
+

@@ -44,6 +44,9 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
   val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
   val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
 
+  //sorted map value matlab
+
+  var result  = new util.HashMap[String,java.lang.Double](circuit.loads.size+circuit.generators.size)
 
   //MatRemote
   var stub: MatRemote = _
@@ -93,8 +96,10 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
           // IF THE PLAN IS CORRECT THEN...
           if (result_of_validation)
-            bridge.sendHead("validated("+next.plan_reference+")")
+          {
+            bridge.sendHead("validated(" + next.plan_reference + ")")
 
+          }
         }
 
         Thread.sleep(100 )
@@ -107,7 +112,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
 
   private def validate(sol: Solution): Boolean = {
-    var result = new util.HashMap[String,java.lang.Double](circuit.loads.size+circuit.generators.size) //numbers of loads and generators
+     //numbers of loads and generators
 
     val w: Boolean = validate_well_formedness(sol, sol.start, List())
 
@@ -125,6 +130,11 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
       try {
         result = stub.evaluateSolution(solution_for_matlab, all_switchers, open_switchers,circuit.loads.size)
+
+
+      //pretty print a map
+
+
         var xsize = 0
         println("result of generators:" + result.get("genResult"))
         var list : util.Set[String]  = result.keySet()
@@ -147,8 +157,6 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
     else
       false
   }
-
-
 
   private def validate_well_formedness(sol: Solution, item : WfItem, visited : List[WfItem]): Boolean = {
     if (!visited.contains(item)) {

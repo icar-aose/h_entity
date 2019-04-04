@@ -24,7 +24,7 @@ public class MMProcessor implements MatRemote{
     }
 
     public void print_hello() throws IllegalStateException {
-        System.out.println("ciao");
+        System.out.println("test");
     }
 
 
