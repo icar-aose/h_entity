@@ -9,7 +9,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
 @SuppressWarnings("serial")
-public class WorkerSystem extends Agent {
+public class JadeAkkaActorSystem extends Agent {
 	final private ActorSystem system = ActorSystem.create("worker-system");
 	private ActorRef root = null;
 

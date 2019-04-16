@@ -13,7 +13,6 @@ import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 import jason.infra.jade.JadeAgArch;
 import jason.mas2j.AgentParameters;
-import org.icar.h.sps_management.WorkerSystem;
 
 import java.io.File;
 import java.util.LinkedList;
