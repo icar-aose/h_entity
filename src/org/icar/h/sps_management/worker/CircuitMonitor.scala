@@ -1,9 +1,12 @@
 package org.icar.h.sps_management.worker
 
-import akka.actor.{Actor, ActorLogging, Props}
+import java.io.File
+
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import cartago.{ArtifactId, CartagoException}
 import cartago.util.agent.CartagoBasicContext
 import cartago.util.agent._
+import com.typesafe.config.ConfigFactory
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.ReconfigurationScenario
 
@@ -18,6 +21,18 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
   var my_device: ArtifactId = _
   var p: Percept = _
+
+  val CheckerActor = context.actorSelection("akka.tcp://RemoteSystem@194.119.214.139:5150/user/remote")  //IP of the PC remote
+
+
+
+  val configFile = getClass.getClassLoader.getResource("local_application.conf").getFile
+  val config = ConfigFactory.parseFile(new File(configFile))
+  val system = ActorSystem("ClientSystem",config)
+  val localActor = system.actorOf(Props[CircuitMonitor], name="local")
+
+
+
 
   override def preStart: Unit = {
     log.info("ready")
@@ -47,10 +62,13 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         log.info("percept: " + p.getSignal)
       } while (!p.hasSignal());
 */
+      CheckerActor ! "Check"
+
+    case msg : Double =>
+
       Thread.sleep(500 )
+      println ("current value low: "+ msg)
       bridge.sendHead("failure(f1)")
-
-
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)
