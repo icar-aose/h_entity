@@ -48,6 +48,9 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
   var result  = new util.HashMap[String,java.lang.Double](circuit.loads.size+circuit.generators.size)
 
+  var result_of_validation = true
+
+  var remoteMat : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.matlab")
   //MatRemote
   var stub: MatRemote = _
 
@@ -55,9 +58,13 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
   val port = properties.getString("simulator.server.port").toInt
 
   override def preStart : Unit = {
+
+    //if matlab remote is active
+    if(remoteMat.equals("true"))
+    {
     println("Connecting to Matlab...")
     try {
-      val registry = LocateRegistry.getRegistry(host,port)
+      val registry = LocateRegistry.getRegistry(host, port)
       stub = registry.lookup("MatRemote").asInstanceOf[MatRemote]
       println("Engine Matlab discovered")
       self ! CheckSolutionQueue()
@@ -72,6 +79,9 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
     SimpleClient.transfer()
     stub.startEngine()
+  }
+    else
+      self ! CheckSolutionQueue()
 
     log.info("ready")
   }
@@ -85,20 +95,21 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
         solutions_to_be_validated += Plan(plan_ref,plan)
 
       case CheckSolutionQueue() =>
-
         // HERE THE CODE TO VALIDATE
         if (solutions_to_be_validated.nonEmpty) {
           val next : Plan = solutions_to_be_validated.dequeue
 
           log.info("Validator: executing Matlab script with the solution "+next.plan_reference)
 
-          val result_of_validation = validate(next.plan)
+          if(remoteMat.equals("true"))
+            {
+              result_of_validation = validate(next.plan)
+            }
 
           // IF THE PLAN IS CORRECT THEN...
           if (result_of_validation)
           {
             bridge.sendHead("validated(" + next.plan_reference + ")")
-
           }
         }
 

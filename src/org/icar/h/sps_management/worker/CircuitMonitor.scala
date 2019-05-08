@@ -3,7 +3,7 @@ package org.icar.h.sps_management.worker
 import java.io.File
 import java.util.ResourceBundle
 
-import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props}
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
 import cartago.{ArtifactId, CartagoException}
 import cartago.util.agent.CartagoBasicContext
 import cartago.util.agent._
@@ -22,13 +22,13 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var my_device: ArtifactId = _
   var p: Percept = _
 
-  var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote")
+  var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
 
-  val CheckerActor : ActorRef = null
+  var CheckerActor : ActorSelection = null
 
   //Check if remote is active!
   if(remote.equals("true")) {
-    val CheckerActor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actor.remote.ip")+":5150/user/remote") //IP of the PC remote
+    CheckerActor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actor.remote.ip")+":5150/user/remote") //IP of the PC remote
     println("That 's remote:" + CheckerActor)
   }
 

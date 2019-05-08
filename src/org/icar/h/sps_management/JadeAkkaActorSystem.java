@@ -1,6 +1,5 @@
 package org.icar.h.sps_management;
 
-import akka.actor.BootstrapSetup;
 import com.typesafe.config.Config;
 import org.icar.h.core.Akka2Jade;
 
@@ -25,9 +24,10 @@ public class JadeAkkaActorSystem extends Agent {
 	ActorSystem system = null;
 	  protected void setup() {
 
-		  String remote = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote");
+		  String remote = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor");
 		  /* config file Akka Remote*/
 		  //THE ACTOR SYSTEM IS CREATE HERE
+		  //if actor remote is active
 		  if(remote.equals("true"))
 		  {
 			   String configFile = getClass().getClassLoader().getResource("resources/local_application.conf").getFile();
