@@ -29,7 +29,7 @@ object SPSPlanGenerator {
 class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val circ_sens_ref: ActorRef) extends Actor with ActorLogging {
   private val term = TimeTermination((2 minutes).toMillis)
 
-  val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.core.matlab.Simple")
+  val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.sps_management.Boot")
 
   private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)

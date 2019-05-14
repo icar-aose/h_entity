@@ -18,8 +18,6 @@ import java.util.ResourceBundle
 import org.icar.h.core.matlab._
 import org.icar.h.core.Akka2Jade
 
-import scala.collection.JavaConverters._
-
 
 object SPSPlanValidator {
    def props(bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_ref : ActorRef) : Props = Props(classOf[SPSPlanValidator],bridge,worker_sps,circ_sens_ref)
@@ -33,7 +31,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
   //load circuit
 
-  val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.core.matlab.Simple")
+  val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.sps_management.Boot")
 
   private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)
@@ -50,7 +48,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
   var result_of_validation = true
 
-  var remoteMat : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.matlab")
+  var remoteMat : String = properties.getString("remote.matlab")
   //MatRemote
   var stub: MatRemote = _
 
@@ -75,9 +73,9 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
         e.printStackTrace()
     }
 
-    //send circuit to matlab Server set on Simple.properties
+    //send circuit to matlab Server set on Boot.properties
 
-    SimpleClient.transfer()
+    //SimpleClient.transfer()
     stub.startEngine()
   }
     else

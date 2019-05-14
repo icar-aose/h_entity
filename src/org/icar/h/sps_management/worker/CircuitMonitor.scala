@@ -17,7 +17,6 @@ object CircuitMonitor {
 
 class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
-
   var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
   var my_device: ArtifactId = _
   var p: Percept = _

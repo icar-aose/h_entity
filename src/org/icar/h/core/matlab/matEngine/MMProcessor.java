@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import org.icar.h.core.matlab.SimpleServer;
-
 
 public class MMProcessor implements MatRemote{
 
@@ -35,20 +33,17 @@ public class MMProcessor implements MatRemote{
         // Get engine instance
         ml = eng.get();
 
-        String path = System.getProperty("user.dir") + "\\sps_data";
+        String path = System.getProperty("user.dir") + "/sps_data";
         String modelPath, model;
-        String textFile = new String();
+        String textFile = null;
         File dir = new File(path);
         for (File file : dir.listFiles()) {
             if (file.getName().endsWith((".slx"))) {
                 textFile=file.getName();
             }
         }
-        System.out.println(textFile);
-        //path circuito
-        modelPath = path + "\\"+textFile;
 
-        model = (new File(modelPath).getName()).substring(0, (new File(modelPath).getName()).length() - 4);
+        model = (new File(textFile).getName()).substring(0, (new File(textFile).getName()).length() - 4);
         //System.out.println(path);
         ml.putVariable("path", path.toCharArray());
         ml.putVariable("model", model);
@@ -84,7 +79,7 @@ public class MMProcessor implements MatRemote{
     }
 
     public HashMap<String,Double> fetchLoadAndGen() {
-        File name = new File(System.getProperty("user.dir") + "\\sps_data\\startup.m");
+        File name = new File(System.getProperty("user.dir") + "/sps_data/startup.m");
        HashMap<String, Double> results = new HashMap<String, Double>() ;
 
         if (name.isFile()) {
@@ -123,8 +118,7 @@ public class MMProcessor implements MatRemote{
 
 
         try{
-            LocateRegistry.createRegistry(1099);
-            Registry registry = LocateRegistry.getRegistry();
+            Registry registry = LocateRegistry.createRegistry(1099);
 
             SimpleServer.server(registry);
             MatRemote stub = (MatRemote) UnicastRemoteObject.exportObject(obj,0);
