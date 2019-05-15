@@ -19,6 +19,7 @@
       <root url="jar://$PROJECT_DIR$/lib/slf4j-simple-1.7.25.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/engine.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/SPSCommanderGUI.jar!/" />
+      <root url="file://$PROJECT_DIR$/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -27,6 +28,9 @@
       <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.fol-1.10.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.logics.commons-1.10.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/net.sf.tweety.commons-1.10.jar!/" />
+      <root url="file://$PROJECT_DIR$/lib" />
     </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

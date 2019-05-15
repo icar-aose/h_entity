@@ -13,7 +13,7 @@ case class FindSolutions( mission_ref : String, failure_description : String ) e
 case class Validate( plan_reference : String ) extends Action
 case class Enact( plan_reference : String ) extends Action
 
-
+case class Check () extends Action
 
 case class GetPlan( plan_reference : String ) extends Predicate
 case class Plan(plan_reference : String,plan:Solution) extends Concept

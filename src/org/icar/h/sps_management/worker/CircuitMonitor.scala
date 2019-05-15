@@ -1,6 +1,5 @@
 package org.icar.h.sps_management.worker
 
-import java.io.File
 import java.util.ResourceBundle
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
@@ -61,7 +60,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 */
       //if remote is active
       if(remote.equals("true"))
-        CheckerActor ! "Check"
+        CheckerActor ! Check()
       else
         self ! 10.0
 
