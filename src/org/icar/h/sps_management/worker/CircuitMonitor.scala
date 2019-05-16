@@ -9,6 +9,7 @@ import cartago.util.agent._
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.ReconfigurationScenario
 
+import org.icar.h.sps_management.rpi_ina219._
 
 object CircuitMonitor {
   def props(bridge: Akka2Jade): Props = Props(classOf[CircuitMonitor], bridge)
@@ -18,7 +19,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
   var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
   var my_device: ArtifactId = _
-  var p: Percept = _
+  val ui = new UI
+  ui.visible = true
 
   var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
 
@@ -46,30 +48,23 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   override def receive: Receive = {
 
     case CheckFailure(mission_ref) =>
-      //println("i'm worker check failure!\n")
-      /*var p: Percept = null
-      val sig: String = null
 
-
-      SimpleClient.transfer
-
-      do {
-        p = my_context.waitForPercept()
-        log.info("percept: " + p.getSignal)
-      } while (!p.hasSignal());
-*/
-      //if remote is active
       if(remote.equals("true"))
         CheckerActor ! Check()
       else
         self ! 10.0
 
 
-    case msg : Double =>
+    case RaspDataVal(data) =>
+      ui.Current0(data.getCurrent(0))
+      ui.Current1(data.getCurrent(1))
+      ui.Current2(data.getCurrent(2))
+      for (i <- 0 to 2)
+        {
+          if(data.getCurrent(i) < 0)
+            bridge.sendHead("failure(f1)")
+        }
 
-      Thread.sleep(500 )
-      println ("current value low: "+ msg)
-      bridge.sendHead("failure(f1)")
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)

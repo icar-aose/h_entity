@@ -77,6 +77,7 @@ class SPSPlanValidator(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_r
 
     //SimpleClient.transfer()
     stub.startEngine()
+    Thread.sleep(2000)
   }
     else
       self ! CheckSolutionQueue()
