@@ -1,4 +1,4 @@
-package org.icar.h.core.rpi_ina219;
+package org.icar.h.sps_management.rpi_ina219;
 
 
 import java.io.IOException;

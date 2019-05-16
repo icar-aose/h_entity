@@ -4,7 +4,7 @@ import processing.io._
 import java.io.File
 import akka.actor._
 import com.typesafe.config.ConfigFactory
-import org.icar.h.core.rpi_ina219._
+import org.icar.h.sps_management.rpi_ina219._
   
 class RaspActorCheckFailure extends Actor {
    	val ledPin = 17

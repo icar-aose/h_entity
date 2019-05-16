@@ -1,4 +1,4 @@
-package org.icar.h.core.rpi_ina219;
+package org.icar.h.sps_management.rpi_ina219;
 
 /**
  * Enumeration of the register addresses used by the INA219.
