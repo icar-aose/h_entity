@@ -56,9 +56,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
 
     case RaspDataVal(data) =>
-      ui.Current0(data.getCurrent(0))
-      ui.Current1(data.getCurrent(1))
-      ui.Current2(data.getCurrent(2))
+      ui.testGui(data)
       for (i <- 0 to 2)
         {
           if(data.getCurrent(i) < 0)
