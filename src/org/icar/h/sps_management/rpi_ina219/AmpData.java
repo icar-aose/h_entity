@@ -6,7 +6,7 @@ public class AmpData {
     private Double[] volt;
 
 
-    void AmpData (){
+    public AmpData (){
 
         this.current = new Double[4];
         this.volt = new Double[4];

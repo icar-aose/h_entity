@@ -2,7 +2,6 @@ package org.icar.h.sps_management.worker
 
 import processing.io._
 import java.io.File
-import java.util
 
 import akka.actor._
 import com.typesafe.config.ConfigFactory
@@ -67,10 +66,10 @@ class RaspActorCheckFailure extends Actor {
           println("current1: "+s1.getCurrent*1000)
           println("current2: "+s2.getCurrent*1000)
           println("current3: "+s3.getCurrent*1000+"\n")
-          data.setCurrent(s0.getCurrent*1000,0)
-          data.setCurrent(s1.getCurrent*1000,1)
-          data.setCurrent(s2.getCurrent*1000,2)
-          data.setCurrent(s3.getCurrent*1000,3)
+          data.setCurrent((s0.getCurrent*1000).asInstanceOf[java.lang.Double],0)
+          data.setCurrent((s1.getCurrent*1000).asInstanceOf[java.lang.Double],1)
+          data.setCurrent((s2.getCurrent*1000).asInstanceOf[java.lang.Double],2)
+          data.setCurrent((s3.getCurrent*1000).asInstanceOf[java.lang.Double],3)
           Thread.sleep(3000)
           sender() ! RaspDataVal(data)
         }

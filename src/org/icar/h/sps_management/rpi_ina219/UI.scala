@@ -8,6 +8,7 @@ class UI extends MainFrame {
   title = "Current Value"
   preferredSize = new Dimension(320, 240)
 
+
   def testGui (data : AmpData): Unit ={
 
     var Current = new TextArea(5,25)
