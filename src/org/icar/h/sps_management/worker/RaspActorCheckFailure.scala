@@ -53,7 +53,7 @@ class RaspActorCheckFailure extends Actor {
 	}
    
   override def receive: Receive = {
-    case msg : String => 
+    case Check() =>
 	GPIO.digitalWrite(swm1Pin, GPIO.LOW)
 	Thread.sleep(3000)
        	GPIO.digitalWrite(swL1Pin, GPIO.LOW)
