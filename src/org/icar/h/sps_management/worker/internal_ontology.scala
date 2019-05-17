@@ -17,8 +17,18 @@ case class Enact( plan_reference : String ) extends Action
 
 case class Check () extends Action
 
+@SerialVersionUID(113L)
+case class AmpData (current : Array[Double]) extends Serializable
+{
+
+  def setCurrent (current : Double, i : Int): Unit = {
+
+    this.current(i) = current
+  }
+}
+
 @SerialVersionUID(114L)
-case class RaspDataVal(data : AmpData) extends Serializable
+case class RaspDataVal(data : AmpData) extends Concept with Serializable
 
 case class GetPlan( plan_reference : String ) extends Predicate
 case class Plan(plan_reference : String,plan:Solution) extends Concept
