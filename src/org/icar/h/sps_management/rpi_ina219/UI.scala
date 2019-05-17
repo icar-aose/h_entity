@@ -2,7 +2,7 @@ package org.icar.h.sps_management.rpi_ina219
 import sun.font.TextLabel
 
 import scala.swing._
-
+import org.icar.h.sps_management.worker._
 
 class UI extends MainFrame {
   title = "Current Value"

@@ -2,7 +2,6 @@ package org.icar.h.sps_management.worker
 
 import org.icar.musa.pmr.Solution
 import org.icar.musa.scenarios.sps.{Mission, ReconfigurationScenario}
-import org.icar.h.sps_management.rpi_ina219.AmpData
 
 
 sealed abstract class Action
@@ -18,13 +17,15 @@ case class Enact( plan_reference : String ) extends Action
 case class Check () extends Action
 
 @SerialVersionUID(113L)
-case class AmpData (current : Array[Double]) extends Serializable
+case class AmpData (current : Array[Double] = new Array[Double](4)) extends Serializable
 {
 
   def setCurrent (current : Double, i : Int): Unit = {
 
     this.current(i) = current
   }
+
+  def getCurrent(i: Int): Double = this.current(i)
 }
 
 @SerialVersionUID(114L)

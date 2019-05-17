@@ -5,11 +5,11 @@ import java.util.ResourceBundle
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
 import cartago.{ArtifactId, CartagoException}
 import cartago.util.agent.CartagoBasicContext
-import cartago.util.agent._
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.ReconfigurationScenario
 
 import org.icar.h.sps_management.rpi_ina219._
+import org.icar.h.sps_management.worker._
 
 object CircuitMonitor {
   def props(bridge: Akka2Jade): Props = Props(classOf[CircuitMonitor], bridge)
