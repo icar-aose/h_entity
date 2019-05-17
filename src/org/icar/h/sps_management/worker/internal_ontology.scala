@@ -17,11 +17,10 @@ case class Enact( plan_reference : String ) extends Action
 case class Check () extends Action
 
 @SerialVersionUID(113L)
-case class AmpData (current : Array[Double] = new Array[Double](4)) extends Serializable
+case class AmpData (current : Array[Double] ) extends Serializable
 {
 
   def setCurrent (current : Double, i : Int): Unit = {
-
     this.current(i) = current
   }
 
