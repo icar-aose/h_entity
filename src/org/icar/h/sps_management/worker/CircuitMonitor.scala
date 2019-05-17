@@ -54,11 +54,6 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
     case RaspDataVal(data) =>
       gui.testGui(data)
-      println("Motor Current: " + data.getCurrent(0))
-      // l1.setBounds(300,50, 300,30);
-      println("Main Current: " + data.getCurrent(1))
-      // l2.setBounds(300,100, 300,30);
-      println("Led Current: " + data.getCurrent(2)+"\n")
       for (i <- 0 to 2)
         {
           if(data.getCurrent(i) < -5)
