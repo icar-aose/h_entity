@@ -9,7 +9,7 @@ import org.icar.h.sps_management.rpi_ina219._
   
 class RaspActorCheckFailure extends Actor {
    	val ledPin = 17
-    var current : Array[Double] = new Array[Double](4)
+    var current : Array[Double] = null
     var data : AmpData = new AmpData(current)
 	  var s0 : INA219 = new INA219 (INA219.Address.ADDR_40, 0.1
 				,1,INA219.Brng.V16,INA219.Pga.GAIN_8
