@@ -63,16 +63,16 @@ class RaspActorCheckFailure extends Actor {
         GPIO.digitalWrite(swL1Pin, GPIO.LOW)
         while(true)
         {
-          println("current0: "+s0.getCurrent*1000)
-          println("current1: "+s1.getCurrent*1000)
-          println("current2: "+s2.getCurrent*1000)
-          println("current3: "+s3.getCurrent*1000+"\n")
-          data.setCurrent((s0.getCurrent*1000).asInstanceOf[java.lang.Double],0)
-          data.setCurrent((s1.getCurrent*1000).asInstanceOf[java.lang.Double],1)
-          data.setCurrent((s2.getCurrent*1000).asInstanceOf[java.lang.Double],2)
-          data.setCurrent((s3.getCurrent*1000).asInstanceOf[java.lang.Double],3)
-          Thread.sleep(3000)
+          data.setCurrent(s0.getCurrent*1000,0)
+          data.setCurrent(s1.getCurrent*1000,1)
+          data.setCurrent(s2.getCurrent*1000,2)
+          data.setCurrent(s3.getCurrent*1000,3)
+          println("current0: "+data.getCurrent(0))
+          println("current1: "+data.getCurrent(1))
+          println("current2: "+data.getCurrent(2))
+          println("current3: "+data.getCurrent(3)+"\n")
           sender() ! RaspDataVal(data)
+          Thread.sleep(5000)
         }
       
     

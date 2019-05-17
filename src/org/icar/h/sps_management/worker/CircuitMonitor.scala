@@ -19,8 +19,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
   var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
   var my_device: ArtifactId = _
-  val gui = new Gui()
-
+  val gui : Gui= new Gui()
   var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
 
   var CheckerActor : ActorSelection = null
@@ -41,7 +40,6 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       case e: CartagoException =>
         e.printStackTrace();
     }
-
   }
 
   override def receive: Receive = {
@@ -56,8 +54,13 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
     case RaspDataVal(data) =>
       gui.testGui(data)
+      println("Motor Current: " + data.getCurrent(0))
+      // l1.setBounds(300,50, 300,30);
+      println("Main Current: " + data.getCurrent(1))
+      // l2.setBounds(300,100, 300,30);
+      println("Led Current: " + data.getCurrent(2)+"\n")
       for (i <- 0 to 2)
-        {println(data.getCurrent(i))
+        {
           if(data.getCurrent(i) < -5)
             bridge.sendHead("failure(f1)")
         }
