@@ -16,7 +16,9 @@ case class Validate( plan_reference : String ) extends Action
 case class Enact( plan_reference : String ) extends Action
 
 case class Check () extends Action
-case class RaspDataVal(data : AmpData) extends Concept
+
+@SerialVersionUID(114L)
+case class RaspDataVal(data : AmpData) extends Serializable
 
 case class GetPlan( plan_reference : String ) extends Predicate
 case class Plan(plan_reference : String,plan:Solution) extends Concept

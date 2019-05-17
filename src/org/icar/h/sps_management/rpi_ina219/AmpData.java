@@ -1,6 +1,10 @@
 package org.icar.h.sps_management.rpi_ina219;
 
-public class AmpData {
+
+import java.io.Serializable;
+
+
+public class AmpData  {
 
     private Double[] current;
     private Double[] volt;
