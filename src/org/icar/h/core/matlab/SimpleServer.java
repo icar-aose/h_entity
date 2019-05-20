@@ -14,7 +14,7 @@ public class SimpleServer
 
 	public static void server(Registry registry)
     {
-		ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.core.matlab.Simple");
+		ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.sps_management.Boot");
 		int port = 1099;
         try
         {

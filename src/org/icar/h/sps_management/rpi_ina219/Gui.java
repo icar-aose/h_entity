@@ -1,12 +1,9 @@
 package org.icar.h.sps_management.rpi_ina219;
 
-import javafx.scene.layout.VBox;
 import org.icar.h.sps_management.worker.AmpData;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javafx.scene.control.TableView;
-import javafx.scene.Scene;
 
 import java.awt.*;
 
