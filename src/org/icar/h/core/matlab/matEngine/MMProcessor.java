@@ -33,7 +33,7 @@ public class MMProcessor implements MatRemote{
         // Get engine instance
         ml = eng.get();
 
-        String path = System.getProperty("user.dir") + "/sps_data";
+        String path = System.getProperty("user.dir") + "\\sps_data";
         String modelPath, model;
         String textFile = null;
         File dir = new File(path);
@@ -79,7 +79,7 @@ public class MMProcessor implements MatRemote{
     }
 
     public HashMap<String,Double> fetchLoadAndGen() {
-        File name = new File(System.getProperty("user.dir") + "/sps_data/startup.m");
+        File name = new File(System.getProperty("user.dir") + "\\sps_data\\startup.m");
        HashMap<String, Double> results = new HashMap<String, Double>() ;
 
         if (name.isFile()) {
@@ -121,7 +121,7 @@ public class MMProcessor implements MatRemote{
             Registry registry = LocateRegistry.createRegistry(1099);
 
             SimpleServer.server(registry);
-            MatRemote stub = (MatRemote) UnicastRemoteObject.exportObject(obj,0);
+            MatRemote stub = (MatRemote) UnicastRemoteObject.exportObject(obj,1099);
 
             System.out.println(registry);
             registry.bind("MatRemote",stub);
