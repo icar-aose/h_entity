@@ -9,6 +9,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -118,10 +120,12 @@ public class MMProcessor implements MatRemote{
 
 
         try{
-            Registry registry = LocateRegistry.createRegistry(1099);
+            ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.sps_management.Boot");
+            int port = Integer.parseInt(properties.getString("simulator.server.port"));
+            Registry registry = LocateRegistry.createRegistry(port);
 
-            SimpleServer.server(registry);
-            MatRemote stub = (MatRemote) UnicastRemoteObject.exportObject(obj,1099);
+            //SimpleServer.server(registry);
+            MatRemote stub = (MatRemote) UnicastRemoteObject.exportObject(obj,port);
 
             System.out.println(registry);
             registry.bind("MatRemote",stub);

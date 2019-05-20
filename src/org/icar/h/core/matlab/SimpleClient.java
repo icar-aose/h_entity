@@ -45,7 +45,7 @@ public class SimpleClient {
 
     public static void transfer() throws Exception {
 
-        ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.core.matlab.Simple");
+        ResourceBundle properties = PropertyResourceBundle.getBundle("org.icar.h.sps_management.Boot");
 
         String serverIP = properties.getString("simulator.server.ip");
         int port = Integer.parseInt(properties.getString("simulator.server.port"));
