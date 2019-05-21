@@ -14,16 +14,18 @@ class SensorMonitor (adr : INA219.Address) extends Actor with ActorLogging {
 				,1,INA219.Brng.V16,INA219.Pga.GAIN_8
 				,INA219.Adc.BITS_12,INA219.Adc.BITS_12)
 
+    var current : Double= null
 	  override def preStart() : Unit = {
       log.info("Ready")
 	  }
    
     override def receive: Receive = {
       case Check() =>
-      {
-        sender() ! AmpValue(s.getCurrent * 1000,adr)
+      { current =s.getCurrent*1000
+        println(self+":"+current)
+        sender() ! AmpValue(current,adr)
         Thread.sleep(5000)
-        self ! Check ()
+        self ! Check()
       }
       
     
