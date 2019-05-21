@@ -22,12 +22,12 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   val gui : Gui= new Gui()
   var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
 
-  var CheckerActor : ActorSelection = null
+  var SensorArrayMonitor : ActorSelection = null
 
   //Check if remote is active!
   if(remote.equals("true")) {
-    CheckerActor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actor.remote.ip")+":5150/user/remote") //IP of the PC remote
-    println("That 's remote:" + CheckerActor)
+    SensorArrayMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actor.remote.ip")+":5150/user/remote") //IP of the PC remote
+    println("That 's remote:" + SensorArrayMonitor)
   }
 
   override def preStart: Unit = {
@@ -47,14 +47,14 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     case CheckFailure(mission_ref) =>
 
       if(remote.equals("true"))
-        CheckerActor ! Check()
+        SensorArrayMonitor ! StartCheckMonitor()
       else
         self ! 10.0
 
 
     case RaspDataVal(data) =>
       gui.testGui(data)
-      for (i <- 0 to 2)
+      for (i <- 0 to 3)
         {
           if(data.getCurrent(i) < -5)
             bridge.sendHead("failure(f1)")

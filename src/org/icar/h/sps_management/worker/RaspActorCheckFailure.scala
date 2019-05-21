@@ -7,10 +7,10 @@ import akka.actor._
 import com.typesafe.config.ConfigFactory
 import org.icar.h.sps_management.rpi_ina219._
   
-class RaspActorCheckFailure extends Actor {
+class RaspActorCheckFailure extends Actor with ActorLogging {
    	val ledPin = 17
     var current : Array[Double] = new Array[Double](4)
-    var data : AmpData = new AmpData(current)
+    var data : AmpData = AmpData(current)
 	  var s0 : INA219 = new INA219 (INA219.Address.ADDR_40, 0.1
 				,1,INA219.Brng.V16,INA219.Pga.GAIN_8
 				,INA219.Adc.BITS_12,INA219.Adc.BITS_12)
@@ -54,6 +54,8 @@ class RaspActorCheckFailure extends Actor {
       GPIO.digitalWrite(swmg1busPin, GPIO.HIGH)
       GPIO.digitalWrite(swL1Pin, GPIO.LOW)
       GPIO.digitalWrite(swL1busPin, GPIO.HIGH)
+
+      log.info("Ready")
 	  }
    
     override def receive: Receive = {
