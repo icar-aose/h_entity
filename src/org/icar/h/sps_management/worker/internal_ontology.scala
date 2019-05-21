@@ -3,6 +3,8 @@ package org.icar.h.sps_management.worker
 import org.icar.musa.pmr.Solution
 import org.icar.musa.scenarios.sps.{Mission, ReconfigurationScenario}
 import org.icar.h.sps_management.rpi_ina219._
+import java.util.{ArrayList, HashMap}
+
 
 sealed abstract class Action
 sealed abstract class Predicate
@@ -35,6 +37,11 @@ case class RaspDataVal(data : AmpData) extends Concept with Serializable
 @SerialVersionUID(115L)
 case class AmpValue (current : Double , adr: INA219.Address) extends Serializable
 
+@SerialVersionUID(116L)
+case class evaluateSolution(plan_reference : String, switchers: ArrayList[String], all_switchers: ArrayList[String], open_switchers: ArrayList[String], num_loads: Int) extends Predicate with Serializable
+
+@SerialVersionUID(117L)
+case class ResultSolution (results: HashMap[String, Double], plan_reference : String ) extends Action with Serializable
 
 
 case class GetPlan( plan_reference : String ) extends Predicate

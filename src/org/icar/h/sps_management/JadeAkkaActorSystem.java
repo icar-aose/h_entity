@@ -24,11 +24,11 @@ public class JadeAkkaActorSystem extends Agent {
 	ActorSystem system = null;
 	  protected void setup() {
 
-		  String remote = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor");
+		  ResourceBundle remote = ResourceBundle.getBundle("org.icar.h.sps_management.Boot");
 		  /* config file Akka Remote*/
 		  //THE ACTOR SYSTEM IS CREATE HERE
 		  //if actor remote is active
-		  if(remote.equals("true"))
+		  if(remote.getString("remote.actor").equals("true") || remote.getString("remote.matlab").equals("true"))
 		  {
 			   String configFile = getClass().getClassLoader().getResource("resources/local_application.conf").getFile();
 			   Config config = ConfigFactory.parseFile(new File(configFile));

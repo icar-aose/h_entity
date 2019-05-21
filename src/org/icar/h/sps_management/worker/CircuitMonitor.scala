@@ -21,7 +21,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var my_device: ArtifactId = _
   val gui : Gui= new Gui()
   var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
-
+  var sendH : Boolean = true
   var SensorArrayMonitor : ActorSelection = null
 
   //Check if remote is active!
@@ -51,13 +51,20 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       else
         self ! 10.0
 
+    case msg : Double =>        //if you don't have raspberry
+      Thread.sleep(3000)
+      bridge.sendHead("failure(f1)")
+
 
     case RaspDataVal(data) =>
       gui.testGui(data)
       for (i <- 0 to 3)
         {
-          if(data.getCurrent(i) < -5)
+          if(data.getCurrent(i) < -5 & sendH)
+          {
             bridge.sendHead("failure(f1)")
+            sendH = false
+          }
         }
 
 
