@@ -27,7 +27,7 @@ class SensorMonitor (adr : INA219.Address) extends Actor with ActorLogging {
       }
       
     
-      case _ => println("Received unknown msg ")
+      case _ => println("Received unknown msg: "+self)
 	  }
   }
 

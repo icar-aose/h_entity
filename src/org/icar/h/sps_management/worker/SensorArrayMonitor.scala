@@ -49,10 +49,10 @@ class SensorArrayMonitor extends Actor with ActorLogging {
   override def receive: Receive = {
     case StartCheckMonitor() =>
     {
-      SensorMonitor1 ! Check
-      SensorMonitor2 ! Check
-      SensorMonitor3 ! Check
-      SensorMonitor4 ! Check
+      SensorMonitor1 ! Check()
+      SensorMonitor2 ! Check()
+      SensorMonitor3 ! Check()
+      SensorMonitor4 ! Check()
       circuit_mon  = sender()
     }
 
