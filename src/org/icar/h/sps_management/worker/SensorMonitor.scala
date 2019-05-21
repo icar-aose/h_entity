@@ -14,7 +14,8 @@ class SensorMonitor (adr : INA219.Address) extends Actor with ActorLogging {
 				,1,INA219.Brng.V16,INA219.Pga.GAIN_8
 				,INA219.Adc.BITS_12,INA219.Adc.BITS_12)
 
-    var current : Double= null
+    var current : Double = _
+
 	  override def preStart() : Unit = {
       log.info("Ready")
 	  }
