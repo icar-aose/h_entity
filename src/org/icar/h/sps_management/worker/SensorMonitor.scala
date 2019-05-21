@@ -24,7 +24,6 @@ class SensorMonitor (adr : INA219.Address) extends Actor with ActorLogging {
       case Check() =>
       while(true)
       { current =s.getCurrent*1000
-        println(self+":"+current)
         sender() ! AmpValue(current,adr)
         Thread.sleep(5000)
       }

@@ -35,10 +35,10 @@ public class Gui   {
     public void testGui(AmpData data)
     {
 
-        l1.setText("Motor Current: "+data.getCurrent(0));
-        l2.setText("Main Current: "+data.getCurrent(1));
-        l3.setText("Led Current: "+data.getCurrent(2));
-        l4.setText("Aux Current: "+data.getCurrent(3));
+        l1.setText("Motor Current: "+data.getCurrent(0)+" mA");
+        l2.setText("Main Current: "+data.getCurrent(1)+" mA");
+        l3.setText("Led Current: "+data.getCurrent(2)+" mA");
+        l4.setText("Aux Current: "+data.getCurrent(3)+" mA");
     }
 
 }
