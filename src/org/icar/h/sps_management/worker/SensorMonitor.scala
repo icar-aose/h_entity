@@ -23,7 +23,7 @@ class SensorMonitor (adr : INA219.Address) extends Actor with ActorLogging {
       {
         sender() ! AmpValue(s.getCurrent * 1000,adr)
         Thread.sleep(5000)
-        self ! Check
+        self ! Check ()
       }
       
     
