@@ -32,7 +32,7 @@ class MatValidator extends Actor with ActorLogging {
           ml = eng.get
 
           val path = System.getProperty("user.dir") + "/sps_data"
-
+          println(path)
           var model: String = null
           var textFile: String = null
 
