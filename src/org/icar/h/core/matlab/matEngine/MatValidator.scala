@@ -15,7 +15,8 @@ class MatValidator extends Actor with ActorLogging {
 
   override def preStart(): Unit = {
 
-    self ! start()
+    self ! start()    //if you want start the matlab engine before
+
   }
 
 
@@ -31,9 +32,9 @@ class MatValidator extends Actor with ActorLogging {
           // Get engine instance
           ml = eng.get
 
-         // val path = System.getProperty("user.dir") + "/sps_data"   //if you are on intellij
+          val path = System.getProperty("user.dir") + "/sps_data"   //if you are on intellij
 
-          val path = "/home/elefante/h_entity/sps_data"    //if you are on command line
+         // val path = "/home/elefante/h_entity/sps_data"    //if you are on command line
           println(path)
           var model: String = null
           var textFile: String = null

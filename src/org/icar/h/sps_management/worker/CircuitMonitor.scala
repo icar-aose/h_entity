@@ -49,7 +49,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       if(remote.equals("true"))
         SensorArrayMonitor ! StartCheckMonitor()
       else
-        self ! 10.0
+        self ! 10.0             //if you don't have raspberry
 
     case msg : Double =>        //if you don't have raspberry
       Thread.sleep(3000)
