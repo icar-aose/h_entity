@@ -48,9 +48,10 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
   var RemoteMatActor: ActorSelection = null
 
   //Check if remote is active!
-  if (remote.equals("true")) RemoteMatActor = context.actorSelection("akka.tcp://RemoteSystem@" + properties.getString("simulator.actor.ip") + ":"+ Integer.parseInt(properties.getString("simulator.actor.port"))+"/user/remote_matlab") //IP of the PC remote
-  println("That 's remote:" + RemoteMatActor)
-
+  if (remote.equals("true")) {
+    RemoteMatActor = context.actorSelection("akka.tcp://RemoteSystem@" + properties.getString("simulator.actor.ip") + ":" + Integer.parseInt(properties.getString("simulator.actor.port")) + "/user/remote_matlab")  //IP of the PC remote
+    println("That 's remote:" + RemoteMatActor)
+  }
   //send file!!
 
   RemoteMatActor ! start()

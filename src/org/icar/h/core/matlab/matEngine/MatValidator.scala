@@ -13,6 +13,10 @@ class MatValidator extends Actor with ActorLogging {
 
   private var ml: MatlabEngine = null
 
+  override def preStart(): Unit = {
+
+    self ! start()
+  }
 
 
   override def receive: Receive = {
