@@ -11,36 +11,44 @@ import org.icar.h.sps_management.worker._
 
 class MatValidator extends Actor with ActorLogging {
 
-  private var ml: MatlabEngine = _
+  private var ml: MatlabEngine = null
 
-  override def preStart(): Unit = {
 
-    //Start MATLAB asynchronously
-    val eng = MatlabEngine.startMatlabAsync
-    // Get engine instance
-    ml = eng.get
-
-    val path = System.getProperty("user.dir") + "/sps_data"
-
-    var model: String = null
-    var textFile: String = null
-
-    val dir = new File(path)
-    for (file <- dir.listFiles) {
-      if (file.getName.endsWith(".slx"))
-        textFile = file.getName
-    }
-
-    model = new File(textFile).getName.substring(0, new File(textFile).getName.length - 4)
-    ml.putVariable("path", path.toCharArray)
-    ml.putVariable("model", model)
-    ml.eval("cd(path)")
-    ml.eval("startup")
-    System.out.println("matlab engine started")
-
-  }
 
   override def receive: Receive = {
+
+    case start() =>
+      {
+        if(ml==null)
+        {
+
+          //Start MATLAB asynchronously
+          val eng = MatlabEngine.startMatlabAsync
+          // Get engine instance
+          ml = eng.get
+
+          val path = System.getProperty("user.dir") + "/sps_data"
+
+          var model: String = null
+          var textFile: String = null
+
+          val dir = new File(path)
+          for (file <- dir.listFiles) {
+            if (file.getName.endsWith(".slx"))
+              textFile = file.getName
+          }
+
+          model = new File(textFile).getName.substring(0, new File(textFile).getName.length - 4)
+          ml.putVariable("path", path.toCharArray)
+          ml.putVariable("model", model)
+          ml.eval("cd(path)")
+          ml.eval("startup")
+          System.out.println("matlab engine started")
+        }
+
+      }
+
+
 
     case evaluateSolution(plan_reference : String, switchers: ArrayList[String], all_switchers: ArrayList[String], open_switchers: ArrayList[String], num_loads: Int) =>
     {

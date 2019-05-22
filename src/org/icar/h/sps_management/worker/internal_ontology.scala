@@ -41,8 +41,10 @@ case class AmpValue (current : Double , adr: INA219.Address) extends Serializabl
 case class evaluateSolution(plan_reference : String, switchers: ArrayList[String], all_switchers: ArrayList[String], open_switchers: ArrayList[String], num_loads: Int) extends Predicate with Serializable
 
 @SerialVersionUID(117L)
-case class ResultSolution (results: HashMap[String, Double], plan_reference : String ) extends Action with Serializable
+case class ResultSolution(results: HashMap[String, Double], plan_reference : String ) extends Action with Serializable
 
+@SerialVersionUID(118L)
+case class start() extends Action with Serializable
 
 case class GetPlan( plan_reference : String ) extends Predicate
 case class Plan(plan_reference : String,plan:Solution) extends Concept

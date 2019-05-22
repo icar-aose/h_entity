@@ -48,10 +48,12 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
   var RemoteMatActor: ActorSelection = null
 
   //Check if remote is active!
-  if (remote.equals("true")) {
-    RemoteMatActor = context.actorSelection("akka.tcp://RemoteSystem@" + properties.getString("simulator.actor.ip") + ":50322/user/remote_matlab") //IP of the PC remote
-    println("That 's remote:" + RemoteMatActor)
-  }
+  if (remote.equals("true")) RemoteMatActor = context.actorSelection("akka.tcp://RemoteSystem@" + properties.getString("simulator.actor.ip") + ":"+ Integer.parseInt(properties.getString("simulator.actor.port"))+"/user/remote_matlab") //IP of the PC remote
+  println("That 's remote:" + RemoteMatActor)
+
+  //send file!!
+
+  RemoteMatActor ! start()
 
 
   override def preStart: Unit = {
@@ -102,13 +104,18 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
     case ResultSolution(result, plan_reference) =>
 
       var xsize = 0
-      println("result of generators:" + result.get("genResult"))
+      println("Plan: "+plan_reference+", result of generators:" + result.get("genResult"))
       var list : util.Set[String]  = result.keySet()
       var iter : util.Iterator[String] = list.iterator()
       while(iter.hasNext)
       {
         var key = iter.next()
-        println(key+": " + result.get(key))
+        print(key+": ")
+        var value = result.get(key)
+        if(value > 0)
+          println(value)
+        else
+          println(-value)
       }
 
       println("\n")
