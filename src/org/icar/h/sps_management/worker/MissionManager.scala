@@ -3,6 +3,7 @@ package org.icar.h.sps_management.worker
 import akka.actor.{Actor, ActorLogging, Props}
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.Mission
+import scala.collection.mutable.ArrayBuffer
 
 object MissionManager {
   def props(bridge : Akka2Jade) : Props = Props(classOf[MissionManager],bridge)
@@ -11,8 +12,17 @@ object MissionManager {
 class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
   case class SetCurrentMission(mission_ref : String)
 
+
+  //configure Mission
+  val m = new Mission
+  m.vitals =ArrayBuffer[String]("load1","load2")
+  m.gen_pow += ("mg1"->20)
+  m.gen_pow += ("auxg1"->20)
+
+
   var missions : Map[String,Mission] = Map(
-    "on_shore" -> Mission.circuit3_file_mission_1
+   // "on_shore" -> Mission.circuit3_file_mission_1
+    "on_shore" -> m
   )
   var current_mission_ref : String = ""
 

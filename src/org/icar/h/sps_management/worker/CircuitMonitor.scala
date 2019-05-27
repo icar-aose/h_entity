@@ -1,6 +1,7 @@
 package org.icar.h.sps_management.worker
 
 import java.util.ResourceBundle
+import scala.collection.mutable.ArrayBuffer
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
 import cartago.{ArtifactId, CartagoException}
@@ -16,7 +17,14 @@ object CircuitMonitor {
 }
 
 class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
-  val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
+
+  //configure scenario
+
+  val scenario = new ReconfigurationScenario
+  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswauxg1","switchf1")
+  scenario.up_generators = ArrayBuffer[String]("mg1")
+
+  //val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
   var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
   var my_device: ArtifactId = _
   val gui : Gui= new Gui()
