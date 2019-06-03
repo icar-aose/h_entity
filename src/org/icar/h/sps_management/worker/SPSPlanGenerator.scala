@@ -12,12 +12,10 @@ import org.icar.fol._
 import org.icar.h.core.Akka2Jade
 import org.icar.ltl.{Finally, LogicConjunction, ltlFormula}
 import org.icar.musa.context.{AddEvoOperator, EvoOperator, RemoveEvoOperator, StateOfWorld}
-import org.icar.musa.main_entity.{AbstractCapability, EvolutionScenario, GroundedAbstractCapability, LTLGoal}
+import org.icar.musa.main_entity._
 import org.icar.musa.pmr.{SingleGoalProblemSpecification, Solution, TimeTermination}
 import org.icar.musa.scenarios.sps.{Circuit, Mission, ReconfigurationScenario}
-
 import java.util.ResourceBundle
-
 
 import scala.collection.mutable
 import scala.concurrent.{Await, Future}
@@ -51,12 +49,12 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
 
       val mission = Await.result(future_mission, timeout.duration).asInstanceOf[MissionDescription].mission
-      //log.info("list of vitals:")
-      //mission.vitals.foreach(log.info)
+      log.info("list of vitals:")
+      mission.vitals.foreach(log.info)
 
       val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
-      //log.info("list of active generators:")
-      //scenario.up_generators.foreach(log.info)
+      log.info("list of active generators:")
+      scenario.up_generators.foreach(log.info)
 
       val wi = initial_state(circuit,scenario)
       val goal = goal_specification(circuit, mission)
@@ -69,6 +67,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       context.actorOf(PMRActor.props(problem_specification,wi,cap_set,term), "pmr_actor")
 
     case PMRFullSolution(sol) =>
+      //println("discovered")
       val num = discovered_solutions.size + 1
       val name = "solution_"+num
       discovered_solutions += (name -> sol)
@@ -148,8 +147,8 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
     var cap_list = ArrayBuffer[AbstractCapability]()
 
     for (gen <- circuit.generators if !scenario.generator_malfunctioning.contains(gen)) {
-      cap_list += generate_switch_on_generator(gen.id)
-      cap_list += generate_switch_off_generator(gen.id)
+      //cap_list += generate_switch_on_generator(gen.id)
+      //cap_list += generate_switch_off_generator(gen.id)
     }
 
     for (sw <- circuit.switcher if !scenario.switcher_malfunctioning.contains(sw)) {
@@ -167,55 +166,52 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       }
     }
 
-    def generate_switch_on_generator(name: String): GroundedAbstractCapability = {
-      val generator_name = "switch_ON_" + name
+    def generate_switch_on_generator(name : String) : GroundedAbstractCapability = {
+      val generator_name = "switch_ON_"+name
       val generator = AtomTerm(name)
-      val pre = FOLCondition(Literal(Predicate("off", generator)))
-      val post = FOLCondition(Literal(Predicate("on", generator)))
-      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("off", generator)), AddEvoOperator(GroundPredicate("on", generator))))
-      GroundedAbstractCapability(generator_name, pre, post, Map("1" -> evo_1))
+      val pre = FOLCondition(Literal(Predicate("off", generator )))
+      val post = FOLCondition(Literal(Predicate("on", generator )))
+      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("off", generator)),AddEvoOperator(GroundPredicate("on", generator))))
+      GroundedAbstractCapability(generator_name,pre,post,Map("1"-> evo_1),DataInSpecification(ArrayBuffer()),DataOutSpecification(ArrayBuffer()),Map(),"switch_OFF_"+name)
     }
 
-    def generate_switch_off_generator(name: String): GroundedAbstractCapability = {
-      val generator_name = "switch_OFF_" + name
+    def generate_switch_off_generator(name : String) : GroundedAbstractCapability = {
+      val generator_name = "switch_OFF_"+name
       val generator = AtomTerm(name)
-      val pre = FOLCondition(Literal(Predicate("on", generator)))
-      val post = FOLCondition(Literal(Predicate("off", generator)))
-      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("on", generator)), AddEvoOperator(GroundPredicate("off", generator))))
-      GroundedAbstractCapability(generator_name, pre, post, Map("1" -> evo_1))
+      val pre = FOLCondition(Literal(Predicate("on", generator )))
+      val post = FOLCondition(Literal(Predicate("off", generator )))
+      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("on", generator)),AddEvoOperator(GroundPredicate("off", generator))))
+      GroundedAbstractCapability(generator_name,pre,post,Map("1"-> evo_1),DataInSpecification(ArrayBuffer()),DataOutSpecification(ArrayBuffer()),Map(),"switch_ON_"+name)
     }
-
-    def generate_close_switcher(name: String): GroundedAbstractCapability = {
-      val capname = "CLOSE_" + name
+    def generate_close_switcher(name : String) : GroundedAbstractCapability = {
+      val capname = "CLOSE_"+name
       val switcher = AtomTerm(name)
-      val pre = FOLCondition(Literal(Predicate("open", switcher)))
-      val post = FOLCondition(Literal(Predicate("closed", switcher)))
-      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("open", switcher)), AddEvoOperator(GroundPredicate("closed", switcher))))
-      GroundedAbstractCapability(capname, pre, post, Map("1" -> evo_1))
+      val pre = FOLCondition(Literal(Predicate("open", switcher )))
+      val post = FOLCondition(Literal(Predicate("closed", switcher )))
+      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("open", switcher)),AddEvoOperator(GroundPredicate("closed", switcher))))
+      GroundedAbstractCapability(capname,pre,post,Map("1"-> evo_1),DataInSpecification(ArrayBuffer()),DataOutSpecification(ArrayBuffer()),Map(),"OPEN_"+name)
     }
-
-    def generate_open_switcher(name: String): GroundedAbstractCapability = {
-      val capname = "OPEN_" + name
+    def generate_open_switcher(name : String) : GroundedAbstractCapability = {
+      val capname = "OPEN_"+name
       val switcher = AtomTerm(name)
-      val pre = FOLCondition(Literal(Predicate("closed", switcher)))
-      val post = FOLCondition(Literal(Predicate("open", switcher)))
-      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("closed", switcher)), AddEvoOperator(GroundPredicate("open", switcher))))
-      GroundedAbstractCapability(capname, pre, post, Map("1" -> evo_1))
+      val pre = FOLCondition(Literal(Predicate("closed", switcher )))
+      val post = FOLCondition(Literal(Predicate("open", switcher )))
+      val evo_1 = EvolutionScenario(Array[EvoOperator](RemoveEvoOperator(GroundPredicate("closed", switcher)),AddEvoOperator(GroundPredicate("open", switcher))))
+      GroundedAbstractCapability(capname,pre,post,Map("1"-> evo_1),DataInSpecification(ArrayBuffer()),DataOutSpecification(ArrayBuffer()),Map(),"CLOSE_"+name)
     }
-
-    def generate_combinated_on_off_switcher(name1: String, name2: String): GroundedAbstractCapability = {
-      val capname = "CLOSE_" + name1 + "_&_OPEN_" + name2
+    def generate_combinated_on_off_switcher(name1 : String, name2 : String) : GroundedAbstractCapability = {
+      val capname = "CLOSE_"+name1+"_&_OPEN_"+name2
       val switcher1 = AtomTerm(name1)
       val switcher2 = AtomTerm(name2)
-      val pre = FOLCondition(Conjunction(Literal(Predicate("open", switcher1)), Literal(Predicate("closed", switcher2))))
-      val post = FOLCondition(Conjunction(Literal(Predicate("closed", switcher1)), Literal(Predicate("open", switcher2))))
+      val pre = FOLCondition(Conjunction(Literal(Predicate("open", switcher1 )),Literal(Predicate("closed", switcher2 ))))
+      val post = FOLCondition(Conjunction(Literal(Predicate("closed", switcher1 )),Literal(Predicate("open", switcher2 ))))
       val evo_1 = EvolutionScenario(Array[EvoOperator](
         RemoveEvoOperator(GroundPredicate("open", switcher1)),
         AddEvoOperator(GroundPredicate("closed", switcher1)),
         RemoveEvoOperator(GroundPredicate("closed", switcher2)),
         AddEvoOperator(GroundPredicate("open", switcher2))
       ))
-      GroundedAbstractCapability(capname, pre, post, Map("1" -> evo_1))
+      GroundedAbstractCapability(capname,pre,post,Map("1"-> evo_1),DataInSpecification(ArrayBuffer()),DataOutSpecification(ArrayBuffer()),Map(),"CLOSE_"+name2+"_&_OPEN_"+name2)
     }
 
     cap_list.toArray

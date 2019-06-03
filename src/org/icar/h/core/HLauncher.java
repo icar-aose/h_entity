@@ -11,8 +11,8 @@ import jade.util.leap.Properties;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
-import jason.infra.jade.JadeAgArch;
 import jason.mas2j.AgentParameters;
+import org.icar.h.core.jason_jade.JadeAgArch;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -75,7 +75,7 @@ public class HLauncher {
         String[] entities = run.getString("entities").split(",");
         for (String s : entities) {
             String name = s.trim();
-            System.out.println("dealing with "+name);
+            //System.out.println("dealing with "+name);
             if (!run.containsKey(name + ".type"))
                 System.out.println("error loading [" + name + "] because of missing type");
             else {

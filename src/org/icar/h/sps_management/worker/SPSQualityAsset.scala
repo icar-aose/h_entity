@@ -14,6 +14,12 @@ class SPSQualityAsset(circuit : Circuit, mission : Mission, assumptions: Assumpt
     val cond_map = circuit.cond_map
     val res_map : Map[String, Boolean] = entail.condition_map(w,assumptions,cond_map)
 
+    val node_map = circuit.node_map
+    val node_res_map : Map[String, Boolean] = entail.condition_map(w,assumptions,node_map)
+    var num_node_up=0
+    for (n<-node_res_map.values if n==true)
+      num_node_up += 1
+
     var supplied_pow : Float = 0
     for (g <- circuit.generators if res_map(g.id)) supplied_pow += mission.gen_pow(g.id)
 
@@ -21,16 +27,19 @@ class SPSQualityAsset(circuit : Circuit, mission : Mission, assumptions: Assumpt
     var absorbed_pow : Float = 0
     var not_enough_pow : Float = 0
     var digits : String = ""
+    var max_digits = ""
 
     for (l_name <- mission.vitals) {
-
+      max_digits += "1"
       if (res_map(l_name)) {
+        digits += "1"
+
         absorbed_pow += mission.vital_pow
         if (residue_pow>mission.vital_pow) {
-          digits += "1"
+          //digits += "1"
           residue_pow -= mission.vital_pow
         } else {
-          digits += "0"
+          //digits += "0"
           not_enough_pow += mission.vital_pow
         }
       } else digits += "0"
@@ -38,14 +47,16 @@ class SPSQualityAsset(circuit : Circuit, mission : Mission, assumptions: Assumpt
     }
 
     for (l_name <- mission.semivitals) {
-
+      max_digits += "1"
       if (res_map(l_name)) {
+        digits += "1"
+
         absorbed_pow += mission.semivital_pow
         if (residue_pow>mission.semivital_pow) {
-          digits += "1"
+          //digits += "1"
           residue_pow -= mission.semivital_pow
         } else {
-          digits += "0"
+          //digits += "0"
           not_enough_pow += mission.semivital_pow
         }
       } else digits += "0"
@@ -53,22 +64,39 @@ class SPSQualityAsset(circuit : Circuit, mission : Mission, assumptions: Assumpt
     }
 
     for (l_name <- mission.nonvitals) {
+      max_digits += "1"
 
       if (res_map(l_name)) {
+        digits += "1"
+
         absorbed_pow += mission.nonvital_pow
         if (residue_pow>mission.nonvital_pow) {
-          digits += "1"
+          //digits += "1"
           residue_pow -= mission.nonvital_pow
         } else {
-          digits += "0"
+          //digits += "0"
           not_enough_pow += mission.nonvital_pow
         }
       } else digits += "0"
 
     }
 
-    //println(digits)
-    Some(Integer.parseInt(digits, 2)-not_enough_pow-residue_pow)
+    val pr_norm = Integer.parseInt(digits, 2).toDouble / Integer.parseInt(max_digits, 2).toDouble
+    val nu_norm = if (supplied_pow>0) residue_pow / supplied_pow else 0
+    val ne_norm = if (supplied_pow>0) not_enough_pow / supplied_pow else 0
+    val u_norm = num_node_up.toDouble / circuit.nodes.size.toDouble
+
+    val PR = 4*pr_norm
+    val UP = 0.5*u_norm
+    val NU = 0.5*nu_norm
+    val NE = 4*ne_norm
+
+    val m = (PR+UP)-(NU+NE)
+
+    //println(s" Pr=$c1  NUp=$c2   NouUsed=$c3   NotEnough=$c4  => $m  ")
+
+
+    Some( m.toFloat )
   }
 
   override def max_score: Float = math.pow(2, circuit.loads.length).toFloat
