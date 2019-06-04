@@ -25,7 +25,7 @@ object SPSPlanGenerator {
 }
 
 class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val circ_sens_ref: ActorRef) extends Actor with ActorLogging {
-  private val term = TimeTermination((2 minutes).toMillis)
+  private val term = TimeTermination((15 minutes).toMillis)
 
   val properties: ResourceBundle = ResourceBundle.getBundle("org.icar.h.sps_management.Boot")
 
