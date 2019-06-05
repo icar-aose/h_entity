@@ -21,7 +21,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   //configure scenario
 
   val scenario = new ReconfigurationScenario
-  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswauxg1","switchf1")
+  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1","switchf1","switchf2")
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
   //val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1

@@ -68,6 +68,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
 
     case PMRFullSolution(sol) =>
       //println("discovered")
+
       val num = discovered_solutions.size + 1
       val name = "solution_"+num
       discovered_solutions += (name -> sol)

@@ -53,10 +53,12 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
     println("That 's remote:" + RemoteMatActor)
 
 
-    RemoteMatActor ! start()
-  }
-  //send file!!
+    //send file!!
 
+    RemoteMatActor ! start()
+
+
+  }
 
 
   override def preStart: Unit = {

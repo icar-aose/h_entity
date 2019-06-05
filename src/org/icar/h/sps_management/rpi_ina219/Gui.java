@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.*;
+import java.util.ResourceBundle;
 
 public class Gui   {
 
@@ -18,7 +19,8 @@ public class Gui   {
 
         f.setSize(400,500);//400 width and 500 height
         f.setLayout(null);//using no layout managers
-        f.setVisible(true);//making the frame visible
+        if(ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor").equals(true))
+            f.setVisible(true);//making the frame visible
 
         l1=new JLabel();
         l2=new JLabel();

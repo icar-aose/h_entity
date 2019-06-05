@@ -15,7 +15,9 @@ class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
 
   //configure Mission
   val m = new Mission
-  m.vitals =ArrayBuffer[String]("load1","load2")
+  m.vitals =ArrayBuffer[String]("load1","load3")
+  m.semivitals = ArrayBuffer[String]("load2","load4")
+  m.nonvitals =ArrayBuffer[String]("load5")
   m.gen_pow += ("mg1"->20)
   m.gen_pow += ("auxg1"->20)
 
