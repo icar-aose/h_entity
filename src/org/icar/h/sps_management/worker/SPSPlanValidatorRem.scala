@@ -44,7 +44,7 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
   var result = new util.HashMap[String, java.lang.Double](circuit.loads.size + circuit.generators.size)
 
   var result_of_validation = true
-  var remote: String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.matlab")
+  var remote: String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("simulator.matlab")
   var RemoteMatActor: ActorSelection = null
 
   //Check if remote is active!
@@ -126,6 +126,8 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
       println("\n")
       if (result.get("genResult")==1) {
         bridge.sendHead("validated(" + plan_reference + ")")
+
+        //GUI solution!!
       }
 
 

@@ -1,12 +1,15 @@
 package org.icar.h.sps_management.worker
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import java.io.File
+
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props}
+import com.typesafe.config.ConfigFactory
 import org.icar.h.core.Akka2Jade
 
 
 object ReconfigurationEnactor {
    def props(bridge : Akka2Jade,worker_sps : ActorRef) : Props = Props(classOf[ReconfigurationEnactor],bridge,worker_sps)
-}
+
 
 class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) extends Actor with ActorLogging {
 
@@ -27,4 +30,6 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
       case _ =>
         println("Enactor: unspecified message")
     }
+}
+
 }

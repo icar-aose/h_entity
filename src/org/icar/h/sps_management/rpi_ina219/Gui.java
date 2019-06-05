@@ -19,7 +19,7 @@ public class Gui   {
 
         f.setSize(400,500);//400 width and 500 height
         f.setLayout(null);//using no layout managers
-        if(ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor").equals(true))
+        if(ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor").equals("true"))
             f.setVisible(true);//making the frame visible
 
         l1=new JLabel();

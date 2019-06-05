@@ -68,7 +68,7 @@ mission(undefined).
 
 +validated(Plan)
 <-
-    .print("The solution: ",Plan, " is valid according the Physical Simulator")
+    .print("The ",Plan," is valid according the Physical Simulator")
 .
 
 
