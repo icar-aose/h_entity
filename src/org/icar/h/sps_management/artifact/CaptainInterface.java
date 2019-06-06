@@ -1,9 +1,8 @@
 package org.icar.h.sps_management.artifact;
 
-
-import cartago.Artifact;
+import cartago.INTERNAL_OPERATION;
 import cartago.OPERATION;
-import org.icar.musa.scenarios.sps.SolutionsGUI;
+import cartago.tools.GUIArtifact;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,17 +10,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CaptainInterface extends Artifact {
+public class CaptainInterface extends GUIArtifact {
 
-	private int count = 0;
 	private DefaultListModel  model = new DefaultListModel();
-	private SolutionsGUI gui = new SolutionsGUI(model,new GuiSelectionListener());
+	private SolutionsGUI gui = new SolutionsGUI(model);
 	private List<String> plan_ref_index =new ArrayList<String>() ;
 
 
-	void init() {
+	public void setup() {
 		System.out.println("sono il Captain");
 		gui.setVisible(true);
+
+		linkActionEventToOp(gui.getSelectButton(),"select");
 	}
 
 	@OPERATION
@@ -33,6 +33,16 @@ public class CaptainInterface extends Artifact {
 
 	}
 
+	@INTERNAL_OPERATION
+	void select(ActionEvent ev) {
+
+		gui.setVisible(false);
+		int index = gui.getSelectedForExecution();
+		String selected_ref = plan_ref_index.get(index);
+		signal("selected",selected_ref);
+
+
+	}
 
 	@OPERATION
 	void addSolution(String plan_reference, String sol ) throws InterruptedException {
@@ -41,23 +51,7 @@ public class CaptainInterface extends Artifact {
 		/*for ( int i = 0; i< sol.size();i++)
 			sol_string += sol.get(i)+"->";*/
 		plan_ref_index.add(plan_reference);
-		count++;
-		model.addElement(plan_reference+": sol" +count+ " "+ sol);
-	}
-
-
-	private class GuiSelectionListener implements ActionListener {
-
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-
-			int index = gui.getSelectedForExecution();
-			String selected_ref = plan_ref_index.get(index);
-			signal("selected",selected_ref);
-
-		}
+		model.addElement(plan_reference+": sol" + sol);
 	}
 
 

@@ -9,8 +9,9 @@ import akka.pattern.ask
 import akka.util.Timeout
 import org.icar.h.core.Akka2Jade
 import org.icar.h.core.matlab.matEngine.MatRemote
+import org.icar.h.sps_management.EvaluateSol
 import org.icar.musa.pmr._
-import org.icar.musa.scenarios.sps.{Circuit, EvaluateSol}
+import org.icar.musa.scenarios.sps.Circuit
 
 import scala.collection.mutable.Queue
 import scala.concurrent.duration._
@@ -74,7 +75,7 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
   override def receive: Receive = {
     case Validate(plan_reference) =>
-      log.info("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: " + plan_reference)
+      log.debug("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: " + plan_reference)
       worker_sps ! GetPlan(plan_reference)
 
     case Plan(plan_ref, plan) =>
@@ -87,7 +88,7 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
       if (solutions_to_be_validated.nonEmpty) {
         val next: Plan = solutions_to_be_validated.dequeue
 
-        log.info("Validator: executing Matlab script with the solution " + next.plan_reference)
+        //log.info("Validator: executing Matlab script with the solution " + next.plan_reference)
 
         if (remote.equals("true")) {
 
@@ -114,19 +115,19 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
     case ResultSolution(result, plan_reference) =>
 
       var xsize = 0
-      println("Plan: "+plan_reference+", result of generators:" + result.get("genResult"))
-      var list : util.Set[String]  = result.keySet()
-      var iter : util.Iterator[String] = list.iterator()
-      while(iter.hasNext)
-      {
-        var key = iter.next()
-        print(key+": ")
-        var value = result.get(key)
-        if(value > 0)
-          println(value)
-        else
-          println(-value)
-      }
+//      println("Plan: "+plan_reference+", result of generators:" + result.get("genResult"))
+//      var list : util.Set[String]  = result.keySet()
+//      var iter : util.Iterator[String] = list.iterator()
+//      while(iter.hasNext)
+//      {
+//        var key = iter.next()
+//        print(key+": ")
+//        var value = result.get(key)
+//        if(value > 0)
+//          println(value)
+//        else
+//          println(-value)
+//      }
 
       println("\n")
       if (result.get("genResult")==1) {

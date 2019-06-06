@@ -49,12 +49,12 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
 
       val mission = Await.result(future_mission, timeout.duration).asInstanceOf[MissionDescription].mission
-      log.info("list of vitals:")
-      mission.vitals.foreach(log.info)
+      //log.info("list of vitals:")
+      //mission.vitals.foreach(log.info)
 
       val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
-      log.info("list of active generators:")
-      scenario.up_generators.foreach(log.info)
+      //log.info("list of active generators:")
+      //scenario.up_generators.foreach(log.info)
 
       val wi = initial_state(circuit,scenario)
       val goal = goal_specification(circuit, mission)
