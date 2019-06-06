@@ -1,8 +1,7 @@
 package org.icar.h.core;
 
-import cartago.CartagoException;
-import cartago.CartagoService;
-import cartago.NodeId;
+import cartago.*;
+import cartago.util.agent.CartagoBasicContext;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -29,7 +28,7 @@ public class HLauncher {
 
         if (run != null) {
             init_jade_infrastructure();
-            init_cartago();
+            //init_cartago();
         }
         if (ac != null)
             create_agent_controllers();
@@ -66,6 +65,17 @@ public class HLauncher {
         try {
             NodeId node = CartagoService.startNode();
             CartagoService.installInfrastructureLayer("default");
+            CartagoBasicContext my_context = new CartagoBasicContext("my_agent");
+            ArtifactId my_device;
+            try {
+                my_device = my_context.makeArtifact("CaptainGui", "org.icar.h.sps_management.artifact.CaptainInterface");
+               // my_context.doAction(my_device, new Op("welcome"));
+            } catch (CartagoException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
         } catch (CartagoException e) {
             e.printStackTrace();
         }

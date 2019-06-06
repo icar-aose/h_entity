@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import jaca.CAgentArch;
+import jaca.CartagoEnvironment;
 import jade.core.AID;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -26,11 +28,13 @@ import jason.infra.jade.RunJadeMAS;
 import jason.mas2j.AgentParameters;
 import jason.runtime.RuntimeServices;
 
-public class JasonBridgeArch extends AgArch {
+public class JasonBridgeArch extends CAgentArch {
 
     JadeAgArch jadeAg;
     AID environmentAID = null;
     Logger logger = jade.util.Logger.getMyLogger(this.getClass().getName());
+
+    CartagoEnvironment cartago_env = new CartagoEnvironment();
 
     // map of pending actions
     private Map<String,ActionExec> myPA = new HashMap<String,ActionExec>();
@@ -48,6 +52,11 @@ public class JasonBridgeArch extends AgArch {
 
         if (getTS().getSettings().verbose() >= 0)
             logger.setLevel(getTS().getSettings().logLevel());
+
+        String[] params = {"standalone"};
+        cartago_env.init(params);
+
+        initBridge();
     }
 
     /*@Override
@@ -224,27 +233,27 @@ public class JasonBridgeArch extends AgArch {
         return s.substring( s.indexOf(c) + c.length());
     }
 
-    @Override
-    public void act(ActionExec action) {
-        if (!isRunning()) return;
-        if (getEnvironmentAg() == null) return;
-
-        try {
-            Term acTerm = action.getActionTerm();
-            logger.fine("doing: " + acTerm);
-
-            String rw  = "id"+jadeAg.incReplyWithId();
-            ACLMessage m = new ACLMessage(ACLMessage.REQUEST);
-            m.addReceiver(environmentAID);
-            m.setOntology(JadeEnvironment.actionOntology);
-            m.setContent(acTerm.toString());
-            m.setReplyWith(rw);
-            myPA.put(rw, action);
-            jadeAg.send(m);
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error sending action " + action, e);
-        }
-    }
+//    @Override
+//    public void act(ActionExec action) {
+//        if (!isRunning()) return;
+//        if (getEnvironmentAg() == null) return;
+//
+//        try {
+//            Term acTerm = action.getActionTerm();
+//            logger.fine("doing: " + acTerm);
+//
+//            String rw  = "id"+jadeAg.incReplyWithId();
+//            ACLMessage m = new ACLMessage(ACLMessage.REQUEST);
+//            m.addReceiver(environmentAID);
+//            m.setOntology(JadeEnvironment.actionOntology);
+//            m.setContent(acTerm.toString());
+//            m.setReplyWith(rw);
+//            myPA.put(rw, action);
+//            jadeAg.send(m);
+//        } catch (Exception e) {
+//            logger.log(Level.SEVERE, "Error sending action " + action, e);
+//        }
+//    }
 
     @Override
     public RuntimeServices getRuntimeServices() {

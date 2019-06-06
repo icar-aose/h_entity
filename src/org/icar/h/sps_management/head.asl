@@ -8,9 +8,8 @@ mission(undefined).
 +!continuity_of_service
 : 
 	true 
-<- .print("ciao1");
-	//makeArtifact("CaptainGui","org.icar.h.sps_management.artifact.CaptainInterface",[],Id);
-	.print("ciao2");
+<-
+	makeArtifact("CaptainGui","org.icar.h.sps_management.artifact.CaptainInterface",[],Id);
 	!failure_prediciton;
 	!failure_detection;
 .
@@ -72,7 +71,8 @@ mission(undefined).
 <-
     .print("The ",Plan_reference," is valid according the Physical Simulator");
     .print(Plan_description);
-    addSolution(Plan_reference,Plan_description);
+    .term2string(Plan_description,String);
+    addSolution(Plan_reference,String);
 .
 
 
