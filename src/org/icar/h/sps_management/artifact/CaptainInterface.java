@@ -26,7 +26,11 @@ public class CaptainInterface extends Artifact {
 
 	@OPERATION
 	void helloWorld() {
+
 		System.out.println("hello world");
+		signal("tick","param");
+		System.out.println("mando un signal");
+
 	}
 
 

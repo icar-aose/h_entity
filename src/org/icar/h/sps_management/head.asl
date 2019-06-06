@@ -12,7 +12,14 @@ mission(undefined).
 	makeArtifact("CaptainGui","org.icar.h.sps_management.artifact.CaptainInterface",[],Id);
 	!failure_prediciton;
 	!failure_detection;
+    focus(Id);
+
+	//helloWorld;
+
 .
+
+
+
 
 +!failure_detection
 :	
@@ -76,13 +83,19 @@ mission(undefined).
 .
 
 
-+selected(Plan)
++selected(Plan)[artifact_name(Id,Name)]
 <-
     .print("The worker_validator validate the solution: ",Plan)
     .print("Now contact the plan enactor for enact the Plan")
     .wait(2000)
 	//.enact(Plan);
 .
+
++tick(Param) [artifact_name(Id,Name)]
+<-
+    .print("tick...",Param);
+.
+
 
 +alive [source(X)]
 :
