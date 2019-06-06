@@ -39,7 +39,7 @@ public class Gui   {
 
         l1.setText("Motor Current: "+data.getCurrent(0)+" mA");
         l2.setText("Main Current: "+data.getCurrent(1)+" mA");
-        l3.setText("Led Current: "+data.getCurrent(2)+" mA");
+        l3.setText("Load 1 Current: "+data.getCurrent(2)+" mA");
         l4.setText("Aux Current: "+data.getCurrent(3)+" mA");
     }
 

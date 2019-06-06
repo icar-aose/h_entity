@@ -8,7 +8,9 @@ mission(undefined).
 +!continuity_of_service
 : 
 	true 
-<- 
+<- .print("ciao1");
+	//makeArtifact("CaptainGui","org.icar.h.sps_management.artifact.CaptainInterface",[],Id);
+	.print("ciao2");
 	!failure_prediciton;
 	!failure_detection;
 .
@@ -66,9 +68,11 @@ mission(undefined).
 	//notify_commander(Plan,Results,Problems);
 .
 
-+validated(Plan)
++validated(Plan_reference,Plan_description)
 <-
-    .print("The ",Plan," is valid according the Physical Simulator")
+    .print("The ",Plan_reference," is valid according the Physical Simulator");
+    .print(Plan_description);
+    addSolution(Plan_reference,Plan_description);
 .
 
 
@@ -77,7 +81,7 @@ mission(undefined).
     .print("The worker_validator validate the solution: ",Plan)
     .print("Now contact the plan enactor for enact the Plan")
     .wait(2000)
-	.enact(Plan);
+	//.enact(Plan);
 .
 
 +alive [source(X)]

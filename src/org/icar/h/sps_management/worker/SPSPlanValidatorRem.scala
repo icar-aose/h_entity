@@ -41,6 +41,9 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
   //sorted map value matlab
 
+
+  var all_plans : Map[String,Solution] = Map.empty
+
   var result = new util.HashMap[String, java.lang.Double](circuit.loads.size + circuit.generators.size)
 
   var result_of_validation = true
@@ -76,6 +79,8 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
     case Plan(plan_ref, plan) =>
       solutions_to_be_validated += Plan(plan_ref, plan)
+      all_plans += (plan_ref -> plan)
+
 
     case CheckSolutionQueue() => {
       // HERE THE CODE TO VALIDATE
@@ -99,8 +104,8 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
             RemoteMatActor ! evaluateSolution(next.plan_reference, solution_for_matlab, all_switchers, open_switchers, circuit.loads.size)
           }
         }
-        }
-        // IF THE PLAN IS CORRECT THEN...
+      }
+      // IF THE PLAN IS CORRECT THEN...
 
       Thread.sleep(100)
       self ! CheckSolutionQueue()
@@ -125,7 +130,9 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
       println("\n")
       if (result.get("genResult")==1) {
-        bridge.sendHead("validated(" + plan_reference + ")")
+        var sol = all_plans(plan_reference)
+        var selected : List[String] = solution_list_gui(sol,sol.start)
+        bridge.sendHead("validated(" + plan_reference +",["+selected.mkString(",")+ "])")
 
         //GUI solution!!
       }
@@ -159,6 +166,16 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
   }
 
 
+  private def solution_list_gui (graph : Solution , e : WfItem) : List[String] = {
+
+    var out  = graph.arcs_out_from(e)
+
+    e match {
+      case x : WfStartEvent => solution_list_gui(graph,out(0).to)
+      case x : WfTask => "\""+x.cap.name+"\"" :: solution_list_gui(graph,out(0).to)
+      case x : WfEndEvent => List.empty
+    }
+  }
 
 
 }
