@@ -8,13 +8,13 @@ import javax.swing.JLabel;
 import java.awt.*;
 import java.util.ResourceBundle;
 
-public class Gui   {
+public class AmperometerGui {
 
     JLabel l1,l2,l3,l4;
     JFrame f = new JFrame();
 
 
-    public Gui()
+    public AmperometerGui()
     {
 
         f.setSize(400,500);//400 width and 500 height

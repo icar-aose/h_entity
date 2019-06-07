@@ -25,12 +25,13 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
   //val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
-  var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
+  //var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
   var my_device: ArtifactId = _
-  val gui : Gui= new Gui()
+  val gui : AmperometerGui= new AmperometerGui()
   var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
   var sendH : Boolean = true
   var SensorArrayMonitor : ActorSelection = null
+
 
   //Check if remote is active!
   if(remote.equals("true")) {
@@ -40,14 +41,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
   override def preStart: Unit = {
     log.info("ready")
-    try {
-      my_device = my_context.makeArtifact("device", "org.icar.h.Device")
-      my_context.focus(my_device)
 
-    } catch {
-      case e: CartagoException =>
-        e.printStackTrace();
-    }
   }
 
   override def receive: Receive = {
@@ -65,15 +59,15 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
 
     case RaspDataVal(data) =>
+
       gui.testGui(data)
-      for (i <- 0 to 3)
-        {
-          if(data.getCurrent(i) < -5 & sendH)
-          {
-            bridge.sendHead("failure(f1)")
-            sendH = false
-          }
+      for (i <- 1 to 1) {
+        if (data.getCurrent(i) < 0 & sendH) {
+          bridge.sendHead("failure(f1)")
+          sendH = false
         }
+      }
+
 
 
     case GetCurrentScenarioDescription() =>

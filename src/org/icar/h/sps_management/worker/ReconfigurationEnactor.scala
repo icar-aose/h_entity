@@ -1,9 +1,9 @@
 package org.icar.h.sps_management.worker
 
 import java.io.File
+import java.util.ResourceBundle
 
-import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props}
-import com.typesafe.config.ConfigFactory
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
 import org.icar.h.core.Akka2Jade
 
 
@@ -12,6 +12,14 @@ object ReconfigurationEnactor {
 
 
 class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) extends Actor with ActorLogging {
+
+  var actuator : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actuator.actor")
+  var ActuatorActor : ActorSelection = null
+
+  if(actuator.equals("true")) {
+    ActuatorActor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actuator.actor.ip")+":5150/user/actuator") //IP of the PC remote
+    println("That 's remote:" + ActuatorActor)
+  }
 
 
   override def preStart : Unit = {
@@ -23,8 +31,11 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
         log.info("i'm plan enactor, now contact worker_sps for require the plan for solution: "+plan_reference)
         worker_sps ! GetPlan(plan_reference)
 
+
       case Plan(plan_reference,plan) =>
         log.info("Now enacting: "+plan_reference)
+        //artifact for the execution of plan!!
+        ActuatorActor ! EnactPlan(plan)
         Thread.sleep(2000)
 
       case _ =>
