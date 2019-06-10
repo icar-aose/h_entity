@@ -4,7 +4,7 @@ import java.io.File
 import java.util
 
 import akka.actor._
-import cartago.{ArtifactId, Op}
+import cartago.{ArtifactId, CartagoService, NodeId, Op}
 import cartago.util.agent.CartagoBasicContext
 import com.typesafe.config.ConfigFactory
 import org.icar.h.sps_management.EvaluateSol
@@ -12,8 +12,9 @@ import org.icar.h.sps_management.artifact.SwitcherArtifact
 
 class ActuatorEnactor extends Actor with ActorLogging {
 
-  var my_context : CartagoBasicContext = new CartagoBasicContext("my_agent")
-  var my_device = my_context.makeArtifact("switcher", "org.icar.h.sps_management.artifact.SwitcherArtifact")
+  val node: NodeId = CartagoService.startNode
+  var my_context : CartagoBasicContext = new CartagoBasicContext("remote_agent")
+  var my_device = my_context.makeArtifact("switcherArtifact", "org.icar.h.sps_management.artifact.SwitcherArtifact")
 
   override def preStart() : Unit = {
 

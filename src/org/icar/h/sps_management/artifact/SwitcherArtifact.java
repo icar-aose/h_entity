@@ -24,7 +24,6 @@ public class SwitcherArtifact extends Artifact {
 	int swauxg1Pin=26; //Relais1 aux gen 1
 	int swauxg1busPin=19; //Relais2 aux gen 1
 
-
 	void init () {
 
 		GPIO.pinMode(swm1Pin, GPIO.OUTPUT);
