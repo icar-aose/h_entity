@@ -4,7 +4,7 @@ import java.rmi.registry.LocateRegistry
 import java.util
 import java.util.ResourceBundle
 
-import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, Props}
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, NoSerializationVerificationNeeded, Props}
 import akka.pattern.ask
 import akka.util.Timeout
 import org.icar.h.core.Akka2Jade
@@ -22,7 +22,7 @@ object SPSPlanValidatorRem {
 }
 class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sens_ref : ActorRef) extends Actor with ActorLogging {
 
-  case class CheckSolutionQueue()
+  case class CheckSolutionQueue() extends NoSerializationVerificationNeeded
 
   //queue solutions
   var solutions_to_be_validated = Queue[Plan]()

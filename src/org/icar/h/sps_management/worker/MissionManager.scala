@@ -1,8 +1,9 @@
 package org.icar.h.sps_management.worker
 
-import akka.actor.{Actor, ActorLogging, Props}
+import akka.actor.{Actor, ActorLogging, NoSerializationVerificationNeeded, Props}
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.Mission
+
 import scala.collection.mutable.ArrayBuffer
 
 object MissionManager {
@@ -10,7 +11,8 @@ object MissionManager {
 }
 
 class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
-  case class SetCurrentMission(mission_ref : String)
+
+  case class SetCurrentMission(mission_ref : String) extends NoSerializationVerificationNeeded
 
 
   //configure Mission

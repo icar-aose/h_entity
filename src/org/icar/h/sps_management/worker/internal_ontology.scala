@@ -7,6 +7,8 @@ import org.icar.musa.scenarios.sps.{Mission, ReconfigurationScenario}
 import org.icar.h.sps_management.rpi_ina219._
 import java.util.{ArrayList, HashMap}
 
+import akka.actor.NoSerializationVerificationNeeded
+
 
 sealed abstract class Action
 sealed abstract class Predicate
@@ -52,13 +54,13 @@ case class start() extends Action with Serializable
 case class EnactPlan(plan_reference : String, acts : util.ArrayList[String]) extends Action with Serializable
 
 
-case class GetPlan( plan_reference : String ) extends Predicate
-case class Plan(plan_reference : String,plan:Solution) extends Concept
+case class GetPlan( plan_reference : String ) extends Predicate with  NoSerializationVerificationNeeded
+case class Plan(plan_reference : String,plan:Solution) extends Concept with  NoSerializationVerificationNeeded
 
-case class GetMissionDescription(mission_ref:String) extends Predicate
-case class MissionDescription(mission_ref:String,mission:Mission) extends Concept
+case class GetMissionDescription(mission_ref:String) extends Predicate with  NoSerializationVerificationNeeded
+case class MissionDescription(mission_ref:String,mission:Mission) extends Concept with  NoSerializationVerificationNeeded
 
-case class GetCurrentScenarioDescription() extends Predicate
-case class CurrentScenarioDescription(scenario: ReconfigurationScenario) extends Concept
+case class GetCurrentScenarioDescription() extends Predicate with  NoSerializationVerificationNeeded
+case class CurrentScenarioDescription(scenario: ReconfigurationScenario) extends Concept with  NoSerializationVerificationNeeded
 
-case class PMRFullSolution( sol : Solution)
+case class PMRFullSolution( sol : Solution) extends NoSerializationVerificationNeeded

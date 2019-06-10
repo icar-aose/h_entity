@@ -1,6 +1,6 @@
 package org.icar.h.sps_management.worker
 
-import akka.actor.{Actor, ActorLogging, Props}
+import akka.actor.{Actor, ActorLogging, NoSerializationVerificationNeeded, Props}
 import org.icar.musa.context.StateOfWorld
 import org.icar.musa.main_entity.AbstractCapability
 import org.icar.musa.pmr._
@@ -20,7 +20,7 @@ class PMRActor(ps : SingleGoalProblemSpecification, initial_state:StateOfWorld, 
   val solution_builder = new EarlyDecisionSolutionBuilder
   val seq_builder = new SequenceBuilder(root, solution_builder)
 
-  case class DoIteration( it : Int)
+  case class DoIteration( it : Int) extends NoSerializationVerificationNeeded
 
   override def preStart: Unit = {
     log.info("ready")
