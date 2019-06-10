@@ -1,10 +1,12 @@
 package org.icar.h.sps_management.worker
 
 import java.io.File
+import java.util
 import java.util.ResourceBundle
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
 import org.icar.h.core.Akka2Jade
+import org.icar.h.sps_management.EvaluateSol
 
 
 object ReconfigurationEnactor {
@@ -35,7 +37,8 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
       case Plan(plan_reference,plan) =>
         log.info("Now enacting: "+plan_reference)
         //artifact for the execution of plan!!
-        ActuatorActor ! EnactPlan(plan_reference,plan)
+        var acts : util.ArrayList[String] = EvaluateSol.solution_list(plan)
+        ActuatorActor ! EnactPlan(plan_reference,acts)
 
       case _ =>
         println("Enactor: unspecified message")

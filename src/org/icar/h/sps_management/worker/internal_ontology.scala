@@ -1,5 +1,7 @@
 package org.icar.h.sps_management.worker
 
+import java.util
+
 import org.icar.musa.pmr.Solution
 import org.icar.musa.scenarios.sps.{Mission, ReconfigurationScenario}
 import org.icar.h.sps_management.rpi_ina219._
@@ -47,7 +49,7 @@ case class ResultSolution(results: HashMap[String, Double], plan_reference : Str
 case class start() extends Action with Serializable
 
 @SerialVersionUID(119L)
-case class EnactPlan(plan_reference : String, plan : Solution) extends Action with Serializable
+case class EnactPlan(plan_reference : String, acts : util.ArrayList[String]) extends Action with Serializable
 
 
 case class GetPlan( plan_reference : String ) extends Predicate

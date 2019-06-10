@@ -26,9 +26,7 @@ class ActuatorEnactor extends Actor with ActorLogging {
 
     case EnactPlan(plan_reference,plan) =>
       {
-        var acts : util.ArrayList[String] = EvaluateSol.solution_list(plan)
-
-        my_context.doAction(my_device, new Op("actPlan",plan_reference,acts))
+        my_context.doAction(my_device, new Op("actPlan",plan_reference,plan))
       }
 
 

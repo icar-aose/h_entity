@@ -28,7 +28,7 @@ public class JadeAkkaActorSystem extends Agent {
 		  /* config file Akka Remote*/
 		  //THE ACTOR SYSTEM IS CREATE HERE
 		  //if actor remote or matlab remote is active
-		  if(remote.getString("remote.actor").equals("true") || remote.getString("simulator.matlab").equals("true"))
+		  if(remote.getString("remote.actor").equals("true") || remote.getString("simulator.matlab").equals("true") ||remote.getString("actuator.actor").equals("true") )
 		  {
 			   String configFile = getClass().getClassLoader().getResource("resources/local_application.conf").getFile();
 			   Config config = ConfigFactory.parseFile(new File(configFile));
