@@ -94,13 +94,13 @@ public class SwitcherArtifact extends Artifact {
 			{
 				case "swmg1Pin":
 					System.out.println("trovato switch main");
-					if(Integer.parseInt(SwitchNamePin.get(acts.get(i+1)))==0)
+					if((int)acts.get(i+1)==0)
 						flagMg1 = 1;
 					else flagMg1 = 0;
 					break;
 				case "swauxg1Pin":
 					System.out.println("trovato switch aux");
-					if(Integer.parseInt(SwitchNamePin.get(acts.get(i+1)))==0)
+					if((int)acts.get(i+1)==0)
 						flagAuxg1 = 1;
 					else flagAuxg1 = 0;
 					break;
