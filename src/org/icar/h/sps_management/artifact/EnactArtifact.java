@@ -46,7 +46,7 @@ public class EnactArtifact extends Artifact {
 
 	 public void actPlan(String plan_reference, ArrayList acts )  {
 
-		if(GPIO.digitalRead(swmg1Pin)==1)
+		if(GPIO.digitalRead(swmg1Pin)==0)
 		{
 			System.out.println("generatore attivo");
 			for(int i =0 ; i< acts.size();i++)

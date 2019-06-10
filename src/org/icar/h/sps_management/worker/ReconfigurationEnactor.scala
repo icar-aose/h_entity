@@ -36,7 +36,6 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
         log.info("Now enacting: "+plan_reference)
         //artifact for the execution of plan!!
         ActuatorActor ! EnactPlan(plan_reference,plan)
-        Thread.sleep(2000)
 
       case _ =>
         println("Enactor: unspecified message")
