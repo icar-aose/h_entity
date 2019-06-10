@@ -15,7 +15,7 @@ public class check_failure extends DefaultInternalAction {
             throw new JasonException("The check_failure command requires the mission_ref as parameter!");
 
         Term misison_ref = args[0];
-        if (misison_ref==null && !misison_ref.isAtom()) {
+        if (misison_ref==null || !misison_ref.isAtom()) {
             throw new JasonException("The mission_ref parameter is in the wrong format!");
         } else {
             Atom fr = (Atom) misison_ref;

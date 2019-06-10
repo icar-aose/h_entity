@@ -82,10 +82,11 @@ mission(undefined).
 
 +selected(Plan_reference)[artifact_name(Id,Name)]
 <-
-    .print("The CAPTAIN selected the reconfiguration: ",Plan_reference)
-    .print("Now contacting the enactor")
-    .wait(2000)
-	.enact(Plan_reference);
+    .print("The CAPTAIN selected the reconfiguration: ",Plan_reference);
+    .print("Now contacting the enactor");
+    .wait(2000);
+    .term2string(Plan_ID, Plan_reference);
+	.enact(Plan_ID);
 .
 
 +tick(Param) [artifact_name(Id,Name)]

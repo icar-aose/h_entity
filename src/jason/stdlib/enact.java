@@ -15,7 +15,7 @@ public class enact extends DefaultInternalAction {
             throw new JasonException("The enact command requires the plan_ref as parameter!");
 
         Term plan_ref = args[0];
-        if (plan_ref==null && !plan_ref.isAtom()) {
+        if (plan_ref==null || !plan_ref.isAtom()) {
             throw new JasonException("The plan_ref parameter is in the wrong format!");
         } else {
             Atom fr = (Atom) plan_ref;

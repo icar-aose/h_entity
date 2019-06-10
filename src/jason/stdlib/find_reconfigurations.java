@@ -17,7 +17,7 @@ public class find_reconfigurations extends DefaultInternalAction {
         Term mission_ref = args[0];
         Term failure_ref = args[1];
 
-        if (mission_ref==null && !mission_ref.isAtom() && failure_ref==null && !failure_ref.isAtom()) {
+        if (mission_ref==null || !mission_ref.isAtom() || (failure_ref==null || !failure_ref.isAtom())) {
             throw new JasonException("The mission_ref or the failure_ref is in a wrong format!");
         } else {
             Atom mr = (Atom) mission_ref;
