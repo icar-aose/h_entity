@@ -26,19 +26,6 @@ public class SwitcherArtifact extends Artifact {
 
 	void init () {
 
-		GPIO.pinMode(swm1Pin, GPIO.OUTPUT);
-		GPIO.pinMode(swm1busPin, GPIO.OUTPUT);
-		GPIO.pinMode(swm2Pin, GPIO.OUTPUT);
-		GPIO.pinMode(swm2busPin, GPIO.OUTPUT);
-		GPIO.pinMode(swmg1Pin, GPIO.OUTPUT);
-		GPIO.pinMode(swmg1busPin, GPIO.OUTPUT);
-		GPIO.pinMode(swauxg1Pin, GPIO.OUTPUT);
-		GPIO.pinMode(swauxg1busPin, GPIO.OUTPUT);
-		GPIO.pinMode(swL1Pin, GPIO.OUTPUT);
-		GPIO.pinMode(swL1busPin, GPIO.OUTPUT);
-		GPIO.pinMode(swL2Pin, GPIO.OUTPUT);
-		GPIO.pinMode(swL2plusPin, GPIO.OUTPUT);
-		GPIO.pinMode(swL2busPin, GPIO.OUTPUT);
 	}
 
 
