@@ -35,7 +35,7 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
       case Plan(plan_reference,plan) =>
         log.info("Now enacting: "+plan_reference)
         //artifact for the execution of plan!!
-        ActuatorActor ! EnactPlan(plan)
+        ActuatorActor ! EnactPlan(plan_reference,plan)
         Thread.sleep(2000)
 
       case _ =>

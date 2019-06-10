@@ -3,14 +3,12 @@ package org.icar.h.sps_management.worker
 import java.util.ResourceBundle
 import scala.collection.mutable.ArrayBuffer
 
-import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, ActorSystem, Props}
-import cartago.{ArtifactId, CartagoException}
-import cartago.util.agent.CartagoBasicContext
+import akka.actor.{Actor, ActorLogging, ActorSelection, Props}
+import cartago.ArtifactId
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.ReconfigurationScenario
 
 import org.icar.h.sps_management.rpi_ina219._
-import org.icar.h.sps_management.worker._
 
 object CircuitMonitor {
   def props(bridge: Akka2Jade): Props = Props(classOf[CircuitMonitor], bridge)
@@ -24,9 +22,6 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1","switchf1","switchf2")
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
-  //val scenario: ReconfigurationScenario = ReconfigurationScenario.scenario_circuit3_parsed_1
-  //var my_context: CartagoBasicContext = new CartagoBasicContext("my_agent")
-  var my_device: ArtifactId = _
   val gui : AmperometerGui= new AmperometerGui()
   var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
   var sendH : Boolean = true

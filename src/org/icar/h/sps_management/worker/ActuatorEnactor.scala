@@ -2,32 +2,31 @@ package org.icar.h.sps_management.worker
 
 import java.io.File
 import java.util
-import java.util.ResourceBundle
-
 import processing.io._
 import akka.actor._
 import com.typesafe.config.ConfigFactory
 import org.icar.h.sps_management.EvaluateSol
 
+import org.icar.h.sps_management.artifact.EnactArtifact
 
 class ActuatorEnactor extends Actor with ActorLogging {
 
+  var enactArt : EnactArtifact = new EnactArtifact
 
-  var swm1Pin =27; //Relais 1 motore 1
-  var swm1busPin=17; //Relais 2 motore 1
-  var swm2Pin=25; //Relais 1 motore 2
-  var swm2busPin=13;//Relais 2 motore 2
-  var swmg1Pin=6; //Relais1 main gen 1
-  var swmg1busPin=5; //Relais2 main gen 1
-  var swL1Pin=20; //Relais 1 Load 1
-  var swL1busPin=16; //Relais 2 Load 1
-  var swL2Pin=12; //Relais 1 Load 2
-  var swL2busPin=21; //Relais 2 Load 2
-  var swL2plusPin=23; //Relais 3 plus Load 2
-  var swauxg1Pin=26; //Relais1 aux gen 1
-  var swauxg1busPin=19; //Relais2 aux gen 1
+  var swm1Pin =27  //Relais 1 motore 1
+  var swm1busPin=17 //Relais 2 motore 1
+  var swm2Pin=25 //Relais 1 motore 2
+  var swm2busPin=13//Relais 2 motore 2
+  var swmg1Pin=6 //Relais1 main gen 1
+  var swmg1busPin=5 //Relais2 main gen 1
+  var swL1Pin=20 //Relais 1 Load 1
+  var swL1busPin=16 //Relais 2 Load 1
+  var swL2Pin=12 //Relais 1 Load 2
+  var swL2busPin=21 //Relais 2 Load 2
+  var swL2plusPin=23 //Relais 3 plus Load 2
+  var swauxg1Pin=26 //Relais1 aux gen 1
+  var swauxg1busPin=19 //Relais2 aux gen 1
 
-  import processing.io.GPIO
 
   GPIO.pinMode(swm1Pin, GPIO.OUTPUT)
   GPIO.pinMode(swm1busPin, GPIO.OUTPUT)
@@ -53,14 +52,11 @@ class ActuatorEnactor extends Actor with ActorLogging {
    
   override def receive: Receive = {
 
-    case EnactPlan(plan) =>
+    case EnactPlan(plan_reference,plan) =>
       {
         var acts : util.ArrayList[String] = EvaluateSol.solution_list(plan)
 
-        GPIO.digitalWrite(swmg1Pin, GPIO.HIGH)
-        GPIO.digitalWrite(swauxg1Pin, GPIO.HIGH)
-
-
+        enactArt.actPlan(plan_reference,acts)
 
       }
 

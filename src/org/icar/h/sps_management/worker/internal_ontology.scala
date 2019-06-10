@@ -47,7 +47,7 @@ case class ResultSolution(results: HashMap[String, Double], plan_reference : Str
 case class start() extends Action with Serializable
 
 @SerialVersionUID(119L)
-case class EnactPlan(plan : Solution) extends Action with Serializable
+case class EnactPlan(plan_reference : String, plan : Solution) extends Action with Serializable
 
 
 case class GetPlan( plan_reference : String ) extends Predicate
