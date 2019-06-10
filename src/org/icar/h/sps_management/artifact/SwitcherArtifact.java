@@ -87,29 +87,31 @@ public class SwitcherArtifact extends Artifact {
 		GPIO.digitalWrite(swmg1Pin,1);   //shutdown the generator mg1
 		GPIO.digitalWrite(swauxg1Pin,1);   //shutdown the generator auxg1
 
-		for(int i =0 ; i< acts.size();i++)
+		for(int i =0 ; i< acts.size();i=i+2)
 		{
 			act = SwitchNamePin.get(acts.get(i));
 			switch(act)
 			{
 				case "swmg1Pin":
+					System.out.println("trovato switch main");
 					if(Integer.parseInt(SwitchNamePin.get(acts.get(i+1)))==0)
 						flagMg1 = 1;
 					else flagMg1 = 0;
 					break;
 				case "swauxg1Pin":
+					System.out.println("trovato switch aux");
 					if(Integer.parseInt(SwitchNamePin.get(acts.get(i+1)))==0)
 						flagAuxg1 = 1;
 					else flagAuxg1 = 0;
 					break;
 				default:
 					if(act.contains("bus"))
-					{
+					{	System.out.println("trovato switch bus");
 						//GPIO.digitalWrite(NamePinNum.get(act),Integer.parseInt(SwitchNamePin.get(acts.get(i+1))));
 						System.out.println(NamePinNum.get(act)+" "+" "+Integer.parseInt(SwitchNamePin.get(acts.get(i+1))));
 						i=i+4;
 					} else
-						{
+						{	System.out.println("trovato switch loads");
 							System.out.println(NamePinNum.get(act)+" "+" "+Integer.parseInt(SwitchNamePin.get(acts.get(i+1))));
 						}
 
