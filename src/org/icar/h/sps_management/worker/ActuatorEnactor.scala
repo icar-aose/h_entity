@@ -13,9 +13,7 @@ import org.icar.h.sps_management.artifact.SwitcherArtifact
 class ActuatorEnactor extends Actor with ActorLogging {
 
   var my_context : CartagoBasicContext = new CartagoBasicContext("my_agent")
-  var  my_device : ArtifactId = _
-
-  my_device = my_context.makeArtifact("switcher", "org.icar.h.sps_management.artifact.SwitcherArtifact")
+  var my_device = my_context.makeArtifact("switcher", "org.icar.h.sps_management.artifact.SwitcherArtifact")
 
   override def preStart() : Unit = {
 
