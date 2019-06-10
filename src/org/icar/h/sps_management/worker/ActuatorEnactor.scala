@@ -2,30 +2,35 @@ package org.icar.h.sps_management.worker
 
 import java.io.File
 import java.util
+
 import akka.actor._
+import cartago.{ArtifactId, Op}
+import cartago.util.agent.CartagoBasicContext
 import com.typesafe.config.ConfigFactory
 import org.icar.h.sps_management.EvaluateSol
-
-import org.icar.h.sps_management.artifact.EnactArtifact
+import org.icar.h.sps_management.artifact.SwitcherArtifact
 
 class ActuatorEnactor extends Actor with ActorLogging {
 
-  var enactArt : EnactArtifact = new EnactArtifact
+  var my_context : CartagoBasicContext = new CartagoBasicContext("my_agent")
+  var enactArt : SwitcherArtifact = new SwitcherArtifact
+  var  my_device : ArtifactId = _
 
+  my_device = my_context.makeArtifact("switcher", "org.icar.h.sps_management.artifact.SwitcherArtifact")
 
   override def preStart() : Unit = {
 
     log.info("Ready")
   }
-   
+
+
   override def receive: Receive = {
 
     case EnactPlan(plan_reference,plan) =>
       {
         var acts : util.ArrayList[String] = EvaluateSol.solution_list(plan)
 
-        enactArt.actPlan(plan_reference,acts)
-
+        my_context.doAction(my_device, new Op("actPlan",plan_reference,acts))
       }
 
 

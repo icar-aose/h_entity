@@ -7,7 +7,7 @@ import processing.io.*;
 import java.util.ArrayList;
 
 
-public class EnactArtifact extends Artifact {
+public class SwitcherArtifact extends Artifact {
 
 
 	int swm1Pin =27; //Relais 1 motore 1
@@ -43,12 +43,12 @@ public class EnactArtifact extends Artifact {
 	}
 
 
-
-	 public void actPlan(String plan_reference, ArrayList acts )  {
+	@OPERATION
+	public void actPlan(String plan_reference, ArrayList acts )  {
 
 		if(GPIO.digitalRead(swmg1Pin)==0)
 		{
-			System.out.println("generatore attivo");
+			System.out.println("generatore attivo, piano: "+plan_reference);
 			for(int i =0 ; i< acts.size();i++)
 				System.out.println(acts.get(i));
 
