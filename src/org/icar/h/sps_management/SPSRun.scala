@@ -6,9 +6,9 @@ import org.icar.h.core.HLauncher
 import org.icar.h.core.matlab.matEngine.MatValidator
 
 object SPSRun extends App {
-  var x : Array[String] = _
+  //var x : Array[String] = _
 
-  MatValidator.main(x)          //test with matlab in the same pc of the h-entity
+  //MatValidator.main(x)          //test with matlab in the same pc of the h-entity
 
   Thread.sleep(10000)
 

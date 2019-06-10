@@ -28,8 +28,10 @@ public class SwitcherArtifact extends Artifact {
 
 	Map<String,String> SwitchNamePin = new HashMap();
 	Map<String, Integer> NamePinNum = new HashMap();
-	String elemAct = "";
+	String switchAct = "";
+	String nameAct = "";
 	int pinAct = 0;
+	int act = 0;
 
 	int flagMg1 = 0;
 	int flagAuxg1 = 0;
@@ -77,9 +79,9 @@ public class SwitcherArtifact extends Artifact {
 	@OPERATION
 	public void actPlan(String plan_reference, ArrayList solution )  {
 
-		//System.out.println("piano: "+plan_reference);
-		//for(int i =0 ; i< solution.size();i++)
-		//	System.out.println(solution.get(i));
+		System.out.println("piano: "+plan_reference);
+		for(int i =0 ; i< solution.size();i++)
+			System.out.println(solution.get(i));
 
 		flagMg1 = GPIO.digitalRead(swmg1Pin);
 		flagAuxg1 = GPIO.digitalRead(swauxg1Pin);
@@ -89,9 +91,11 @@ public class SwitcherArtifact extends Artifact {
 
 		for(int i =0 ; i< solution.size();i=i+2)
 		{
-			elemAct = SwitchNamePin.get(solution.get(i));
-			pinAct = NamePinNum.get(elemAct);
-			switch(elemAct)
+			switchAct =(String)solution.get(i);
+			nameAct = SwitchNamePin.get(solution.get(i));
+			pinAct = NamePinNum.get(nameAct);
+			act = (int)solution.get(i+1);
+			switch(nameAct)
 			{
 				case "swmg1Pin":
 					System.out.println("trovato switch main");
@@ -106,14 +110,28 @@ public class SwitcherArtifact extends Artifact {
 					else flagAuxg1 = 0;
 					break;
 				default:
-					if(elemAct.contains("bus"))
-					{	System.out.println("trovato switch bus");
-						//GPIO.digitalWrite(NamePinNum.get(elemAct),Integer.parseInt(SwitchNamePin.get(acts.get(i+1))));
-						System.out.println(elemAct+" "+NamePinNum.get(elemAct)+" "+" "+solution.get(i+1));
+					if(nameAct.contains("bus"))
+					{
+						if(switchAct.startsWith("switchsws"))
+							if(act == 1)
+								GPIO.digitalWrite(pinAct,GPIO.HIGH);
+							else
+								GPIO.digitalWrite(pinAct,GPIO.LOW);
+						System.out.println("trovato switch bus");
+						if(switchAct.startsWith("switchswp"))
+							if(act == 1)
+								GPIO.digitalWrite(pinAct,GPIO.LOW);
+							else
+								GPIO.digitalWrite(pinAct,GPIO.HIGH);
+						//GPIO.digitalWrite(NamePinNum.get(nameAct),Integer.parseInt(SwitchNamePin.get(acts.get(i+1))));
+						//System.out.println(nameAct +" "+NamePinNum.get(nameAct)+" "+" "+solution.get(i+1));
 						i=i+4;
 					} else
 						{	System.out.println("trovato switch loads");
-							System.out.println(elemAct+" "+NamePinNum.get(elemAct)+" "+" "+solution.get(i+1));
+							if(act == 1)
+								GPIO.digitalWrite(pinAct,GPIO.LOW);
+							else
+								GPIO.digitalWrite(pinAct,GPIO.HIGH);
 						}
 
 			}
