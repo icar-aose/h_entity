@@ -19,23 +19,35 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   //configure scenario
 
   val scenario = new ReconfigurationScenario
-  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1","switchf2","switchf5")
+  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1")
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
+  var fault : Set[String] = _
+
   val gui : AmperometerGui= new AmperometerGui()
-  var remote : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("remote.actor")
+  var sensorActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor")
+
+  var switcherActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor")
+
   var sendH : Boolean = true
   var SensorArrayMonitor : ActorSelection = null
-
+  var SwitcherMonitor : ActorSelection = null
 
   //Check if remote is active!
-  if(remote.equals("true")) {
-    SensorArrayMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actor.remote.ip")+":5150/user/remote") //IP of the PC remote
+  if(sensorActor.equals("true")) {
+    SensorArrayMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.remote.ip")+":5150/user/sensor") //IP of the PC remote
     println("That 's remote:" + SensorArrayMonitor)
   }
 
+  if(switcherActor.equals("true")) {
+    SwitcherMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor.ip")+":5150/user/switcher") //IP of the PC remote
+    println("That 's remote:" + SwitcherMonitor)
+  }
   override def preStart: Unit = {
     log.info("ready")
+
+    if(switcherActor.equals("true"))
+      self ! RequestUpdateScenario()
 
   }
 
@@ -43,7 +55,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
     case CheckFailure(mission_ref) =>
 
-      if(remote.equals("true"))
+      if(sensorActor.equals("true"))
         SensorArrayMonitor ! StartCheckMonitor()
       else
         self ! 10.0             //if you don't have raspberry
@@ -58,12 +70,22 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       gui.testGui(data)
       for (i <- 0 to 0) {
         if (data.getCurrent(i) < 0 & sendH) {
+          fault += "switchf1"
+
           bridge.sendHead("failure(f1)")
           sendH = false
         }
       }
 
 
+    case RequestUpdateScenario() =>     //update the scenario (state of switchers)
+      SwitcherMonitor ! RequestUpdateScenario()
+      Thread.sleep(5000)
+      self ! RequestUpdateScenario()
+
+    case UpdateScenario(open_switchers) =>
+      scenario.open_switchers = (open_switchers | fault).to[ArrayBuffer[String]]
+      println(scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)

@@ -70,7 +70,7 @@ object SensorArrayMonitor{
     //create an actor system with that config
     val system = ActorSystem("RemoteSystem" , config)
     //create a remote actor from actorSystem
-    val remote = system.actorOf(Props[SensorArrayMonitor], name="remote")
+    val remote = system.actorOf(Props[SensorArrayMonitor], name="sensor")
     println("remote is ready")
 
 

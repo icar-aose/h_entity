@@ -11,7 +11,7 @@ import org.icar.h.core.Akka2Jade
 import org.icar.h.core.matlab.matEngine.MatRemote
 import org.icar.h.sps_management.EvaluateSol
 import org.icar.musa.pmr._
-import org.icar.musa.scenarios.sps.Circuit
+import org.icar.musa.scenarios.sps.{Circuit, ReconfigurationScenario}
 
 import scala.collection.mutable.Queue
 import scala.concurrent.duration._
@@ -37,9 +37,7 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
   //get current scenario
   implicit val timeout = Timeout(5 seconds)
-  val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
-  val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
-
+  var scenario : ReconfigurationScenario = _
 
   //DOBBIAMO ESEGUIRE LE RIGHE DI SOPRA PROPRIO A RIDOSSO DELLE VALIDAZIONI!
   //sorted map value matlab
@@ -77,6 +75,9 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
   override def receive: Receive = {
     case Validate(plan_reference) =>
+
+      val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
+      scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
       log.debug("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: " + plan_reference)
       worker_sps ! GetPlan(plan_reference)
 
@@ -117,19 +118,6 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
     case ResultSolution(result, plan_reference) =>
 
       var xsize = 0
-//      println("Plan: "+plan_reference+", result of generators:" + result.get("genResult"))
-//      var list : util.Set[String]  = result.keySet()
-//      var iter : util.Iterator[String] = list.iterator()
-//      while(iter.hasNext)
-//      {
-//        var key = iter.next()
-//        print(key+": ")
-//        var value = result.get(key)
-//        if(value > 0)
-//          println(value)
-//        else
-//          println(-value)
-//      }
 
       println("\n")
       if (result.get("genResult")==1) {

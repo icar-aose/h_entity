@@ -53,6 +53,15 @@ case class start() extends Action with Serializable
 @SerialVersionUID(119L)
 case class EnactPlan(plan_reference : String, acts : util.ArrayList[String]) extends Action with Serializable
 
+@SerialVersionUID(120L)
+case class UpdateScenario(open_switchers : Set[String]) extends Action with Serializable
+
+case class RequestUpdateScenario() extends Action with Serializable
+
+case class SwitcherMonitoring() extends Action with NoSerializationVerificationNeeded
+
+
+
 
 case class GetPlan( plan_reference : String ) extends Predicate with  NoSerializationVerificationNeeded
 case class Plan(plan_reference : String,plan:Solution) extends Concept with  NoSerializationVerificationNeeded
