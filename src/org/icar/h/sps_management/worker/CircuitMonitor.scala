@@ -19,7 +19,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   //configure scenario
 
   val scenario = new ReconfigurationScenario
-  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1","switchf1","switchf2")
+  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1","switchf2","switchf5")
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
   val gui : AmperometerGui= new AmperometerGui()
@@ -56,7 +56,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     case RaspDataVal(data) =>
 
       gui.testGui(data)
-      for (i <- 1 to 1) {
+      for (i <- 0 to 0) {
         if (data.getCurrent(i) < 0 & sendH) {
           bridge.sendHead("failure(f1)")
           sendH = false

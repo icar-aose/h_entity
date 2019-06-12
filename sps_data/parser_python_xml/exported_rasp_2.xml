@@ -7,7 +7,7 @@
       <P Name="NumRootInports">0</P>
       <P Name="NumRootOutports">0</P>
       <P Name="ParameterArgumentNames"/>
-      <P Name="ComputedModelVersion">1.21</P>
+      <P Name="ComputedModelVersion">1.22</P>
       <P Name="NumModelReferences">0</P>
       <P Name="NumTestPointedSignals">0</P>
       <P Name="NumProvidedFunctions">0</P>
@@ -18,7 +18,7 @@
       <P Name="PreCompExecutionDomainType">Unset</P>
       <P Name="IsExportFunctionModel">0</P>
       <P Name="NumParameterArguments">0</P>
-      <P Name="NumExternalFileReferences">33</P>
+      <P Name="NumExternalFileReferences">36</P>
       <ExternalFileReference>
         <P Name="Reference">fl_lib/Electrical/Electrical Sources/DC Voltage Source</P>
         <P Name="Path">circuit_Rasp_2/AUXG1</P>
@@ -108,6 +108,27 @@ Components/Single-Phase Switch</P>
         <P Name="Reference">pe_lib/Switches &amp; Breakers/Fundamental
 Components/Single-Phase Switch</P>
         <P Name="Path">circuit_Rasp_2/Switch F2</P>
+        <P Name="SID">164</P>
+        <P Name="Type">LIBRARY_BLOCK</P>
+      </ExternalFileReference>
+      <ExternalFileReference>
+        <P Name="Reference">pe_lib/Switches &amp; Breakers/Fundamental
+Components/Single-Phase Switch</P>
+        <P Name="Path">circuit_Rasp_2/Switch F3</P>
+        <P Name="SID">165</P>
+        <P Name="Type">LIBRARY_BLOCK</P>
+      </ExternalFileReference>
+      <ExternalFileReference>
+        <P Name="Reference">pe_lib/Switches &amp; Breakers/Fundamental
+Components/Single-Phase Switch</P>
+        <P Name="Path">circuit_Rasp_2/Switch F4</P>
+        <P Name="SID">166</P>
+        <P Name="Type">LIBRARY_BLOCK</P>
+      </ExternalFileReference>
+      <ExternalFileReference>
+        <P Name="Reference">pe_lib/Switches &amp; Breakers/Fundamental
+Components/Single-Phase Switch</P>
+        <P Name="Path">circuit_Rasp_2/Switch F5</P>
         <P Name="SID">161</P>
         <P Name="Type">LIBRARY_BLOCK</P>
       </ExternalFileReference>
@@ -258,7 +279,7 @@ Components/Single-Phase Switch</P>
     <Object PropName="BdWindowsInfo" ObjectID="1" ClassName="Simulink.BDWindowsInfo">
       <Object PropName="WindowsInfo" ObjectID="2" ClassName="Simulink.WindowInfo">
         <P Name="IsActive" Class="logical">1</P>
-        <P Name="Location" Class="double">[0.0, 23.0, 1440.0, 832.0]</P>
+        <P Name="Location" Class="double">[-6.0, 23.0, 1440.0, 832.0]</P>
         <Object PropName="ModelBrowserInfo" ObjectID="3" ClassName="Simulink.ModelBrowserInfo">
           <P Name="Visible" Class="logical">0</P>
           <P Name="DockPosition" Class="char">Left</P>
@@ -293,8 +314,8 @@ Components/Single-Phase Switch</P>
     </Object>
     <P Name="HideAutomaticNames">on</P>
     <UserParameters>
-      <P Name="PhysicalModelingChecksum">1988159281</P>
-      <P Name="PhysicalModelingParameterChecksum">472238357</P>
+      <P Name="PhysicalModelingChecksum">2063911905</P>
+      <P Name="PhysicalModelingParameterChecksum">1558002997</P>
       <P Name="PhysicalModelingProducts">Power_System_Blocks|Simscape</P>
     </UserParameters>
     <ConfigManagerSettings>
@@ -304,9 +325,9 @@ Components/Single-Phase Switch</P>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="LastModifiedBy">giovannirenda</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="LastModifiedDate">Tue Jun 04 15:51:52 2019</P>
-      <P Name="RTWModifiedTimeStamp">481564309</P>
-      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:21&gt;</P>
+      <P Name="LastModifiedDate">Tue Jun 11 15:35:05 2019</P>
+      <P Name="RTWModifiedTimeStamp">482168101</P>
+      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:22&gt;</P>
     </ConfigManagerSettings>
     <EditorSettings>
       <P Name="SampleTimeColors">off</P>
@@ -370,7 +391,7 @@ Components/Single-Phase Switch</P>
           <Cell Class="char">circuit_Rasp_2</Cell>
         </Array>
         <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell" Dimension="1*1">
-          <Cell>[]</Cell>
+          <Cell Class="double">[]</Cell>
         </Array>
       </Object>
     </SimulationSettings>
@@ -1168,14 +1189,14 @@ Components/Single-Phase Switch</P>
     </MaskParameterDefaults>
     <BlockParameterDefaults/>
     <System>
-      <P Name="Location">[0, 23, 1440, 855]</P>
+      <P Name="Location">[-6, 23, 1434, 855]</P>
       <P Name="Open">on</P>
       <P Name="SetExecutionDomain">off</P>
       <P Name="ExecutionDomainType">Deduce</P>
       <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
       <P Name="ZoomFactor">60</P>
       <P Name="ReportName">simulink-default.rpt</P>
-      <P Name="SIDHighWatermark">163</P>
+      <P Name="SIDHighWatermark">166</P>
       <Block BlockType="Reference" Name="AUXG1" SID="63">
         <P Name="Ports">[0, 0, 0, 0, 0, 1, 1]</P>
         <P Name="Position">[2375, 296, 2415, 324]</P>
@@ -1247,7 +1268,7 @@ Components/Single-Phase Switch</P>
       </Block>
       <Block BlockType="Reference" Name="G3" SID="14">
         <P Name="Ports">[0, 0, 0, 0, 0, 1]</P>
-        <P Name="Position">[1400, 330, 1420, 350]</P>
+        <P Name="Position">[1450, 330, 1470, 350]</P>
         <P Name="ZOrder">1874</P>
         <P Name="BlockRotation">180</P>
         <P Name="BlockMirror">on</P>
@@ -1479,7 +1500,7 @@ Components/Single-Phase Switch</P>
       </Block>
       <Block BlockType="Reference" Name="Load 5" SID="162">
         <P Name="Ports">[0, 0, 0, 0, 0, 1, 1]</P>
-        <P Name="Position">[2024, 441, 2064, 469]</P>
+        <P Name="Position">[2025, 441, 2065, 469]</P>
         <P Name="ZOrder">1928</P>
         <P Name="LibraryVersion">9002000.1</P>
         <P Name="SourceBlock">fl_lib/Electrical/Electrical Elements/Resistor</P>
@@ -1515,7 +1536,7 @@ Components/Single-Phase Switch</P>
       </Block>
       <Block BlockType="Reference" Name="MG1" SID="13">
         <P Name="Ports">[0, 0, 0, 0, 0, 1, 1]</P>
-        <P Name="Position">[1330, 326, 1370, 354]</P>
+        <P Name="Position">[1380, 326, 1420, 354]</P>
         <P Name="ZOrder">1748</P>
         <P Name="BlockRotation">180</P>
         <P Name="BlockMirror">on</P>
@@ -1567,7 +1588,94 @@ Components/Single-Phase Switch</P>
           <P Name="threshold_conf">compiletime</P>
         </InstanceData>
       </Block>
-      <Block BlockType="Reference" Name="Switch&#xA;F2" SID="161">
+      <Block BlockType="Reference" Name="Switch&#xA;F2" SID="164">
+        <P Name="Ports">[0, 0, 0, 0, 0, 2, 1]</P>
+        <P Name="Position">[1070, 80, 1125, 160]</P>
+        <P Name="ZOrder">1930</P>
+        <P Name="LibraryVersion">9002000.1</P>
+        <P Name="SourceBlock">pe_lib/Switches &amp; Breakers/Fundamental
+Components/Single-Phase Switch</P>
+        <P Name="SourceType">Single-Phase Switch</P>
+        <P Name="SourceProductName">Simscape Electrical</P>
+        <P Name="SourceProductBaseCode">PS</P>
+        <InstanceData>
+          <P Name="LogSimulationData">off</P>
+          <P Name="SourceFile">pe.switches.fundamental.switch.ps</P>
+          <P Name="ComponentPath">pe.switches.fundamental.switch.ps</P>
+          <P Name="ComponentVariants">pe.switches.fundamental.switch.ps, pe.switches.fundamental.switch.elec</P>
+          <P Name="ComponentVariantNames">PS control port, Electrical control port</P>
+          <P Name="ClassName">Simscape variant</P>
+          <P Name="SchemaVersion">1</P>
+          <P Name="R_closed">0.001</P>
+          <P Name="R_closed_unit">Ohm</P>
+          <P Name="R_closed_conf">compiletime</P>
+          <P Name="G_open">1e-6</P>
+          <P Name="G_open_unit">1/Ohm</P>
+          <P Name="G_open_conf">compiletime</P>
+          <P Name="threshold">0</P>
+          <P Name="threshold_unit">V</P>
+          <P Name="threshold_conf">compiletime</P>
+        </InstanceData>
+      </Block>
+      <Block BlockType="Reference" Name="Switch&#xA;F3" SID="165">
+        <P Name="Ports">[0, 0, 0, 0, 0, 2, 1]</P>
+        <P Name="Position">[1230, 320, 1285, 400]</P>
+        <P Name="ZOrder">1931</P>
+        <P Name="LibraryVersion">9002000.1</P>
+        <P Name="SourceBlock">pe_lib/Switches &amp; Breakers/Fundamental
+Components/Single-Phase Switch</P>
+        <P Name="SourceType">Single-Phase Switch</P>
+        <P Name="SourceProductName">Simscape Electrical</P>
+        <P Name="SourceProductBaseCode">PS</P>
+        <InstanceData>
+          <P Name="LogSimulationData">off</P>
+          <P Name="SourceFile">pe.switches.fundamental.switch.ps</P>
+          <P Name="ComponentPath">pe.switches.fundamental.switch.ps</P>
+          <P Name="ComponentVariants">pe.switches.fundamental.switch.ps, pe.switches.fundamental.switch.elec</P>
+          <P Name="ComponentVariantNames">PS control port, Electrical control port</P>
+          <P Name="ClassName">Simscape variant</P>
+          <P Name="SchemaVersion">1</P>
+          <P Name="R_closed">0.001</P>
+          <P Name="R_closed_unit">Ohm</P>
+          <P Name="R_closed_conf">compiletime</P>
+          <P Name="G_open">1e-6</P>
+          <P Name="G_open_unit">1/Ohm</P>
+          <P Name="G_open_conf">compiletime</P>
+          <P Name="threshold">0</P>
+          <P Name="threshold_unit">V</P>
+          <P Name="threshold_conf">compiletime</P>
+        </InstanceData>
+      </Block>
+      <Block BlockType="Reference" Name="Switch&#xA;F4" SID="166">
+        <P Name="Ports">[0, 0, 0, 0, 0, 2, 1]</P>
+        <P Name="Position">[1375, 500, 1430, 580]</P>
+        <P Name="ZOrder">1932</P>
+        <P Name="LibraryVersion">9002000.1</P>
+        <P Name="SourceBlock">pe_lib/Switches &amp; Breakers/Fundamental
+Components/Single-Phase Switch</P>
+        <P Name="SourceType">Single-Phase Switch</P>
+        <P Name="SourceProductName">Simscape Electrical</P>
+        <P Name="SourceProductBaseCode">PS</P>
+        <InstanceData>
+          <P Name="LogSimulationData">off</P>
+          <P Name="SourceFile">pe.switches.fundamental.switch.ps</P>
+          <P Name="ComponentPath">pe.switches.fundamental.switch.ps</P>
+          <P Name="ComponentVariants">pe.switches.fundamental.switch.ps, pe.switches.fundamental.switch.elec</P>
+          <P Name="ComponentVariantNames">PS control port, Electrical control port</P>
+          <P Name="ClassName">Simscape variant</P>
+          <P Name="SchemaVersion">1</P>
+          <P Name="R_closed">0.001</P>
+          <P Name="R_closed_unit">Ohm</P>
+          <P Name="R_closed_conf">compiletime</P>
+          <P Name="G_open">1e-6</P>
+          <P Name="G_open_unit">1/Ohm</P>
+          <P Name="G_open_conf">compiletime</P>
+          <P Name="threshold">0</P>
+          <P Name="threshold_unit">V</P>
+          <P Name="threshold_conf">compiletime</P>
+        </InstanceData>
+      </Block>
+      <Block BlockType="Reference" Name="Switch&#xA;F5" SID="161">
         <P Name="Ports">[0, 0, 0, 0, 0, 2, 1]</P>
         <P Name="Position">[1945, 415, 2000, 495]</P>
         <P Name="ZOrder">1927</P>
@@ -1743,7 +1851,7 @@ Components/Single-Phase Switch</P>
       </Block>
       <Block BlockType="Reference" Name="Switch&#xA;SWMG1" SID="10">
         <P Name="Ports">[0, 0, 0, 0, 0, 2, 1]</P>
-        <P Name="Position">[1255, 300, 1310, 380]</P>
+        <P Name="Position">[1305, 300, 1360, 380]</P>
         <P Name="ZOrder">1744</P>
         <P Name="LibraryVersion">9002000.1</P>
         <P Name="SourceBlock">pe_lib/Switches &amp; Breakers/Fundamental
@@ -2191,24 +2299,15 @@ SWS4</P>
             <P Name="Points">[-265, 0]</P>
             <Branch ConnectType="DEST_DEST">
               <P Name="SrcBlock">Switch
+F2</P>
+              <P Name="SrcPort">RConn1</P>
+              <P Name="Points">[1, 0; 0, 20; 49, 0]</P>
+            </Branch>
+            <Branch ConnectType="DEST_DEST">
+              <P Name="SrcBlock">Switch
 SWS3</P>
               <P Name="SrcPort">LConn2</P>
               <P Name="Points">[0, -40]</P>
-            </Branch>
-            <Branch ConnectType="DEST_DEST">
-              <P Name="Points">[920, 140; 270, 0]</P>
-              <Branch ConnectType="SRC_DEST">
-                <P Name="SrcBlock">Switch
-SWS2</P>
-                <P Name="SrcPort">LConn2</P>
-                <P Name="Points">[0, -5]</P>
-              </Branch>
-              <Branch ConnectType="SRC_DEST">
-                <P Name="SrcBlock">Switch
-F1</P>
-                <P Name="SrcPort">RConn1</P>
-                <P Name="Points">[65, 0]</P>
-              </Branch>
             </Branch>
           </Branch>
         </Branch>
@@ -2226,43 +2325,25 @@ SWP1</P>
         <P Name="SrcPort">RConn1</P>
         <P Name="Points">[0, -10; 290, 0]</P>
         <Branch ConnectType="DEST_DEST">
-          <P Name="SrcBlock">Switch
-SWP2</P>
-          <P Name="SrcPort">RConn1</P>
-          <P Name="Points">[0, 10]</P>
-        </Branch>
-        <Branch ConnectType="DEST_SRC">
-          <P Name="Points">[270, 0]</P>
-          <Branch ConnectType="DEST_DEST">
-            <P Name="Points">[1495, 560; -265, 0]</P>
-            <Branch ConnectType="SRC_DEST">
-              <P Name="Points">[1795, 560; -300, 0]</P>
-              <Branch ConnectType="SRC_DEST">
-                <P Name="SrcBlock">Switch
-SWP6</P>
-                <P Name="SrcPort">RConn1</P>
-                <P Name="Points">[0, 65; -410, 0]</P>
-              </Branch>
-              <Branch ConnectType="SRC_DEST">
-                <P Name="SrcBlock">Switch
-SWP5</P>
-                <P Name="SrcPort">RConn1</P>
-                <P Name="Points">[0, 65]</P>
-              </Branch>
-            </Branch>
-            <Branch ConnectType="SRC_DEST">
-              <P Name="SrcBlock">Switch
-SWP4</P>
-              <P Name="SrcPort">RConn1</P>
-              <P Name="Points">[0, 65]</P>
-            </Branch>
+          <P Name="Points">[1230, 560; -270, 0]</P>
+          <Branch ConnectType="SRC_DEST">
+            <P Name="SrcBlock">Switch
+F4</P>
+            <P Name="SrcPort">LConn2</P>
+            <P Name="Points">[-130, 0]</P>
           </Branch>
-          <Branch ConnectType="DEST_DEST">
+          <Branch ConnectType="SRC_DEST">
             <P Name="SrcBlock">Switch
 SWP3</P>
             <P Name="SrcPort">RConn1</P>
             <P Name="Points">[0, 45]</P>
           </Branch>
+        </Branch>
+        <Branch ConnectType="DEST_DEST">
+          <P Name="SrcBlock">Switch
+SWP2</P>
+          <P Name="SrcPort">RConn1</P>
+          <P Name="Points">[0, 10]</P>
         </Branch>
       </Line>
       <Line LineType="Connection">
@@ -2327,21 +2408,21 @@ SWP2</P>
         </Branch>
       </Line>
       <Line LineType="Connection">
-        <P Name="ZOrder">257</P>
+        <P Name="ZOrder">461</P>
         <P Name="SrcBlock">Switch
-SWMG1</P>
+SWP3</P>
         <P Name="SrcPort">LConn2</P>
-        <P Name="Points">[-30, 0]</P>
+        <P Name="Points">[0, -50]</P>
+        <Branch ConnectType="DEST_DEST">
+          <P Name="SrcBlock">Switch
+F3</P>
+          <P Name="SrcPort">LConn2</P>
+          <P Name="Points">[-5, 0]</P>
+        </Branch>
         <Branch ConnectType="DEST_SRC">
           <P Name="DstBlock">Switch
 SWS3</P>
           <P Name="DstPort">RConn1</P>
-        </Branch>
-        <Branch ConnectType="DEST_DEST">
-          <P Name="SrcBlock">Switch
-SWP3</P>
-          <P Name="SrcPort">LConn2</P>
-          <P Name="Points">[0, -70]</P>
         </Branch>
       </Line>
       <Line LineType="Connection">
@@ -2408,7 +2489,7 @@ SW4</P>
         <Branch ConnectType="DEST_DEST">
           <P Name="SrcBlock">Load 5</P>
           <P Name="SrcPort">RConn1</P>
-          <P Name="Points">[22, 0; 0, -75]</P>
+          <P Name="Points">[22, 0; -1, -75]</P>
         </Branch>
       </Line>
       <Line LineType="Connection">
@@ -2459,17 +2540,72 @@ SW4</P>
         <Branch ConnectType="DEST_SRC">
           <P Name="Points">[0, 135]</P>
           <P Name="DstBlock">Switch
-F2</P>
+F5</P>
           <P Name="DstPort">LConn2</P>
         </Branch>
       </Line>
       <Line LineType="Connection">
         <P Name="ZOrder">424</P>
         <P Name="SrcBlock">Switch
-F2</P>
+F5</P>
         <P Name="SrcPort">RConn1</P>
         <P Name="DstBlock">Load 5</P>
         <P Name="DstPort">LConn1</P>
+      </Line>
+      <Line LineType="Connection">
+        <P Name="ZOrder">440</P>
+        <P Name="SrcBlock">Switch
+F1</P>
+        <P Name="SrcPort">RConn1</P>
+        <P Name="Points">[65, 0]</P>
+        <Branch ConnectType="DEST_DEST">
+          <P Name="SrcBlock">Switch
+F2</P>
+          <P Name="SrcPort">LConn2</P>
+          <P Name="Points">[-135, 0]</P>
+        </Branch>
+        <Branch ConnectType="DEST_SRC">
+          <P Name="DstBlock">Switch
+SWS2</P>
+          <P Name="DstPort">LConn2</P>
+        </Branch>
+      </Line>
+      <Line LineType="Connection">
+        <P Name="ZOrder">486</P>
+        <P Name="SrcBlock">Switch
+F3</P>
+        <P Name="SrcPort">RConn1</P>
+        <P Name="DstBlock">Switch
+SWMG1</P>
+        <P Name="DstPort">LConn2</P>
+      </Line>
+      <Line LineType="Connection">
+        <P Name="ZOrder">448</P>
+        <P Name="SrcBlock">Switch
+SWP5</P>
+        <P Name="SrcPort">RConn1</P>
+        <P Name="Points">[0, 65]</P>
+        <Branch ConnectType="DEST_DEST">
+          <P Name="Points">[1495, 560; 0, 0; 300, 0]</P>
+          <Branch ConnectType="SRC_DEST">
+            <P Name="SrcBlock">Switch
+F4</P>
+            <P Name="SrcPort">RConn1</P>
+            <P Name="Points">[19, 0; 0, 20; 31, 0]</P>
+          </Branch>
+          <Branch ConnectType="SRC_DEST">
+            <P Name="SrcBlock">Switch
+SWP4</P>
+            <P Name="SrcPort">RConn1</P>
+            <P Name="Points">[0, 65]</P>
+          </Branch>
+        </Branch>
+        <Branch ConnectType="DEST_DEST">
+          <P Name="SrcBlock">Switch
+SWP6</P>
+          <P Name="SrcPort">RConn1</P>
+          <P Name="Points">[0, 65; -410, 0]</P>
+        </Branch>
       </Line>
     </System>
   </Model>

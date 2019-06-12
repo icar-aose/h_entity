@@ -10,7 +10,7 @@ object SPSRun extends App {
 
   //MatValidator.main(x)          //test with matlab in the same pc of the h-entity
 
-  Thread.sleep(10000)
+  //Thread.sleep(10000)
 
   val launcher = new HLauncher("org.icar.h.sps_management.Boot")
 

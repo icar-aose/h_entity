@@ -53,6 +53,10 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       //mission.vitals.foreach(log.info)
 
       val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
+
+      //DOBBIAMO ESEGUIRE LE RIGHE DI SOPRA PROPRIO A RIDOSSO DELLE VALIDAZIONI!
+
+
       //log.info("list of active generators:")
       //scenario.up_generators.foreach(log.info)
 
