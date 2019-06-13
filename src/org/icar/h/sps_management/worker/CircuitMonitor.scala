@@ -22,7 +22,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1")
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
-  var fault : Set[String] = _
+  var fault : ArrayBuffer[String] = new ArrayBuffer[String]
 
   val gui : AmperometerGui= new AmperometerGui()
   var sensorActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor")
@@ -46,8 +46,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   override def preStart: Unit = {
     log.info("ready")
 
-    if(switcherActor.equals("true"))
-      SwitcherMonitor ! RequestUpdateScenario()
+//    if(switcherActor.equals("true"))
+  //    SwitcherMonitor ! RequestUpdateScenario()
 
   }
 
@@ -83,8 +83,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 //      Thread.sleep(5000)
 //      self ! RequestUpdateScenario()
 
-    case UpdateScenario(open_switchers) =>
-      scenario.open_switchers = (open_switchers | fault).to[ArrayBuffer]
+    case UpdateScenario(open_switchers_current) =>
+      scenario.open_switchers = open_switchers_current ++ fault
       println(scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>

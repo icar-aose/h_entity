@@ -8,6 +8,8 @@ import cartago.{CartagoService, NodeId, Op}
 import com.typesafe.config.ConfigFactory
 import processing.io.GPIO
 
+import scala.collection.mutable.ArrayBuffer
+
 class SwitcherMonitor extends Actor with ActorLogging {
 
   val node: NodeId = CartagoService.startNode
@@ -53,7 +55,7 @@ class SwitcherMonitor extends Actor with ActorLogging {
   "switchswauxg1"->"swauxg1Pin")
 
 
-  var open_switchers : Set[String] = Set.empty
+  var open_switchers : ArrayBuffer[String] = new ArrayBuffer[String]
 
   override def preStart() : Unit = {
 
@@ -71,7 +73,8 @@ class SwitcherMonitor extends Actor with ActorLogging {
     case SwitcherMonitoring() =>
     { var readVal : Int = 0
 
-      open_switchers =Set.empty
+      open_switchers.clear()
+
       for ((k,v) <- NamePinNum)
         {
           readVal = GPIO.digitalRead(v)

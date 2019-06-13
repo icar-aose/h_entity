@@ -9,6 +9,8 @@ import java.util.{ArrayList, HashMap}
 
 import akka.actor.NoSerializationVerificationNeeded
 
+import scala.collection.mutable.ArrayBuffer
+
 
 sealed abstract class Action
 sealed abstract class Predicate
@@ -54,7 +56,7 @@ case class start() extends Action with Serializable
 case class EnactPlan(plan_reference : String, acts : util.ArrayList[String]) extends Action with Serializable
 
 @SerialVersionUID(120L)
-case class UpdateScenario(open_switchers : Set[String]) extends Action with Serializable
+case class UpdateScenario(open_switchers : ArrayBuffer[String]) extends Action with Serializable
 
 case class RequestUpdateScenario() extends Action with Serializable
 
