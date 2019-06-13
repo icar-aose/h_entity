@@ -73,8 +73,8 @@ class SwitcherMonitor extends Actor with ActorLogging {
 
       for ((k,v) <- NamePinNum)
         {
+          open_switchers =Set.empty
           readVal = GPIO.digitalRead(v)
-          println(k+": "+v)
 
             k match
             {
