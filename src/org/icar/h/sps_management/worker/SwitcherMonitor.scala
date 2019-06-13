@@ -122,7 +122,7 @@ object SwitcherMonitor{
     //create an actor system with that config
     val system = ActorSystem("RemoteSystem" , config)
     //create a remote actor from actorSystem
-    val remote = system.actorOf(Props[ActuatorEnactor], name="switcher")
+    val remote = system.actorOf(Props[SwitcherMonitor], name="switcher")
     println("remote is ready")
 
 
