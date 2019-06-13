@@ -53,7 +53,7 @@ class SwitcherMonitor extends Actor with ActorLogging {
   "switchswauxg1"->"swauxg1Pin")
 
 
-  var open_switchers : Set[String] = _
+  var open_switchers : Set[String] = Set.empty
 
   override def preStart() : Unit = {
 
