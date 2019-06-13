@@ -70,7 +70,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       gui.testGui(data)
       for (i <- 0 to 0) {
         if (data.getCurrent(i) < 0 & sendH) {
-          fault += "switchf1"
+          fault +="switchf1"
+          fault +="switchf5"
 
           bridge.sendHead("failure(f1)")
           sendH = false
@@ -79,9 +80,9 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
 
     case UpdateScenario(open_switchers_current) =>
-      println("arrivato: "+open_switchers_current)
+     // println("arrivato: "+open_switchers_current)
       scenario.open_switchers = open_switchers_current ++ fault
-      println("salvato: "+scenario.open_switchers)
+     // println("salvato: "+scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)

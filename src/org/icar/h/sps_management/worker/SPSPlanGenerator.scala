@@ -46,19 +46,17 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
 
       implicit val timeout: Timeout = Timeout(5 seconds)
       val future_mission: Future[Any] = mission_man_ref ? GetMissionDescription(mission_ref)
-      val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
+
 
       val mission = Await.result(future_mission, timeout.duration).asInstanceOf[MissionDescription].mission
       //log.info("list of vitals:")
       //mission.vitals.foreach(log.info)
 
+      Thread.sleep(3000)
+      val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
       val scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
 
-      //DOBBIAMO ESEGUIRE LE RIGHE DI SOPRA PROPRIO A RIDOSSO DELLE VALIDAZIONI!
-
-
-      //log.info("list of active generators:")
-      //scenario.up_generators.foreach(log.info)
+      println(scenario.open_switchers)
 
       val wi = initial_state(circuit,scenario)
       val goal = goal_specification(circuit, mission)
