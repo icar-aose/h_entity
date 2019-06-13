@@ -40,7 +40,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   }
 
   if(switcherActor.equals("true")) {
-    SwitcherMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor.ip")+":5150/user/switcher") //IP of the PC remote
+    SwitcherMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor.ip")+":5160/user/switcher") //IP of the PC remote
     println("That 's remote:" + SwitcherMonitor)
   }
   override def preStart: Unit = {
