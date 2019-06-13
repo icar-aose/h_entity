@@ -57,6 +57,8 @@ class SwitcherMonitor extends Actor with ActorLogging {
 
   var open_switchers : ArrayBuffer[String] = new ArrayBuffer[String]
 
+  var circuit_monitor : ActorRef = null
+
   override def preStart() : Unit = {
 
     log.info("Ready")
@@ -101,12 +103,15 @@ class SwitcherMonitor extends Actor with ActorLogging {
 
       println(open_switchers)
       Thread.sleep(1000)
+      if(circuit_monitor!=null)
+          circuit_monitor ! UpdateScenario(open_switchers)
       self ! SwitcherMonitoring()
 
 
     }
+
     case RequestUpdateScenario()=>
-      sender() ! UpdateScenario(open_switchers)
+      circuit_monitor = sender()
 
 
 
