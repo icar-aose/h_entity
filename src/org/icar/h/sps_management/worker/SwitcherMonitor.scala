@@ -74,6 +74,8 @@ class SwitcherMonitor extends Actor with ActorLogging {
       for ((k,v) <- NamePinNum)
         {
           readVal = GPIO.digitalRead(v)
+          println(k+": "+v)
+
             k match
             {
               case "swm1busPin" => if(readVal==1) open_switchers+="switchswp1" else open_switchers+="switchsws1"

@@ -47,7 +47,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     log.info("ready")
 
     if(switcherActor.equals("true"))
-      self ! RequestUpdateScenario()
+      SwitcherMonitor ! RequestUpdateScenario()
 
   }
 
@@ -78,13 +78,13 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       }
 
 
-    case RequestUpdateScenario() =>     //update the scenario (state of switchers)
-      SwitcherMonitor ! RequestUpdateScenario()
-      Thread.sleep(5000)
-      self ! RequestUpdateScenario()
+//    case RequestUpdateScenario() =>     //update the scenario (state of switchers)
+//      SwitcherMonitor ! RequestUpdateScenario()
+//      Thread.sleep(5000)
+//      self ! RequestUpdateScenario()
 
     case UpdateScenario(open_switchers) =>
-      scenario.open_switchers = (open_switchers | fault).to[ArrayBuffer[String]]
+      scenario.open_switchers = (open_switchers | fault).to[ArrayBuffer]
       println(scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>
