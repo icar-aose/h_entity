@@ -71,9 +71,9 @@ class SwitcherMonitor extends Actor with ActorLogging {
     case SwitcherMonitoring() =>
     { var readVal : Int = 0
 
+      open_switchers =Set.empty
       for ((k,v) <- NamePinNum)
         {
-          open_switchers =Set.empty
           readVal = GPIO.digitalRead(v)
 
             k match
