@@ -79,8 +79,9 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
 
     case UpdateScenario(open_switchers_current) =>
+      println("arrivato: "+open_switchers_current)
       scenario.open_switchers = open_switchers_current ++ fault
-      println(scenario.open_switchers)
+      println("salvato: "+scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)
