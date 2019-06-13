@@ -85,7 +85,7 @@ class SwitcherMonitor extends Actor with ActorLogging {
 
   }
 
-
+}
   object SwitcherMonitor {
     def main(args: Array[String]) {
       //get the configuration file from classpath
@@ -102,4 +102,3 @@ class SwitcherMonitor extends Actor with ActorLogging {
     }
   }
 
-}
