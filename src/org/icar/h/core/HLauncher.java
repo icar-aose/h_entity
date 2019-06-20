@@ -57,6 +57,7 @@ public class HLauncher {
         props.setProperty(Profile.GUI, JasonGUI);
         ProfileImpl p = new ProfileImpl(props);
 
+        p.setParameter(Profile.NO_MTP,"true");
 
         ac = Runtime.instance().createMainContainer(p); //* RMI internal Message Transport Protocol, port number 1099, HTTP MTP.
     }
@@ -117,6 +118,7 @@ public class HLauncher {
             try {
                 AgentParameters ap = new AgentParameters();
                 ap.asSource = new File(run.getString(name + ".asl"));
+                ap.addOption("mindinspector","false");
                 controller = ac.createNewAgent(name, JadeAgArch.class.getName(), new Object[] { ap });
                 System.out.println("loaded [" + name + "] jason agent");
             } catch (StaleProxyException e) {
