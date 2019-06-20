@@ -57,10 +57,10 @@ public class SwitcherArtifact extends Artifact {
 		SwitchNamePin.put("switchswmg1","swmg1Pin");
 		SwitchNamePin.put("switchswauxg1","swauxg1Pin");
 
-		NamePinNum.put("swm1Pin",27); //Relais 1 motore 1
-		NamePinNum.put("swm1busPin",17); //Relais 2 motore 1
-		NamePinNum.put("swm2Pin",25);
-		NamePinNum.put("swm2busPin",13);
+		NamePinNum.put("swm1Pin",25); //Relais 1 motore 1
+		NamePinNum.put("swm1busPin",13); //Relais 2 motore 1
+		NamePinNum.put("swm2Pin",27);
+		NamePinNum.put("swm2busPin",17);
 		NamePinNum.put("swmg1Pin",6);
 		NamePinNum.put("swmg1busPin",5);
 		NamePinNum.put("swL1Pin",20);

@@ -37,10 +37,10 @@ public class AmperometerGui {
     public void testGui(AmpData data)
     {
 
-        l1.setText("Motor Current: "+data.getCurrent(0)+" mA");
-        l2.setText("Main Current: "+data.getCurrent(1)+" mA");
-        l3.setText("Load 1 Current: "+data.getCurrent(2)+" mA");
-        l4.setText("Aux Current: "+data.getCurrent(3)+" mA");
+        l1.setText("Motor 1 Current: "+data.getCurrent(0)+" mA");
+        l2.setText("Motor 2 Current: "+data.getCurrent(1)+" mA");
+        l3.setText("Main Gen Current: "+data.getCurrent(2)+" mA");
+        l4.setText("Load 1 Current: "+data.getCurrent(3)+" mA");
     }
 
 }

@@ -10,10 +10,10 @@ import scala.collection.mutable.ArrayBuffer
 
 class SwitcherMonitor extends Actor with ActorLogging {
 
-  val swm1Pin = 27 //Relais 1 motore 1
-  val swm1busPin = 17 //Relais 2 motore 1
-  val swm2Pin = 25 //Relais 1 motore 2
-  val swm2busPin = 13 //Relais 2 motore 2
+  val swm1Pin = 25 //Relais 1 motore 1
+  val swm1busPin = 13 //Relais 2 motore 1
+  val swm2Pin = 27 //Relais 1 motore 2
+  val swm2busPin = 17 //Relais 2 motore 2
   val swmg1Pin = 6 //Relais1 main gen 1
   val swmg1busPin = 5 //Relais2 main gen 1
   val swL1Pin = 20 //Relais 1 Load 1
@@ -24,8 +24,8 @@ class SwitcherMonitor extends Actor with ActorLogging {
   val swauxg1Pin = 26 //Relais1 aux gen 1
   val swauxg1busPin = 19 //Relais2 aux gen 1
 
-  val NamePinNum: Map[String, Int] = Map("swm1Pin" -> 27, "swm1busPin" -> 17, "swm2Pin" -> 25
-    , "swm2busPin" -> 13, "swmg1Pin" -> 6, "swmg1busPin" -> 5,
+  val NamePinNum: Map[String, Int] = Map("swm1Pin" -> 25, "swm1busPin" -> 13, "swm2Pin" -> 27
+    , "swm2busPin" -> 17, "swmg1Pin" -> 6, "swmg1busPin" -> 5,
     "swL1Pin" -> 20, "swL1busPin" -> 16, "swL2Pin" -> 12, "swL2busPin" -> 21,
     "swauxg1Pin" -> 26, "swauxg1busPin" -> 19)
 
