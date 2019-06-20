@@ -95,6 +95,7 @@ public class SwitcherArtifact extends Artifact {
 			nameAct = SwitchNamePin.get(solution.get(i));
 			pinAct = NamePinNum.get(nameAct);
 			act = (int)solution.get(i+1);
+
 			switch(nameAct)
 			{
 				case "swmg1Pin":
@@ -125,7 +126,7 @@ public class SwitcherArtifact extends Artifact {
 								GPIO.digitalWrite(pinAct,GPIO.HIGH);
 						//GPIO.digitalWrite(NamePinNum.get(nameAct),Integer.parseInt(SwitchNamePin.get(acts.get(i+1))));
 						//System.out.println(nameAct +" "+NamePinNum.get(nameAct)+" "+" "+solution.get(i+1));
-						i=i+4;
+						i=i+2;
 					} else
 						{	System.out.println("trovato switch loads");
 							if(act == 1)
