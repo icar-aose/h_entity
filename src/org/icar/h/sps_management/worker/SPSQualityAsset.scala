@@ -3,7 +3,8 @@ package org.icar.h.sps_management.worker
 import org.icar.fol.{AssumptionSet, Entail}
 import org.icar.musa.context.StateOfWorld
 import org.icar.musa.pmr._
-import org.icar.musa.scenarios.sps.{Circuit, Mission}
+import org.icar.musa.scenarios.sps.Circuit
+import org.icar.h.sps_management.Mission
 
 class SPSQualityAsset(circuit : Circuit, mission : Mission, assumptions: AssumptionSet) extends QualityAsset {
   val entail: Entail.type = Entail
@@ -93,7 +94,7 @@ class SPSQualityAsset(circuit : Circuit, mission : Mission, assumptions: Assumpt
 
     val m = (PR+UP)-(NU+NE)
 
-    //println(s" Pr=$c1  NUp=$c2   NouUsed=$c3   NotEnough=$c4  => $m  ")
+  //  println(s" Pr=$PR  NUp=$UP   NouUsed=$NU   NotEnough=$NE  => $m  ")
 
 
     Some( m.toFloat )

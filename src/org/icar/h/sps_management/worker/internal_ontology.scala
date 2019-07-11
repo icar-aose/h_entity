@@ -3,8 +3,9 @@ package org.icar.h.sps_management.worker
 import java.util
 
 import org.icar.musa.pmr.Solution
-import org.icar.musa.scenarios.sps.{Mission, ReconfigurationScenario}
+import org.icar.musa.scenarios.sps.ReconfigurationScenario
 import org.icar.h.sps_management.rpi_ina219._
+import org.icar.h.sps_management.Mission
 import java.util.{ArrayList, HashMap}
 
 import akka.actor.NoSerializationVerificationNeeded
@@ -37,11 +38,11 @@ case class AmpData (current : Array[Double] ) extends Serializable
 }
 
 @SerialVersionUID(114L)
-case class RaspDataVal(data : AmpData) extends Concept with Serializable
+case class RaspDataVal(data : AmpData, index_rasp : Int) extends Concept with Serializable
 
 
 @SerialVersionUID(115L)
-case class AmpValue (current : Double , adr: INA219.Address) extends Serializable
+case class AmpValue (current : Double , adr: INA219.Address, index_rasp : Int) extends Serializable
 
 @SerialVersionUID(116L)
 case class evaluateSolution(plan_reference : String, switchers: ArrayList[String], all_switchers: ArrayList[String], open_switchers: ArrayList[String], num_loads: Int) extends Predicate with Serializable

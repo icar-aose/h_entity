@@ -22,7 +22,7 @@ public class EvaluateSol {
             val = cap_name.length;
 
             //stampo la stringa, vediamo la soluzione
-            //System.out.println(name_to);
+            System.out.println(name_to);
 
             //controlla se è maggiore di 2, significa che c'è la &
             switch(val) {

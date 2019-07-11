@@ -2,7 +2,7 @@ package org.icar.h.sps_management.worker
 
 import akka.actor.{Actor, ActorLogging, NoSerializationVerificationNeeded, Props}
 import org.icar.h.core.Akka2Jade
-import org.icar.musa.scenarios.sps.Mission
+import org.icar.h.sps_management.Mission
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,8 +20,8 @@ class MissionManager(val bridge : Akka2Jade) extends Actor with ActorLogging {
   m.vitals =ArrayBuffer[String]("load1","load3")
   m.semivitals = ArrayBuffer[String]("load2","load4")
   m.nonvitals =ArrayBuffer[String]("load5")
-  m.gen_pow += ("mg1"->20)
-  m.gen_pow += ("auxg1"->20)
+  m.gen_pow += ("mg1"->600)
+  m.gen_pow += ("auxg1"->350)
 
 
   var missions : Map[String,Mission] = Map(

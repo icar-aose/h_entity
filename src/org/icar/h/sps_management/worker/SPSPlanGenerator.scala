@@ -14,7 +14,9 @@ import org.icar.ltl.{Finally, LogicConjunction, ltlFormula}
 import org.icar.musa.context.{AddEvoOperator, EvoOperator, RemoveEvoOperator, StateOfWorld}
 import org.icar.musa.main_entity._
 import org.icar.musa.pmr.{SingleGoalProblemSpecification, Solution, TimeTermination}
-import org.icar.musa.scenarios.sps.{Circuit, Mission, ReconfigurationScenario}
+import org.icar.musa.scenarios.sps.{Circuit, ReconfigurationScenario}
+import org.icar.h.sps_management.Mission
+
 import java.util.ResourceBundle
 
 import scala.collection.mutable
