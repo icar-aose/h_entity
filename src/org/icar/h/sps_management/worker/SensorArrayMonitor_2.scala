@@ -27,7 +27,7 @@ class SensorArrayMonitor_2 extends Actor with ActorLogging {
     case StartCheckMonitor() =>
     {
       SensorMonitor1 ! Check()
-      //SensorMonitor2 ! Check()
+      SensorMonitor2 ! Check()
       circuit_mon  = sender()
     }
 
