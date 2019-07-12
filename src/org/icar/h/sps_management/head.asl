@@ -54,11 +54,10 @@ mission(undefined).
 
 +!management_and_recovery(FailureDescription) :	true
 <-
-	//.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription);
+	.print("Now contact the worker sps reconfigurator for these failures: ",FailureDescription);
 	//.wait(2000);
 	?mission(Mission);
 	.find_reconfigurations(Mission,FailureDescription);
-	//.send(workersystem,achive,find_reconfigurations(FailureDescription));
 .
 
 +discovered(Plan)
@@ -94,6 +93,15 @@ mission(undefined).
 	.enact(Plan_ID);
 .
 
+/* soluzione da modificare - non ottimale - selezione fallimento da dashboard */
+
++selected_failure(fail) : true
+<-
+    .print("messages failure: ",fail);
+    .fault(fail);
+.
+
+
 +tick(Param) [artifact_name(Id,Name)]
 <-
     .print("tick...",Param);
@@ -116,9 +124,4 @@ mission(undefined).
 .
 
 
-/* soluzione da modificare - non ottimale - selezione fallimento da dashboard */
 
-+selectedFailure (failure) : true
-<-
-    .fault(failure);
-.

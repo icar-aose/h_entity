@@ -23,7 +23,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
   var fault : ArrayBuffer[String] = new ArrayBuffer[String]
 
-  val gui : FaultAmpGui= new FaultAmpGui(bridge)
+
   var sensorActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor")
 
   var switcherActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor")
@@ -49,6 +49,9 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     SwitcherMonitor = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor.ip")+":5160/user/switcher") //IP of the PC remote
     println("That 's remote:" + SwitcherMonitor)
   }
+
+  val gui : FaultAmpGui= new FaultAmpGui(bridge)
+
   override def preStart: Unit = {
     log.info("ready")
 

@@ -42,7 +42,7 @@ public class FaultArtifact extends Artifact {
 	public void actFault(String fault) {
 
 		System.out.println(fault);
-
+		GPIO.digitalWrite(swf1Pin, GPIO.LOW);
 	}
 
 }

@@ -28,9 +28,6 @@ public class FaultAmpGui {
 
         f.setSize(1500,346);//400 width and 500 height
         //f.setLayout(null);//using no layout managers
-
-
-
         BufferedImage img = ImageIO.read(new File("/Users/giovannirenda/Documents/GitHub/h_entity/src/org/icar/h/sps_management/rpi_ina219/circuit.png"));
         ImageIcon imgI = new ImageIcon(img);
         JLabel x = new JLabel(imgI);
@@ -44,24 +41,25 @@ public class FaultAmpGui {
                     if(faultF1.getBackground()==Color.GREEN)
                     {
                         faultF1.setBackground(Color.RED);
-                        bridge.sendHead("fault(switchf1)");
+                        //System.out.println("invio messaggio switchf1");
+                        bridge.sendHead("selected_failure(switchf1)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
                     else {
                         faultF1.setBackground(Color.GREEN);
-                        bridge.sendHead("fault(switchf1)");
+                        bridge.sendHead("selected_failure(switchf1)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
                 if(actionEvent.getActionCommand().equals("F2"))
                     if(faultF2.getBackground()==Color.GREEN)
                     {
                         faultF2.setBackground(Color.RED);
-                        bridge.sendHead("fault(switchf2)");
+                        bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
                     else {
                         faultF2.setBackground(Color.GREEN);
-                        bridge.sendHead("fault(switchf2)");
+                        bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
             }

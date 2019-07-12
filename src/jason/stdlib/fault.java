@@ -12,11 +12,11 @@ public class fault extends DefaultInternalAction {
 
     public Object execute(final TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         if (args.length==0)
-            throw new JasonException("The enact command requires the plan_ref as parameter!");
+            throw new JasonException("The fault command requires the fault as parameter!");
 
         Term plan_ref = args[0];
         if (plan_ref==null || !plan_ref.isAtom()) {
-            throw new JasonException("The plan_ref parameter is in the wrong format!");
+            throw new JasonException("The fault parameter is in the wrong format!");
         } else {
             Atom fr = (Atom) plan_ref;
             String fr_string = fr.getFunctor();

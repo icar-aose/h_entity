@@ -30,12 +30,15 @@ public class Akka2Jade {
 
 		@Override
 		public void action() {
+
 			ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+			//System.out.println("PROVA "+content+ "agente:"+ myAgent);
 			msg.addReceiver(new AID("head",AID.ISLOCALNAME));
 			msg.setLanguage("h-language");
 			msg.setContent(content);
-			//System.out.println("sent");
+
 			myAgent.send(msg);
+			//System.out.println("sent");
 		}
 		  
 	  }
