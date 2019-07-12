@@ -14,7 +14,7 @@ class SensorArrayMonitor_2 extends Actor with ActorLogging {
   var data_fetch : Int = 0
 
   private val SensorMonitor1 : ActorRef = context.actorOf(SensorMonitor.props(INA219.Address.ADDR_40,1), "sensor_monitor1")
-  //private val SensorMonitor2 : ActorRef = context.actorOf(SensorMonitor.props(INA219.Address.ADDR_41,1), "sensor_monitor2")
+  private val SensorMonitor2 : ActorRef = context.actorOf(SensorMonitor.props(INA219.Address.ADDR_41,1), "sensor_monitor2")
 
   var circuit_mon : ActorRef = _
 
@@ -38,7 +38,7 @@ class SensorArrayMonitor_2 extends Actor with ActorLogging {
 
         adr match {
           case INA219.Address.ADDR_40 => data.setCurrent(value,0)
-         // case INA219.Address.ADDR_41 => data.setCurrent(value,1)
+          case INA219.Address.ADDR_41 => data.setCurrent(value,1)
         }
 
         if(data_fetch==2)
