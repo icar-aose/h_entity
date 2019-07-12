@@ -12,12 +12,15 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import akka.actor.*;
-import java.util.ResourceBundle;
+
+import org.icar.musa.scenarios.sps.ReconfigurationScenario;
 
 public class FaultAmpGui {
 
-    JLabel l1,l2,l3,l4,l5,l6;
+    JLabel amp1,amp2,amp3, amp4, amp5, amp6;
+
+    JLabel swm1bus,swm2bus,swmg1bus,swmL1bus,swmL2bus,swmauxg1bus;
+
     JFrame f = new JFrame();
     Dimension size = new Dimension(100,20);
 
@@ -73,41 +76,41 @@ public class FaultAmpGui {
 
         faultF2 = new JButton("F2");
         faultF2.setBackground(Color.green);
-        faultF2.setBounds(390, 50, 90, 30);
+        faultF2.setBounds(540, 220, 90, 30);
         faultF2.addActionListener(actionListener);
         faultF2.setOpaque(true);
 
-        l1=new JLabel(val[0]+" mA");
-       // size = l1.getPreferredSize();
-        l1.setBounds(70, 160, size.width, size.height);
+        amp1 =new JLabel(val[0]+" mA");
+       // size = amp1.getPreferredSize();
+        amp1.setBounds(70, 160, size.width, size.height);
 
-        l2=new JLabel(val[1]+" mA");
+        amp2=new JLabel(val[1]+" mA");
         //size = l2.getPreferredSize();
-        l2.setBounds(300, 160, size.width, size.height);
+        amp2.setBounds(300, 160, size.width, size.height);
 
-        l3=new JLabel(val[2]+" mA");
-        //size = l3.getPreferredSize();
-        l3.setBounds(570, 160, size.width, size.height);
+        amp3 =new JLabel(val[2]+" mA");
+        //size = amp3.getPreferredSize();
+        amp3.setBounds(570, 160, size.width, size.height);
 
-        l4=new JLabel(val[3]+" mA");
-        //size = l4.getPreferredSize();
-        l4.setBounds(785, 160, size.width, size.height);
+        amp4 =new JLabel(val[3]+" mA");
+        //size = amp4.getPreferredSize();
+        amp4.setBounds(785, 160, size.width, size.height);
 
-        l5=new JLabel(val[4]+" mA");
-        //size = l5.getPreferredSize();
-        l5.setBounds(1020, 160, size.width, size.height);
+        amp5 =new JLabel(val[4]+" mA");
+        //size = amp5.getPreferredSize();
+        amp5.setBounds(1020, 160, size.width, size.height);
 
-        l6=new JLabel(val[5]+" mA");
-       // size = l6.getPreferredSize();
-        l6.setBounds(1250, 160, size.width, size.height);
+        amp6 =new JLabel(val[5]+" mA");
+       // size = amp6.getPreferredSize();
+        amp6.setBounds(1250, 160, size.width, size.height);
 
 
-        f.add(l1);
-        f.add(l2);
-        f.add(l3);
-        f.add(l4);
-        f.add(l5);
-        f.add(l6);
+        f.add(amp1);
+        f.add(amp2);
+        f.add(amp3);
+        f.add(amp4);
+        f.add(amp5);
+        f.add(amp6);
         f.add(faultF1);
         f.add(faultF2);
 
@@ -126,7 +129,7 @@ public class FaultAmpGui {
     }
 
 
-    public void testGui(AmpData data)
+    public void updateGui(AmpData data, ReconfigurationScenario open_switchers)
     {
 
         for (int i=0;i<6;i++)
@@ -139,12 +142,12 @@ public class FaultAmpGui {
                 //System.out.println(val[i]);
             }
 
-        l1.setText(val[0] + " mA");
-        l2.setText(val[1] + " mA");
-        l3.setText(val[2] + " mA");
-        l4.setText(val[3] + " mA");
-        l5.setText(val[4] + " mA");
-        l6.setText(val[5] + " mA");
+        amp1.setText(val[0] + " mA");
+        amp2.setText(val[1] + " mA");
+        amp3.setText(val[2] + " mA");
+        amp4.setText(val[3] + " mA");
+        amp5.setText(val[4] + " mA");
+        amp6.setText(val[5] + " mA");
 
     }
 

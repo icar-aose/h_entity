@@ -24,7 +24,7 @@ class FaultEnactor extends Actor with ActorLogging {
 
     case EnactFault(fault) =>
     {
-      println("abilito il fault")
+      //println("abilito il fault")
       my_context.doAction(my_device, new Op("actFault",fault))
     }
 

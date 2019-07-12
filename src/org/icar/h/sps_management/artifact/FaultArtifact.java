@@ -12,8 +12,8 @@ import java.util.Map;
 public class FaultArtifact extends Artifact {
 
 	int swf1Pin = 26;
-	int swf2Pin = 5;
-//	int swf3Pin = 13;
+	int swf2Pin = 13;
+//	int swf3Pin = 5;
 //	int swf4Pin = 16;
 //	int swf5Pin = 12;
 
@@ -42,7 +42,14 @@ public class FaultArtifact extends Artifact {
 	public void actFault(String fault) {
 
 		System.out.println(fault);
-		GPIO.digitalWrite(swf1Pin, GPIO.LOW);
+		if(fault.equals("switchf1"))
+			if(GPIO.digitalRead(swf1Pin)==0)
+			GPIO.digitalWrite(swf1Pin, 1);
+			else GPIO.digitalWrite(swf1Pin, 0);
+		else
+			if (GPIO.digitalRead(swf2Pin)==0)
+				GPIO.digitalWrite(swf2Pin, 1);
+			else GPIO.digitalWrite(swf2Pin, 0);
 	}
 
 }

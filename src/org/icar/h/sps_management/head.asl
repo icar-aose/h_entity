@@ -95,10 +95,10 @@ mission(undefined).
 
 /* soluzione da modificare - non ottimale - selezione fallimento da dashboard */
 
-+selected_failure(fail) : true
++selected_failure(Fail) : true
 <-
-    .print("messages failure: ",fail);
-    .fault(fail);
+    //.print("messages failure: ",Fail);
+    .fault(Fail);
 .
 
 
