@@ -36,12 +36,12 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var SensorArrayMonitor_1 : ActorSelection = null
   var SensorArrayMonitor_2 : ActorSelection = null
   var SwitcherMonitor : ActorSelection = null
-
+  val r = scala.util.Random
   //Check if remote is active!
   if(sensorActor.equals("true")) {
-    SensorArrayMonitor_1 = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_1.remote.ip")+":5150/user/sensor") //IP of the PC remote
+    SensorArrayMonitor_1 = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_1.remote.ip")+":5150/user/sensor_1") //IP of the PC remote
     println("That 's remote:" + SensorArrayMonitor_1)
-    SensorArrayMonitor_2 = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.remote.ip")+":5150/user/sensor") //IP of the PC remote
+    SensorArrayMonitor_2 = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.remote.ip")+":5150/user/sensor_2") //IP of the PC remote
     println("That 's remote:" + SensorArrayMonitor_2)
   }
 
@@ -63,13 +63,24 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
       if(sensorActor.equals("true")) {
         SensorArrayMonitor_1 ! StartCheckMonitor()
-        SensorArrayMonitor_2 ! StartCheckMonitor()
+     //   SensorArrayMonitor_2 ! StartCheckMonitor()
       }
       else
         self ! 10.0             //if you don't have raspberry
 
     case msg : Double =>        //if you don't have raspberry
-      Thread.sleep(3000)
+
+      while(true)
+        {
+          DataMerged.setCurrent(r.nextDouble(),0)
+          DataMerged.setCurrent(r.nextDouble(),1)
+          DataMerged.setCurrent(r.nextDouble(),2)
+          DataMerged.setCurrent(r.nextDouble(),3)
+          DataMerged.setCurrent(r.nextDouble(),4)
+          DataMerged.setCurrent(r.nextDouble(),5)
+          Thread.sleep(1000)
+          gui.testGui(DataMerged)
+        }
       bridge.sendHead("failure(f1)")
 
 
@@ -95,19 +106,21 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
           gui.testGui(DataMerged)
           data_fetch=0
         }
-
-//      if (data.getCurrent(0) < 0 & data.getCurrent(2) > 10 & sendH) {
-//          fault +="switchf1"
-//          fault +="switchf5"
-//          bridge.sendHead("failure(f1)")
-//          sendH = false
-//        }
-//      if (data.getCurrent(2) < 1 & sendH) {
-//        fault +="switchf3"
-//        fault +="switchf5"
-//        bridge.sendHead("failure(f3)")
-//        sendH = false
-//      }
+      if(index_rasp==0)
+        {
+          if (data.getCurrent(0) < 0 & data.getCurrent(2) > 10 & sendH) {
+            fault +="switchf1"
+            fault +="switchf5"
+            bridge.sendHead("failure(f1)")
+            sendH = false
+          }
+          if (data.getCurrent(2) < 1 & sendH) {
+            fault +="switchf3"
+            fault +="switchf5"
+            bridge.sendHead("failure(f3)")
+            sendH = false
+          }
+        }
 
 
 

@@ -79,6 +79,13 @@ mission(undefined).
     addSolution(Plan_reference,String);
 .
 
++notvalidated(Plan_reference,Plan_description)
+<-
+    //.print("The ",Plan_reference," is valid according the Physical Simulator");
+    //.print(Plan_description);
+    .term2string(Plan_description,String);
+    addSolutionNotValidated(Plan_reference,String);
+.
 
 +selected(Plan_reference)[artifact_name(Id,Name)]
 <-

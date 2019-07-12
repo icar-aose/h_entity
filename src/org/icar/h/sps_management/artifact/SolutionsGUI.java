@@ -47,13 +47,13 @@ public class SolutionsGUI extends javax.swing.JFrame {
         SelectedTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Commander GUI - Solution Selector");
+        setTitle("Commander GUI - Solution Validated Selector");
 
         MainPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(600, 400));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(700, 300));
 
         SolutionList.setModel(solution_model);
         SolutionList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -116,6 +116,9 @@ public class SolutionsGUI extends javax.swing.JFrame {
 
     public javax.swing.JButton getSelectButton() {
         return ExecuteButton;
+    }
+    public javax.swing.JPanel getJPanel3() {
+        return jPanel3;
     }
 
     private void SolutionListValueChanged(javax.swing.event.ListSelectionEvent evt) {

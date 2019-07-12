@@ -1,6 +1,5 @@
 package org.icar.h.sps_management.worker
 
-import java.rmi.registry.LocateRegistry
 import java.util
 import java.util.ResourceBundle
 
@@ -8,7 +7,6 @@ import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, NoSerializatio
 import akka.pattern.ask
 import akka.util.Timeout
 import org.icar.h.core.Akka2Jade
-import org.icar.h.core.matlab.matEngine.MatRemote
 import org.icar.h.sps_management.EvaluateSol
 import org.icar.musa.pmr._
 import org.icar.musa.scenarios.sps.{Circuit, ReconfigurationScenario}
@@ -120,13 +118,18 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
       var xsize = 0
 
       println("\n")
+
+      var sol = all_plans(plan_reference)
+      var selected : List[String] = solution_list_gui(sol,sol.start)
       if (result.get("genResult")==1) {
-        var sol = all_plans(plan_reference)
-        var selected : List[String] = solution_list_gui(sol,sol.start)
         bridge.sendHead("validated(" + plan_reference +",["+selected.mkString(",")+ "])")
 
         //GUI solution!!
       }
+      else
+        {
+          bridge.sendHead("notvalidated(" + plan_reference +",["+selected.mkString(",")+ "])")
+        }
 
 
     case _ =>

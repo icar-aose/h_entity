@@ -11,16 +11,30 @@ import java.util.List;
 
 public class CaptainInterface extends GUIArtifact {
 
-	private DefaultListModel  model = new DefaultListModel();
-	private SolutionsGUI gui = new SolutionsGUI(model);
+	private DefaultListModel model_1 = new DefaultListModel();
+	private SolutionsGUI gui_1 = new SolutionsGUI(model_1);
+
+
+	private DefaultListModel model_2 = new DefaultListModel();
+	private SolutionsGUI gui_2 = new SolutionsGUI(model_2);
+
 	private List<String> plan_ref_index =new ArrayList<String>() ;
 
 
 	public void setup() {
 		System.out.println("sono il Captain");
-		gui.setVisible(true);
 
-		linkActionEventToOp(gui.getSelectButton(),"select");
+
+		gui_1.setLocation(800,500);
+		gui_1.setVisible(true);
+
+		gui_2.setTitle("Commander GUI - Solution not validated");
+		gui_2.setLocation(10,500);
+		gui_2.getSelectButton().setVisible(false);
+		gui_2.getJPanel3().setVisible(false);
+		gui_2.setVisible(true);
+
+		linkActionEventToOp(gui_1.getSelectButton(),"select");
 	}
 
 	@OPERATION
@@ -35,8 +49,9 @@ public class CaptainInterface extends GUIArtifact {
 	@INTERNAL_OPERATION
 	void select(ActionEvent ev) {
 
-		gui.setVisible(false);
-		int index = gui.getSelectedForExecution();
+		gui_1.setVisible(false);
+		gui_2.setVisible(false);
+		int index = gui_1.getSelectedForExecution();
 		String selected_ref = plan_ref_index.get(index);
 		signal("selected",selected_ref);
 
@@ -45,15 +60,15 @@ public class CaptainInterface extends GUIArtifact {
 
 	@OPERATION
 	void addSolution(String plan_reference, String sol ) throws InterruptedException {
-		String sol_string = "";
-
-		/*for ( int i = 0; i< sol.size();i++)
-			sol_string += sol.get(i)+"->";*/
 		plan_ref_index.add(plan_reference);
-		model.addElement(plan_reference+": sol" + sol);
+		model_1.addElement(plan_reference+": sol" + sol);
 	}
 
-
+	@OPERATION
+	void addSolutionNotValidated(String plan_reference, String sol ) throws InterruptedException {
+		plan_ref_index.add(plan_reference);
+		model_2.addElement(plan_reference+": sol" + sol);
+	}
 }
 
 
