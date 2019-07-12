@@ -81,8 +81,6 @@ mission(undefined).
 
 +notvalidated(Plan_reference,Plan_description)
 <-
-    //.print("The ",Plan_reference," is valid according the Physical Simulator");
-    //.print(Plan_description);
     .term2string(Plan_description,String);
     addSolutionNotValidated(Plan_reference,String);
 .
@@ -118,3 +116,9 @@ mission(undefined).
 .
 
 
+/* soluzione da modificare - non ottimale - selezione fallimento da dashboard */
+
++selectedFailure (failure) : true
+<-
+    .fault(failure);
+.

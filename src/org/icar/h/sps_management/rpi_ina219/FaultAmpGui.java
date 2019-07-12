@@ -1,33 +1,83 @@
 package org.icar.h.sps_management.rpi_ina219;
 
+import org.icar.h.core.Akka2Jade;
 import org.icar.h.sps_management.worker.AmpData;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import akka.actor.*;
+import java.util.ResourceBundle;
 
-public class AmperometerGui {
+public class FaultAmpGui {
 
     JLabel l1,l2,l3,l4,l5,l6;
     JFrame f = new JFrame();
     Dimension size = new Dimension(100,20);
 
+    JButton faultF1,faultF2;
     double[] val =new double[6];
 
-    public AmperometerGui() throws IOException {
+    public FaultAmpGui(final Akka2Jade bridge) throws IOException {
 
         f.setSize(1500,346);//400 width and 500 height
         //f.setLayout(null);//using no layout managers
+
+
 
         BufferedImage img = ImageIO.read(new File("/Users/giovannirenda/Documents/GitHub/h_entity/src/org/icar/h/sps_management/rpi_ina219/circuit.png"));
         ImageIcon imgI = new ImageIcon(img);
         JLabel x = new JLabel(imgI);
         f.setContentPane(x);
         f.pack();
+
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println(actionEvent.getActionCommand());
+                if(actionEvent.getActionCommand().equals("F1"))
+                    if(faultF1.getBackground()==Color.GREEN)
+                    {
+                        faultF1.setBackground(Color.RED);
+                        bridge.sendHead("fault(switchf1)");
+                        //INVIA COMANDO AL FAULTENACTOR
+                    }
+                    else {
+                        faultF1.setBackground(Color.GREEN);
+                        bridge.sendHead("fault(switchf1)");
+                        //INVIA COMANDO AL FAULTENACTOR
+                    }
+                if(actionEvent.getActionCommand().equals("F2"))
+                    if(faultF2.getBackground()==Color.GREEN)
+                    {
+                        faultF2.setBackground(Color.RED);
+                        bridge.sendHead("fault(switchf2)");
+                        //INVIA COMANDO AL FAULTENACTOR
+                    }
+                    else {
+                        faultF2.setBackground(Color.GREEN);
+                        bridge.sendHead("fault(switchf2)");
+                        //INVIA COMANDO AL FAULTENACTOR
+                    }
+            }
+        };
+
+        faultF1 = new JButton("F1");
+        faultF1.setBackground(Color.GREEN);
+        faultF1.setBounds(120, 50, 90, 30);
+        faultF1.addActionListener(actionListener);
+        faultF1.setOpaque(true);
+
+        faultF2 = new JButton("F2");
+        faultF2.setBackground(Color.green);
+        faultF2.setBounds(390, 50, 90, 30);
+        faultF2.addActionListener(actionListener);
+        faultF2.setOpaque(true);
 
         l1=new JLabel(val[0]+" mA");
        // size = l1.getPreferredSize();
@@ -60,6 +110,8 @@ public class AmperometerGui {
         f.add(l4);
         f.add(l5);
         f.add(l6);
+        f.add(faultF1);
+        f.add(faultF2);
 
         f.setLocation(10,10);
         //if(ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor").equals("true"))
@@ -72,7 +124,7 @@ public class AmperometerGui {
 
     public static void main (String[] args) throws IOException {
 
-        AmperometerGui gui = new AmperometerGui();
+       // FaultAmpGui gui = new FaultAmpGui();
     }
 
 
@@ -107,4 +159,5 @@ public class AmperometerGui {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+
 }

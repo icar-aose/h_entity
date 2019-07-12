@@ -59,6 +59,9 @@ case class EnactPlan(plan_reference : String, acts : util.ArrayList[String]) ext
 @SerialVersionUID(120L)
 case class UpdateScenario(open_switchers : ArrayBuffer[String]) extends Action with Serializable
 
+@SerialVersionUID(121L)
+case class EnactFault(fault : String) extends Action with Serializable
+
 case class RequestUpdateScenario() extends Action with Serializable
 
 case class SwitcherMonitoring() extends Action with NoSerializationVerificationNeeded

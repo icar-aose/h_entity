@@ -1,7 +1,9 @@
 package org.icar.h.sps_management
 
 
-import akka.actor.{Actor, ActorLogging, ActorRef, Props}
+import java.util.ResourceBundle
+
+import akka.actor.{Actor, ActorLogging, ActorRef, ActorSelection, Props}
 import org.icar.h.sps_management.worker._
 import jason.asSyntax.{Atom, Structure}
 import org.icar.h.core.Akka2Jade
@@ -18,6 +20,10 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
   private val plan_validator_rem = context.actorOf(SPSPlanValidatorRem.props(bridge,sps_reconfigurator,sensor_checkers), "plan_validator_rem")
   private lazy val plan_executor : ActorRef = context.actorOf(ReconfigurationEnactor.props(bridge,sps_reconfigurator), "plan_executor")
 
+  var faultEnactor : ActorSelection = null
+  //actor Fault
+  faultEnactor = context.actorSelection("akka.tcp://RemoteSystem@" + ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.remote.ip") + ":5151/user/fault") //IP of the PC remote
+  println("That 's remote:" + faultEnactor)
 
   override def preStart : Unit = {
     log.info("ready")
@@ -46,6 +52,9 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
           val par = get_structure_arg(structure,0)
           plan_executor ! Enact(par)
 
+        case "fault" if check_structure(structure,1) =>
+          val par = get_structure_arg(structure,0)
+          faultEnactor ! EnactFault(par)
         case _ =>
           println("Root: unspecied message")
 

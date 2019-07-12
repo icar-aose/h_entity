@@ -23,7 +23,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
   var fault : ArrayBuffer[String] = new ArrayBuffer[String]
 
-  val gui : AmperometerGui= new AmperometerGui()
+  val gui : FaultAmpGui= new FaultAmpGui(bridge)
   var sensorActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor")
 
   var switcherActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor")
@@ -97,8 +97,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
       }
       else
       {
-        DataMerged.setCurrent(data.getCurrent(0),4)
-        DataMerged.setCurrent(data.getCurrent(1),5)
+        DataMerged.setCurrent(data.getCurrent(0),5)
+        DataMerged.setCurrent(data.getCurrent(1),4)
       }
 
       if(data_fetch==2)

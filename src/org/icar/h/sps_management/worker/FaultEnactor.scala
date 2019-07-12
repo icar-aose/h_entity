@@ -3,15 +3,15 @@ package org.icar.h.sps_management.worker
 import java.io.File
 
 import akka.actor._
-import cartago.{CartagoService, NodeId, Op}
 import cartago.util.agent.CartagoBasicContext
+import cartago.{CartagoService, NodeId, Op}
 import com.typesafe.config.ConfigFactory
 
-class ActuatorEnactor extends Actor with ActorLogging {
+class FaultEnactor extends Actor with ActorLogging {
 
   val node: NodeId = CartagoService.startNode
   var my_context : CartagoBasicContext = new CartagoBasicContext("remote_agent")
-  var my_device = my_context.makeArtifact("switcherArtifact", "org.icar.h.sps_management.artifact.SwitcherArtifact")
+  var my_device = my_context.makeArtifact("faultArtifact", "org.icar.h.sps_management.artifact.FaultArtifact")
 
   override def preStart() : Unit = {
 
@@ -21,10 +21,13 @@ class ActuatorEnactor extends Actor with ActorLogging {
 
   override def receive: Receive = {
 
-    case EnactPlan(plan_reference,plan) =>
-      {
-        my_context.doAction(my_device, new Op("actPlan",plan_reference,plan))
-      }
+
+    case EnactFault(fault) =>
+    {
+      my_context.doAction(my_device, new Op("actFault",fault))
+    }
+
+
 
 
 
@@ -33,16 +36,16 @@ class ActuatorEnactor extends Actor with ActorLogging {
 }
 
 
-object ActuatorEnactor{
+object FaultEnactor{
   def main(args: Array[String]) {
     //get the configuration file from classpath
-    val configFile = getClass.getClassLoader.getResource("org/icar/h/sps_management/worker/actuator_application.conf").getFile
+    val configFile = getClass.getClassLoader.getResource("org/icar/h/sps_management/worker/fault_application.conf").getFile
     //parse the config
     val config = ConfigFactory.parseFile(new File(configFile))
     //create an actor system with that config
     val system = ActorSystem("RemoteSystem" , config)
     //create a remote actor from actorSystem
-    val remote = system.actorOf(Props[ActuatorEnactor], name="actuator")
+    val remote = system.actorOf(Props[FaultEnactor], name="fault")
     println("remote is ready")
 
 
