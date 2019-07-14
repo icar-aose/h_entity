@@ -82,7 +82,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
           DataMerged.setCurrent(r.nextDouble(),4)
           DataMerged.setCurrent(r.nextDouble(),5)
           Thread.sleep(1000)
-          gui.updateGui(DataMerged,scenario.open_switchers)
+
+          gui.updateGui(DataMerged,scenario.open_switchers.toArray)
         }
       bridge.sendHead("failure(f1)")
 
@@ -106,7 +107,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
       if(data_fetch==2)
         {
-          gui.updateGui(DataMerged,scenario.open_switchers)
+          gui.updateGui(DataMerged,scenario.open_switchers.toArray)
           data_fetch=0
         }
       if(index_rasp==0)

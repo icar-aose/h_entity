@@ -5,6 +5,7 @@ import org.icar.h.sps_management.worker.AmpData;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,13 +13,20 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import scala.collection.mutable.ArrayBuffer;
+
 
 public class FaultAmpGui {
 
     JLabel amp1,amp2,amp3, amp4, amp5, amp6;
 
-    JLabel swm1bus,swm2bus,swmg1bus,swmL1bus,swmL2bus,swmauxg1bus;
+    JLabel swm1, swm2, swmg1, swL1, swL2, swauxg1;
+
+    JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
+
+
+    Border border_green = BorderFactory.createLineBorder(Color.GREEN, 50);
+
+    Border border_red = BorderFactory.createLineBorder(Color.RED, 50);
 
     JFrame f = new JFrame();
     Dimension size = new Dimension(100,20);
@@ -69,18 +77,78 @@ public class FaultAmpGui {
 
         faultF1 = new JButton("F1");
         faultF1.setBackground(Color.GREEN);
-        faultF1.setBounds(120, 50, 90, 30);
+        faultF1.setBounds(120, 50, 70, 30);
         faultF1.addActionListener(actionListener);
         faultF1.setOpaque(true);
 
         faultF2 = new JButton("F2");
         faultF2.setBackground(Color.green);
-        faultF2.setBounds(540, 220, 90, 30);
+        faultF2.setBounds(540, 220, 70, 30);
         faultF2.addActionListener(actionListener);
         faultF2.setOpaque(true);
 
+        swm1 = new JLabel();
+        swm1.setBorder(border_green);
+        swm1.setBounds(140,205,30,20);
+        f.add(swm1);
+
+        swm2 = new JLabel();
+        swm2.setBorder(border_green);
+        swm2.setBounds(370,205,30,20);
+        f.add(swm2);
+
+        swmg1 = new JLabel();
+        swmg1.setBorder(border_green);
+        swmg1.setBounds(630,205,30,20);
+        f.add(swmg1);
+
+        swL1 = new JLabel();
+        swL1.setBorder(border_green);
+        swL1.setBounds(850,205,30,20);
+        f.add(swL1);
+
+        swL2 = new JLabel();
+        swL2.setBorder(border_green);
+        swL2.setBounds(1090,205,30,20);
+        f.add(swL2);
+
+        swauxg1 = new JLabel();
+        swauxg1.setBorder(border_green);
+        swauxg1.setBounds(1310,205,30,20);
+        f.add(swauxg1);
+
+        swm1bus = new JLabel();
+        swm1bus.setBorder(border_green);
+        swm1bus.setBounds(10,185,30,20);
+        f.add(swm1bus);
+
+        swm2bus = new JLabel();
+        swm2bus.setBorder(border_green);
+        swm2bus.setBounds(240,185,30,20);
+        f.add(swm2bus);
+
+        swmg1bus = new JLabel();
+        swmg1bus.setBorder(border_green);
+        swmg1bus.setBounds(470,185,30,20);
+        f.add(swmg1bus);
+
+        swL1bus = new JLabel();
+        swL1bus.setBorder(border_green);
+        swL1bus.setBounds(710,185,30,20);
+        f.add(swL1bus);
+
+        swL2bus = new JLabel();
+        swL2bus.setBorder(border_green);
+        swL2bus.setBounds(940,185,30,20);
+        f.add(swL2bus);
+
+        swauxg1bus = new JLabel();
+        swauxg1bus.setBorder(border_green);
+        swauxg1bus.setBounds(1170,185,30,20);
+        f.add(swauxg1bus);
+
         amp1 =new JLabel(val[0]+" mA");
-       // size = amp1.getPreferredSize();
+        // size = amp1.getPreferredSize();
         amp1.setBounds(70, 160, size.width, size.height);
 
         amp2=new JLabel(val[1]+" mA");
@@ -100,7 +168,7 @@ public class FaultAmpGui {
         amp5.setBounds(1020, 160, size.width, size.height);
 
         amp6 =new JLabel(val[5]+" mA");
-       // size = amp6.getPreferredSize();
+        // size = amp6.getPreferredSize();
         amp6.setBounds(1250, 160, size.width, size.height);
 
 
@@ -110,8 +178,8 @@ public class FaultAmpGui {
         f.add(amp4);
         f.add(amp5);
         f.add(amp6);
-        f.add(faultF1);
-        f.add(faultF2);
+        f.add(faultF1,BorderLayout.NORTH);
+        f.add(faultF2,BorderLayout.NORTH);
 
         f.setLocation(10,10);
         //if(ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor").equals("true"))
@@ -124,20 +192,19 @@ public class FaultAmpGui {
 
     public static void main (String[] args) throws IOException {
 
-       // FaultAmpGui gui = new FaultAmpGui();
+        // FaultAmpGui gui = new FaultAmpGui();
     }
 
 
-    public void updateGui(AmpData data, ArrayBuffer<String> open_switchers)
-    {
+    public void updateGui(AmpData data, String[] open_switchers) {
 
-        for (int i=0;i<6;i++)
-            if(data.getCurrent(i)<0)
-                val[i]=0;
+        for (int i = 0; i < 6; i++)
+            if (data.getCurrent(i) < 0)
+                val[i] = 0;
             else {
 
-                val[i]=data.getCurrent(i);
-                val[i]=round(val[i],2);
+                val[i] = data.getCurrent(i);
+                val[i] = round(val[i], 2);
                 //System.out.println(val[i]);
             }
 
@@ -148,6 +215,71 @@ public class FaultAmpGui {
         amp5.setText(val[4] + " mA");
         amp6.setText(val[5] + " mA");
 
+        for (int i = 0; i < open_switchers.length; i++) {
+            switch (open_switchers[i]) {
+                case "switchswp1":
+                    swm1bus.setBorder(border_green);
+                    break;
+                case "switchswp2":
+                    swm2bus.setBorder(border_green);
+                    break;
+                case "switchswp3":
+                    swmg1bus.setBorder(border_green);
+                    break;
+                case "switchswp4":
+                    swL1bus.setBorder(border_green);
+                    break;
+                case "switchswp5":
+                    swL2bus.setBorder(border_green);
+                    break;
+                case "switchswp6":
+                    swauxg1bus.setBorder(border_green);
+                    break;
+                case "switchsws1":
+                    swm1bus.setBorder(border_red);
+                    break;
+                case "switchsws2":
+                    swm2bus.setBorder(border_red);
+                    break;
+                case "switchsws3":
+                    swmg1bus.setBorder(border_red);
+                    break;
+                case "switchsws4":
+                    swL1bus.setBorder(border_red);
+                    break;
+                case "switchsws5":
+                    swL2bus.setBorder(border_red);
+                    break;
+                case "switchsws6":
+                    swauxg1bus.setBorder(border_red);
+                    break;
+                case "switchswauxg1":
+                    swauxg1.setBorder(border_red);
+                    break;
+                case "switchswmg1":
+                    swmg1.setBorder(border_red);
+                    break;
+                case "switchsw1":
+                    swm1.setBorder(border_red);
+                    break;
+                case "switchsw2":
+                    swm2.setBorder(border_red);
+                    break;
+                case "switchsw3":
+                    swL1.setBorder(border_red);
+                    break;
+                case "switchsw4":
+                    swL2.setBorder(border_red);
+                    break;
+                    //switchsw5
+                case "switchsw6":
+                    swauxg1.setBorder(border_red);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + open_switchers[i]);
+            }
+
+        }
     }
 
 
