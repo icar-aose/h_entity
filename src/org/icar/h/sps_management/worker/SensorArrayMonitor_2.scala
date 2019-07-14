@@ -59,7 +59,7 @@ class SensorArrayMonitor_2 extends Actor with ActorLogging {
 object SensorArrayMonitor_2{
   def main(args: Array[String]) {
     //get the configuration file from classpath
-    val configFile = getClass.getClassLoader.getResource("org/icar/h/sps_management/worker/sensor_application_2.conf").getFile
+    val configFile = getClass.getClassLoader.getResource("resources/sensor_application_2.conf").getFile
     //parse the config
     val config = ConfigFactory.parseFile(new File(configFile))
     //create an actor system with that config

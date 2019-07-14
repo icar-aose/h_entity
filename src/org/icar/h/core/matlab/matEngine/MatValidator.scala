@@ -119,7 +119,7 @@ class MatValidator extends Actor with ActorLogging {
 object MatValidator {
   def main(args: Array[String]) {
     //get the configuration file from classpath
-    val configFile = getClass.getClassLoader.getResource("org/icar/h/core/matlab/matEngine/matlab_application.conf").getFile
+    val configFile = getClass.getClassLoader.getResource("resources/matlab_application.conf").getFile
     //parse the config
     val config = ConfigFactory.parseFile(new File(configFile))
     //create an actor system with that config

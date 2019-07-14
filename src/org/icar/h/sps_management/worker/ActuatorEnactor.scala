@@ -36,7 +36,7 @@ class ActuatorEnactor extends Actor with ActorLogging {
 object ActuatorEnactor{
   def main(args: Array[String]) {
     //get the configuration file from classpath
-    val configFile = getClass.getClassLoader.getResource("org/icar/h/sps_management/worker/actuator_application.conf").getFile
+    val configFile = getClass.getClassLoader.getResource("resources/actuator_application.conf").getFile
     //parse the config
     val config = ConfigFactory.parseFile(new File(configFile))
     //create an actor system with that config

@@ -12,8 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import org.icar.musa.scenarios.sps.ReconfigurationScenario;
+import scala.collection.mutable.ArrayBuffer;
 
 public class FaultAmpGui {
 
@@ -129,7 +128,7 @@ public class FaultAmpGui {
     }
 
 
-    public void updateGui(AmpData data, ReconfigurationScenario open_switchers)
+    public void updateGui(AmpData data, ArrayBuffer<String> open_switchers)
     {
 
         for (int i=0;i<6;i++)

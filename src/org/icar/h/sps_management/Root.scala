@@ -54,7 +54,6 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
 
         case "fault" if check_structure(structure,1) =>
           val par = get_structure_arg(structure,0)
-          //println("FAULT-ENACTOR!!!!")
           faultEnactor ! EnactFault(par)
         case _ =>
           println("Root: unspecied message")
