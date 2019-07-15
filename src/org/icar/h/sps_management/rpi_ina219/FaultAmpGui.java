@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 
 public class FaultAmpGui {
@@ -34,14 +35,41 @@ public class FaultAmpGui {
     JButton faultF1,faultF2;
     double[] val =new double[6];
 
+    URL url_lineDown = getClass().getResource("circuit_file/line_down.png");
+    File lineDown = new File(url_lineDown.getPath());
+    BufferedImage imgLineDown = ImageIO.read(lineDown);
+    ImageIcon iconLineDown = new ImageIcon(imgLineDown);
+
+
+    URL url_lineUp = getClass().getResource("circuit_file/line_up.png");
+    File lineUp = new File(url_lineUp.getPath());
+    BufferedImage imgLineUp = ImageIO.read(lineUp);
+    ImageIcon iconLineUp = new ImageIcon(imgLineUp);
+
+    URL url_lineRect = getClass().getResource("circuit_file/line_rect.png");
+    File lineRect = new File(url_lineRect.getPath());
+    BufferedImage imgLineRect = ImageIO.read(lineRect);
+    ImageIcon iconLineRect = new ImageIcon(imgLineRect);
+
+
+    URL url_lineOpen = getClass().getResource("circuit_file/line_open_sw.png");
+    File lineOpen = new File(url_lineOpen.getPath());
+    BufferedImage imgLineOpen = ImageIO.read(lineOpen);
+    ImageIcon iconLineOpen = new ImageIcon(imgLineOpen);
+
+
     public FaultAmpGui(final Akka2Jade bridge) throws IOException {
 
         f.setSize(1500,346);//400 width and 500 height
         //f.setLayout(null);//using no layout managers
-        BufferedImage img = ImageIO.read(new File("/Users/giovannirenda/Documents/GitHub/h_entity/src/org/icar/h/sps_management/rpi_ina219/circuit.png"));
-        ImageIcon imgI = new ImageIcon(img);
-        JLabel x = new JLabel(imgI);
-        f.setContentPane(x);
+        URL urlCircuit = getClass().getResource("circuit_file/circuit.png");
+        File circuit = new File(urlCircuit.getPath());
+        BufferedImage img = ImageIO.read(circuit);
+        ImageIcon iconCircuit = new ImageIcon(img);
+        JLabel background = new JLabel(iconCircuit);
+        f.setContentPane(background);
+
+
         f.pack();
 
         ActionListener actionListener = new ActionListener() {
@@ -87,64 +115,64 @@ public class FaultAmpGui {
         faultF2.addActionListener(actionListener);
         faultF2.setOpaque(true);
 
-        swm1 = new JLabel();
-        swm1.setBorder(border_green);
-        swm1.setBounds(140,205,30,20);
+        swm1 = new JLabel(iconLineRect);
+        //swm1.setBorder(border_green);
+        swm1.setBounds(140,188,30,20);
         f.add(swm1);
 
-        swm2 = new JLabel();
-        swm2.setBorder(border_green);
-        swm2.setBounds(370,205,30,20);
+        swm2 = new JLabel(iconLineRect);
+        //swm2.setBorder(border_green);
+        swm2.setBounds(370,188,30,20);
         f.add(swm2);
 
-        swmg1 = new JLabel();
-        swmg1.setBorder(border_green);
-        swmg1.setBounds(630,205,30,20);
+        swmg1 = new JLabel(iconLineRect);
+        //swmg1.setBorder(border_green);
+        swmg1.setBounds(630,188,30,20);
         f.add(swmg1);
 
-        swL1 = new JLabel();
-        swL1.setBorder(border_green);
-        swL1.setBounds(850,205,30,20);
+        swL1 = new JLabel(iconLineRect);
+        //swL1.setBorder(border_green);
+        swL1.setBounds(850,188,30,20);
         f.add(swL1);
 
-        swL2 = new JLabel();
-        swL2.setBorder(border_green);
-        swL2.setBounds(1090,205,30,20);
+        swL2 = new JLabel(iconLineRect);
+        //swL2.setBorder(border_green);
+        swL2.setBounds(1090,188,30,20);
         f.add(swL2);
 
-        swauxg1 = new JLabel();
-        swauxg1.setBorder(border_green);
-        swauxg1.setBounds(1310,205,30,20);
+        swauxg1 = new JLabel(iconLineRect);
+        //swauxg1.setBorder(border_green);
+        swauxg1.setBounds(1310,188,30,20);
         f.add(swauxg1);
 
         swm1bus = new JLabel();
-        swm1bus.setBorder(border_green);
-        swm1bus.setBounds(10,185,30,20);
+        //swm1bus.setBounds(41,182,30,20);
+        //swm1bus.setOpaque(false);
         f.add(swm1bus);
 
         swm2bus = new JLabel();
-        swm2bus.setBorder(border_green);
-        swm2bus.setBounds(240,185,30,20);
+        //swm2bus.setBorder(border_green);
+        //swm2bus.setBounds(276,182,30,20);
         f.add(swm2bus);
 
         swmg1bus = new JLabel();
-        swmg1bus.setBorder(border_green);
-        swmg1bus.setBounds(470,185,30,20);
+        //swmg1bus.setBorder(border_green);
+        //swmg1bus.setBounds(510,180,30,20);
         f.add(swmg1bus);
 
         swL1bus = new JLabel();
-        swL1bus.setBorder(border_green);
-        swL1bus.setBounds(710,185,30,20);
+        //swL1bus.setBorder(border_green);
+        //swL1bus.setBounds(745,180,30,20);
         f.add(swL1bus);
 
         swL2bus = new JLabel();
-        swL2bus.setBorder(border_green);
-        swL2bus.setBounds(940,185,30,20);
+        //swL2bus.setBorder(border_green);
+        //swL2bus.setBounds(980,182,30,20);
         f.add(swL2bus);
 
         swauxg1bus = new JLabel();
-        swauxg1bus.setBorder(border_green);
-        swauxg1bus.setBounds(1170,185,30,20);
+        //swauxg1bus.setBorder(border_green);
+        //swauxg1bus.setBounds(1210,182,30,20);
         f.add(swauxg1bus);
 
         amp1 =new JLabel(val[0]+" mA");
@@ -191,8 +219,13 @@ public class FaultAmpGui {
     }
 
     public static void main (String[] args) throws IOException {
+        String[] open_switchers = new String[]{"switchsw1","switchsw2","switchsw3","switchsw4","switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswmg1"};
 
-        // FaultAmpGui gui = new FaultAmpGui();
+        double[] current = {1.13,1.13,1.13,1.13,1.13,1.13};
+        AmpData data = new AmpData(current);
+        Akka2Jade bridge = null;
+        FaultAmpGui gui = new FaultAmpGui(bridge);
+        gui.updateGui(data,open_switchers);
     }
 
 
@@ -218,62 +251,76 @@ public class FaultAmpGui {
         for (int i = 0; i < open_switchers.length; i++) {
             switch (open_switchers[i]) {
                 case "switchswp1":
-                    swm1bus.setBorder(border_green);
+                    swm1bus.setIcon(iconLineUp);
+                    swm1bus.setBounds(41,182,30,20);
                     break;
                 case "switchswp2":
-                    swm2bus.setBorder(border_green);
+                    swm2bus.setIcon(iconLineUp);
+                    swm2bus.setBounds(276,182,30,20);
                     break;
                 case "switchswp3":
-                    swmg1bus.setBorder(border_green);
+                    swmg1bus.setIcon(iconLineUp);
+                    swmg1bus.setBounds(510,180,30,20);
                     break;
                 case "switchswp4":
-                    swL1bus.setBorder(border_green);
+                    swL1bus.setIcon(iconLineUp);
+                    swL1bus.setBounds(745,180,30,20);
                     break;
                 case "switchswp5":
-                    swL2bus.setBorder(border_green);
+                    swL2bus.setIcon(iconLineUp);
+                    swL2bus.setBounds(980,182,30,20);
                     break;
                 case "switchswp6":
-                    swauxg1bus.setBorder(border_green);
+                    swauxg1bus.setIcon(iconLineUp);
+                    swauxg1bus.setBounds(1210,182,30,20);
                     break;
                 case "switchsws1":
-                    swm1bus.setBorder(border_red);
+                    swm1bus.setIcon(iconLineDown);
+                    swm1bus.setBounds(41,191,30,20);
                     break;
                 case "switchsws2":
-                    swm2bus.setBorder(border_red);
+                    swm2bus.setIcon(iconLineDown);
+                    swm2bus.setBounds(276,191,30,20);
                     break;
                 case "switchsws3":
-                    swmg1bus.setBorder(border_red);
+                    swmg1bus.setIcon(iconLineDown);
+                    swmg1bus.setBounds(510,192,30,20);
                     break;
                 case "switchsws4":
-                    swL1bus.setBorder(border_red);
+                    swL1bus.setIcon(iconLineDown);
+                    swL1bus.setBounds(745,190,30,20);
                     break;
                 case "switchsws5":
-                    swL2bus.setBorder(border_red);
+                    swL2bus.setIcon(iconLineDown);
+                    swL2bus.setBounds(980,190,30,20);
                     break;
                 case "switchsws6":
-                    swauxg1bus.setBorder(border_red);
+                    swauxg1bus.setIcon(iconLineDown);
+                    swauxg1bus.setBounds(1210,191,30,20);
                     break;
                 case "switchswauxg1":
-                    swauxg1.setBorder(border_red);
+                    swauxg1.setIcon(iconLineOpen);
+                    swauxg1.setBounds(1310,182,30,20);
                     break;
                 case "switchswmg1":
-                    swmg1.setBorder(border_red);
+                    swmg1.setIcon(iconLineOpen);
+                    swmg1.setBounds(625,181,30,20);
                     break;
                 case "switchsw1":
-                    swm1.setBorder(border_red);
+                    swm1.setIcon(iconLineOpen);
+                    swm1.setBounds(140,182,30,20);
                     break;
                 case "switchsw2":
-                    swm2.setBorder(border_red);
+                    swm2.setIcon(iconLineOpen);
+                    swm2.setBounds(370,182,30,20);
                     break;
                 case "switchsw3":
-                    swL1.setBorder(border_red);
+                    swL1.setIcon(iconLineOpen);
+                    swL1.setBounds(850,182,30,20);
                     break;
                 case "switchsw4":
-                    swL2.setBorder(border_red);
-                    break;
-                    //switchsw5
-                case "switchsw6":
-                    swauxg1.setBorder(border_red);
+                    swL2.setIcon(iconLineOpen);
+                    swL2.setBounds(1090,182,30,20);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + open_switchers[i]);
