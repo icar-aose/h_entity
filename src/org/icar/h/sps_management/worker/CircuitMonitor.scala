@@ -29,7 +29,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var switcherActor : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("switcher.actor")
 
   var current : Array[Double] = new Array[Double](6)
-  var DataMerged : AmpData = new AmpData(current)
+  var DataMerged : AmpData = AmpData(current)
   var data_fetch : Int = 0
 
   var sendH : Boolean = true

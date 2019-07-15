@@ -5,7 +5,6 @@ import org.icar.h.sps_management.worker.AmpData;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,48 +17,44 @@ import java.net.URL;
 
 public class FaultAmpGui {
 
-    JLabel amp1,amp2,amp3, amp4, amp5, amp6;
+    private JLabel amp1,amp2,amp3, amp4, amp5, amp6;
 
-    JLabel swm1, swm2, swmg1, swL1, swL2, swauxg1;
+    private JLabel swm1, swm2, swmg1, swL1, swL2, swauxg1;
 
-    JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
+    private JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
 
+    private JFrame f = new JFrame();
 
-    Border border_green = BorderFactory.createLineBorder(Color.GREEN, 50);
+    private JButton faultF1,faultF2;
+    private double[] val =new double[6];
 
-    Border border_red = BorderFactory.createLineBorder(Color.RED, 50);
-
-    JFrame f = new JFrame();
-    Dimension size = new Dimension(100,20);
-
-    JButton faultF1,faultF2;
-    double[] val =new double[6];
-
-    URL url_lineDown = getClass().getResource("circuit_file/line_down.png");
-    File lineDown = new File(url_lineDown.getPath());
-    BufferedImage imgLineDown = ImageIO.read(lineDown);
-    ImageIcon iconLineDown = new ImageIcon(imgLineDown);
+    private URL url_lineDown = getClass().getResource("circuit_file/line_down.png");
+    private File lineDown = new File(url_lineDown.getPath());
+    private BufferedImage imgLineDown = ImageIO.read(lineDown);
+    private ImageIcon iconLineDown = new ImageIcon(imgLineDown);
 
 
-    URL url_lineUp = getClass().getResource("circuit_file/line_up.png");
-    File lineUp = new File(url_lineUp.getPath());
-    BufferedImage imgLineUp = ImageIO.read(lineUp);
-    ImageIcon iconLineUp = new ImageIcon(imgLineUp);
+    private URL url_lineUp = getClass().getResource("circuit_file/line_up.png");
+    private File lineUp = new File(url_lineUp.getPath());
+    private BufferedImage imgLineUp = ImageIO.read(lineUp);
+    private ImageIcon iconLineUp = new ImageIcon(imgLineUp);
 
-    URL url_lineRect = getClass().getResource("circuit_file/line_rect.png");
-    File lineRect = new File(url_lineRect.getPath());
-    BufferedImage imgLineRect = ImageIO.read(lineRect);
-    ImageIcon iconLineRect = new ImageIcon(imgLineRect);
+    private URL url_lineRect = getClass().getResource("circuit_file/line_rect.png");
+    private File lineRect = new File(url_lineRect.getPath());
+    private BufferedImage imgLineRect = ImageIO.read(lineRect);
+    private ImageIcon iconLineRect = new ImageIcon(imgLineRect);
 
 
-    URL url_lineOpen = getClass().getResource("circuit_file/line_open_sw.png");
-    File lineOpen = new File(url_lineOpen.getPath());
-    BufferedImage imgLineOpen = ImageIO.read(lineOpen);
-    ImageIcon iconLineOpen = new ImageIcon(imgLineOpen);
+    private URL url_lineOpen = getClass().getResource("circuit_file/line_open_sw.png");
+    private File lineOpen = new File(url_lineOpen.getPath());
+    private BufferedImage imgLineOpen = ImageIO.read(lineOpen);
+    private ImageIcon iconLineOpen = new ImageIcon(imgLineOpen);
 
 
     public FaultAmpGui(final Akka2Jade bridge) throws IOException {
 
+
+        Dimension size = new Dimension(100,20);
         f.setSize(1500,346);//400 width and 500 height
         //f.setLayout(null);//using no layout managers
         URL urlCircuit = getClass().getResource("circuit_file/circuit.png");
@@ -69,7 +64,7 @@ public class FaultAmpGui {
         JLabel background = new JLabel(iconCircuit);
         f.setContentPane(background);
 
-
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
 
         ActionListener actionListener = new ActionListener() {
@@ -223,8 +218,7 @@ public class FaultAmpGui {
 
         double[] current = {1.13,1.13,1.13,1.13,1.13,1.13};
         AmpData data = new AmpData(current);
-        Akka2Jade bridge = null;
-        FaultAmpGui gui = new FaultAmpGui(bridge);
+        FaultAmpGui gui = new FaultAmpGui(null);
         gui.updateGui(data,open_switchers);
     }
 
@@ -238,7 +232,6 @@ public class FaultAmpGui {
 
                 val[i] = data.getCurrent(i);
                 val[i] = round(val[i], 2);
-                //System.out.println(val[i]);
             }
 
         amp1.setText(val[0] + " mA");
@@ -248,82 +241,82 @@ public class FaultAmpGui {
         amp5.setText(val[4] + " mA");
         amp6.setText(val[5] + " mA");
 
-        for (int i = 0; i < open_switchers.length; i++) {
-            switch (open_switchers[i]) {
+        for (String open_switcher : open_switchers) {
+            switch (open_switcher) {
                 case "switchswp1":
                     swm1bus.setIcon(iconLineUp);
-                    swm1bus.setBounds(41,182,30,20);
+                    swm1bus.setBounds(41, 182, 30, 20);
                     break;
                 case "switchswp2":
                     swm2bus.setIcon(iconLineUp);
-                    swm2bus.setBounds(276,182,30,20);
+                    swm2bus.setBounds(276, 182, 30, 20);
                     break;
                 case "switchswp3":
                     swmg1bus.setIcon(iconLineUp);
-                    swmg1bus.setBounds(510,180,30,20);
+                    swmg1bus.setBounds(510, 180, 30, 20);
                     break;
                 case "switchswp4":
                     swL1bus.setIcon(iconLineUp);
-                    swL1bus.setBounds(745,180,30,20);
+                    swL1bus.setBounds(745, 180, 30, 20);
                     break;
                 case "switchswp5":
                     swL2bus.setIcon(iconLineUp);
-                    swL2bus.setBounds(980,182,30,20);
+                    swL2bus.setBounds(980, 182, 30, 20);
                     break;
                 case "switchswp6":
                     swauxg1bus.setIcon(iconLineUp);
-                    swauxg1bus.setBounds(1210,182,30,20);
+                    swauxg1bus.setBounds(1210, 182, 30, 20);
                     break;
                 case "switchsws1":
                     swm1bus.setIcon(iconLineDown);
-                    swm1bus.setBounds(41,191,30,20);
+                    swm1bus.setBounds(41, 191, 30, 20);
                     break;
                 case "switchsws2":
                     swm2bus.setIcon(iconLineDown);
-                    swm2bus.setBounds(276,191,30,20);
+                    swm2bus.setBounds(276, 191, 30, 20);
                     break;
                 case "switchsws3":
                     swmg1bus.setIcon(iconLineDown);
-                    swmg1bus.setBounds(510,192,30,20);
+                    swmg1bus.setBounds(510, 192, 30, 20);
                     break;
                 case "switchsws4":
                     swL1bus.setIcon(iconLineDown);
-                    swL1bus.setBounds(745,190,30,20);
+                    swL1bus.setBounds(745, 190, 30, 20);
                     break;
                 case "switchsws5":
                     swL2bus.setIcon(iconLineDown);
-                    swL2bus.setBounds(980,190,30,20);
+                    swL2bus.setBounds(980, 190, 30, 20);
                     break;
                 case "switchsws6":
                     swauxg1bus.setIcon(iconLineDown);
-                    swauxg1bus.setBounds(1210,191,30,20);
+                    swauxg1bus.setBounds(1210, 191, 30, 20);
                     break;
                 case "switchswauxg1":
                     swauxg1.setIcon(iconLineOpen);
-                    swauxg1.setBounds(1310,182,30,20);
+                    swauxg1.setBounds(1310, 182, 30, 20);
                     break;
                 case "switchswmg1":
                     swmg1.setIcon(iconLineOpen);
-                    swmg1.setBounds(625,181,30,20);
+                    swmg1.setBounds(625, 181, 30, 20);
                     break;
                 case "switchsw1":
                     swm1.setIcon(iconLineOpen);
-                    swm1.setBounds(140,182,30,20);
+                    swm1.setBounds(140, 182, 30, 20);
                     break;
                 case "switchsw2":
                     swm2.setIcon(iconLineOpen);
-                    swm2.setBounds(370,182,30,20);
+                    swm2.setBounds(370, 182, 30, 20);
                     break;
                 case "switchsw3":
                     swL1.setIcon(iconLineOpen);
-                    swL1.setBounds(850,182,30,20);
+                    swL1.setBounds(850, 182, 30, 20);
                     break;
                 case "switchsw4":
                     swL2.setIcon(iconLineOpen);
-                    swL2.setBounds(1090,182,30,20);
+                    swL2.setBounds(1090, 182, 30, 20);
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + open_switchers[i]);
+                    throw new IllegalStateException("Unexpected value: " + open_switcher);
             }
 
         }
