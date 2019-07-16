@@ -43,13 +43,13 @@ public class FaultArtifact extends Artifact {
 
 		System.out.println(fault);
 		if(fault.equals("switchf1"))
-			if(GPIO.digitalRead(swf1Pin)==0)
-			GPIO.digitalWrite(swf1Pin, 1);
-			else GPIO.digitalWrite(swf1Pin, 0);
+			if(GPIO.digitalRead(swf1Pin)==1)
+			GPIO.digitalWrite(swf1Pin, 0);
+			else GPIO.digitalWrite(swf1Pin, 1);
 		else
-			if (GPIO.digitalRead(swf2Pin)==0)
-				GPIO.digitalWrite(swf2Pin, 1);
-			else GPIO.digitalWrite(swf2Pin, 0);
+			if (GPIO.digitalRead(swf2Pin)==1)
+				GPIO.digitalWrite(swf2Pin, 0);
+			else GPIO.digitalWrite(swf2Pin, 1);
 	}
 
 }

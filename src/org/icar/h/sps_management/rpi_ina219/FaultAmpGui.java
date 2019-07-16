@@ -241,6 +241,14 @@ public class FaultAmpGui {
         amp5.setText(val[4] + " mA");
         amp6.setText(val[5] + " mA");
 
+        boolean sw1,sw2,sw3,sw4,swm,swaux;
+        sw1 = false;
+        sw2 = false;
+        sw3 = false;
+        sw4 = false;
+        swm = false;
+        swaux = false;
+
         for (String open_switcher : open_switchers) {
             switch (open_switcher) {
                 case "switchswp1":
@@ -294,31 +302,68 @@ public class FaultAmpGui {
                 case "switchswauxg1":
                     swauxg1.setIcon(iconLineOpen);
                     swauxg1.setBounds(1310, 182, 30, 20);
+                    swaux = true;
                     break;
                 case "switchswmg1":
                     swmg1.setIcon(iconLineOpen);
                     swmg1.setBounds(625, 181, 30, 20);
+                    swm = true;
                     break;
                 case "switchsw1":
                     swm1.setIcon(iconLineOpen);
                     swm1.setBounds(140, 182, 30, 20);
+                    sw1 = true;
                     break;
                 case "switchsw2":
                     swm2.setIcon(iconLineOpen);
                     swm2.setBounds(370, 182, 30, 20);
+                    sw2 = true;
                     break;
                 case "switchsw3":
                     swL1.setIcon(iconLineOpen);
                     swL1.setBounds(850, 182, 30, 20);
+                    sw3 = true;
                     break;
                 case "switchsw4":
                     swL2.setIcon(iconLineOpen);
                     swL2.setBounds(1090, 182, 30, 20);
+                    sw4 = true;
                     break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + open_switcher);
+                   // throw new IllegalStateException("Unexpected value: " + open_switcher);
             }
 
+        }
+
+        if(!sw1)
+        {
+            swm1.setIcon(iconLineRect);
+            swm1.setBounds(140,188,30,20);
+        }
+        if(!sw2)
+        {
+            swm2.setIcon(iconLineRect);
+            swm2.setBounds(370,188,30,20);
+        }
+        if(!sw3)
+        {
+            swL1.setIcon(iconLineRect);
+            swL1.setBounds(850,188,30,20);
+        }
+        if(!sw4)
+        {
+            swL2.setIcon(iconLineRect);
+            swL2.setBounds(1090, 188, 30, 20);
+        }
+        if(!swaux)
+        {
+            swauxg1.setIcon(iconLineRect);
+            swauxg1.setBounds(1310,188,30,20);
+
+        }
+        if(!swm)
+        {
+            swmg1.setIcon(iconLineRect);
+            swmg1.setBounds(630,188,30,20);
         }
     }
 

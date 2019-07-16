@@ -1,12 +1,13 @@
 package org.icar.h.sps_management.worker
 
+import java.awt.Color
+import java.awt.event.{ActionEvent, ActionListener}
 import java.util.ResourceBundle
-import scala.collection.mutable.ArrayBuffer
 
+import scala.collection.mutable.ArrayBuffer
 import akka.actor.{Actor, ActorLogging, ActorSelection, Props}
 import org.icar.h.core.Akka2Jade
 import org.icar.musa.scenarios.sps.ReconfigurationScenario
-
 import org.icar.h.sps_management.rpi_ina219._
 
 object CircuitMonitor {
@@ -140,4 +141,29 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     case _ =>
       log.error("unspecified message")
   }
+
+
+//  val actionListener: ActionListener = new ActionListener() {
+//    override def actionPerformed(actionEvent: ActionEvent): Unit = {
+//      System.out.println(actionEvent.getActionCommand)
+//      if (actionEvent.getActionCommand == "F1") if (faultF1.getBackground eq Color.GREEN) {
+//        faultF1.setBackground(Color.RED)
+//        //System.out.println("invio messaggio switchf1");
+//        bridge.sendHead("selected_failure(switchf1)")
+//        //INVIA COMANDO AL FAULTENACTOR
+//      }
+//      else {
+//        faultF1.setBackground(Color.GREEN)
+//        bridge.sendHead("selected_failure(switchf1)")
+//      }
+//      if (actionEvent.getActionCommand == "F2") if (faultF2.getBackground eq Color.GREEN) {
+//        faultF2.setBackground(Color.RED)
+//        bridge.sendHead("selected_failure(switchf2)")
+//      }
+//      else {
+//        faultF2.setBackground(Color.GREEN)
+//        bridge.sendHead("selected_failure(switchf2)")
+//      }
+//    }
+//  }
 }
