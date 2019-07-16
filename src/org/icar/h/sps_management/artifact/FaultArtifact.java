@@ -20,6 +20,7 @@ public class FaultArtifact extends Artifact {
 
 	void init() {
 
+		System.out.println("FaultEnactor Active");
 		// inizializzazione direzione dei PIN del GPIO
 		GPIO.pinMode(swf1Pin, GPIO.OUTPUT);
 		GPIO.pinMode(swf2Pin, GPIO.OUTPUT);
