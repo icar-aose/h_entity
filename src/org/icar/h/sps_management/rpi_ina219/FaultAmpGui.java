@@ -21,6 +21,8 @@ public class FaultAmpGui {
 
     private JLabel swm1, swm2, swmg1, swL1, swL2, swauxg1;
 
+    private JLabel boltLabelF1,boltLabelF2;
+
     private JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
 
     private JFrame f = new JFrame();
@@ -50,6 +52,12 @@ public class FaultAmpGui {
     private BufferedImage imgLineOpen = ImageIO.read(lineOpen);
     private ImageIcon iconLineOpen = new ImageIcon(imgLineOpen);
 
+    private URL url_bolt = getClass().getResource("circuit_file/bolt.png");
+    private File bolt = new File(url_bolt.getPath());
+    private BufferedImage imgBolt = ImageIO.read(bolt);
+    private ImageIcon iconBolt = new ImageIcon(imgBolt);
+
+
 
     public FaultAmpGui(final Akka2Jade bridge) throws IOException {
 
@@ -74,12 +82,13 @@ public class FaultAmpGui {
                     if(faultF1.getBackground()==Color.GREEN)
                     {
                         faultF1.setBackground(Color.RED);
-                        //System.out.println("invio messaggio switchf1");
+                        boltLabelF1.setIcon(iconBolt);
                         bridge.sendHead("selected_failure(switchf1)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
                     else {
                         faultF1.setBackground(Color.GREEN);
+                        boltLabelF1.setIcon(null);
                         bridge.sendHead("selected_failure(switchf1)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
@@ -87,11 +96,13 @@ public class FaultAmpGui {
                     if(faultF2.getBackground()==Color.GREEN)
                     {
                         faultF2.setBackground(Color.RED);
+                        boltLabelF2.setIcon(iconBolt);
                         bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
                     else {
                         faultF2.setBackground(Color.GREEN);
+                        boltLabelF2.setIcon(null);
                         bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
@@ -104,11 +115,21 @@ public class FaultAmpGui {
         faultF1.addActionListener(actionListener);
         faultF1.setOpaque(true);
 
+        boltLabelF1 = new JLabel();
+        //swm1.setBorder(border_green);
+        boltLabelF1.setBounds(120,85,30,45);
+        f.add(boltLabelF1);
+
         faultF2 = new JButton("F2");
         faultF2.setBackground(Color.green);
         faultF2.setBounds(540, 220, 70, 30);
         faultF2.addActionListener(actionListener);
         faultF2.setOpaque(true);
+
+        boltLabelF2 = new JLabel();
+        //swm1.setBorder(border_green);
+        boltLabelF2.setBounds(540,175,30,45);
+        f.add(boltLabelF2);
 
         swm1 = new JLabel(iconLineRect);
         //swm1.setBorder(border_green);
