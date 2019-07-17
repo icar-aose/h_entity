@@ -43,10 +43,15 @@ public class FaultArtifact extends Artifact {
 	public void actFault(String fault) {
 
 		System.out.println(fault);
-		if(fault.equals("switchf1"))
-			if(GPIO.digitalRead(swf1Pin)==1)
-			GPIO.digitalWrite(swf1Pin, 0);
-			else GPIO.digitalWrite(swf1Pin, 1);
+		if(fault.equals("switchf1")) {
+			if (GPIO.digitalRead(swf1Pin) == 1) {
+				System.out.println("open");
+				GPIO.digitalWrite(swf1Pin, 0);
+			} else {
+				GPIO.digitalWrite(swf1Pin, 1);
+				System.out.println("close");
+			}
+		}
 		else
 			if (GPIO.digitalRead(swf2Pin)==1)
 				GPIO.digitalWrite(swf2Pin, 0);

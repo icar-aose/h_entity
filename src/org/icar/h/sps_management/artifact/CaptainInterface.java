@@ -49,8 +49,8 @@ public class CaptainInterface extends GUIArtifact {
 	@INTERNAL_OPERATION
 	void select(ActionEvent ev) {
 
-		gui_1.setVisible(false);
-		gui_2.setVisible(false);
+		//gui_1.setVisible(false);
+		//gui_2.setVisible(false);
 		int index = gui_1.getSelectedForExecution();
 		String selected_ref = plan_ref_index.get(index);
 		signal("selected",selected_ref);
