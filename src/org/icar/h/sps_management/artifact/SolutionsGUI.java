@@ -120,6 +120,9 @@ public class SolutionsGUI extends javax.swing.JFrame {
     public javax.swing.JPanel getJPanel3() {
         return jPanel3;
     }
+    public javax.swing.JTextField getTextField() {
+        return SelectedTextField;
+    }
 
     private void SolutionListValueChanged(javax.swing.event.ListSelectionEvent evt) {
         // TODO add your handling code here:

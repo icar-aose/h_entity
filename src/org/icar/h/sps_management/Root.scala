@@ -14,11 +14,12 @@ object Root {
 
 class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
   private val mission_manager : ActorRef = context.actorOf(MissionManager.props(bridge), "mission_manager")
-  private lazy val sensor_checkers = context.actorOf(CircuitMonitor.props(bridge), "sensor_checkers")
-  private lazy val sps_reconfigurator = context.actorOf(SPSPlanGenerator.props(bridge,mission_manager,sensor_checkers), "sps_reconfigurator")
+  private val sensor_checkers = context.actorOf(CircuitMonitor.props(bridge), "sensor_checkers")
+  private val sps_reconfigurator = context.actorOf(SPSPlanGenerator.props(bridge,mission_manager,sensor_checkers), "sps_reconfigurator")
+  private val plan_validator_rem = context.actorOf(SPSPlanValidatorRem.props(bridge, sps_reconfigurator,sensor_checkers), "plan_validator_rem")
+
   // private val plan_validator = context.actorOf(SPSPlanValidator.props(bridge,sps_reconfigurator,sensor_checkers), "plan_validator")
-  private val plan_validator_rem = context.actorOf(SPSPlanValidatorRem.props(bridge,sps_reconfigurator,sensor_checkers), "plan_validator_rem")
-  private lazy val plan_executor : ActorRef = context.actorOf(ReconfigurationEnactor.props(bridge,sps_reconfigurator), "plan_executor")
+  private val plan_executor : ActorRef = context.actorOf(ReconfigurationEnactor.props(bridge,sps_reconfigurator,plan_validator_rem), "plan_executor")
 
   var faultEnactor : ActorSelection = null
   //actor Fault
@@ -36,7 +37,7 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
       structure.getFunctor match {
         case "check_failure" if check_structure(structure,1) =>
           val par = get_structure_arg(structure,0)
-          sensor_checkers ! CheckFailure(par)
+          sensor_checkers ! CheckFailure()
 
         case "find_reconfigurations" if check_structure(structure,2) =>
           val par1 = get_structure_arg(structure,0)

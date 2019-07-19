@@ -18,7 +18,7 @@ sealed abstract class Predicate
 sealed abstract class Concept
 
 
-case class CheckFailure( mission_ref : String) extends Action
+case class CheckFailure() extends Action
 case class FindSolutions( mission_ref : String, failure_description : String ) extends Action
 case class Validate( plan_reference : String ) extends Action
 case class Enact( plan_reference : String ) extends Action
@@ -66,10 +66,10 @@ case class RequestUpdateScenario() extends Action with Serializable
 
 case class SwitcherMonitoring() extends Action with NoSerializationVerificationNeeded
 
+case class StopAll() extends Action with NoSerializationVerificationNeeded
 
+case class GetPlan(plan_reference : String) extends Predicate with  NoSerializationVerificationNeeded
 
-
-case class GetPlan( plan_reference : String ) extends Predicate with  NoSerializationVerificationNeeded
 case class Plan(plan_reference : String,plan:Solution) extends Concept with  NoSerializationVerificationNeeded
 
 case class GetMissionDescription(mission_ref:String) extends Predicate with  NoSerializationVerificationNeeded

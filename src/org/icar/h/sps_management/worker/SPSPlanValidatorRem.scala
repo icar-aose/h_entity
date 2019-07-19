@@ -72,6 +72,9 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
   }
 
   override def receive: Receive = {
+
+
+
     case Validate(plan_reference) =>
 
       val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
@@ -131,6 +134,9 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
           bridge.sendHead("notvalidated(" + plan_reference +",["+selected.mkString(",")+ "])")
         }
 
+    case StopAll() =>
+      log.info("stopped: planValidator")
+      context.stop(self)
 
     case _ =>
       log.error("unspecified message")

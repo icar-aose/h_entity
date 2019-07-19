@@ -1,7 +1,5 @@
 package org.icar.h.sps_management.worker
 
-import java.awt.Color
-import java.awt.event.{ActionEvent, ActionListener}
 import java.util.ResourceBundle
 
 import scala.collection.mutable.ArrayBuffer
@@ -19,7 +17,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   //configure scenario
 
   val scenario = new ReconfigurationScenario
-  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1")
+  scenario.open_switchers = ArrayBuffer[String]("switchswp1","switchswp2","switchswp3","switchswp4","switchswp5","switchswp6","switchswauxg1","switchf1")
   scenario.up_generators = ArrayBuffer[String]("mg1","auxg1")
 
   var fault : ArrayBuffer[String] = new ArrayBuffer[String]
@@ -53,6 +51,9 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
   val gui : FaultAmpGui= new FaultAmpGui(bridge)
 
+  var test : Int = 0
+  var test2 : Int = 0
+
   override def preStart: Unit = {
     log.info("ready")
 
@@ -63,19 +64,24 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
   override def receive: Receive = {
 
-    case CheckFailure(mission_ref) =>
+    case CheckFailure() =>
+
 
       if(sensorActor.equals("true")) {
         SensorArrayMonitor_1 ! StartCheckMonitor()
         SensorArrayMonitor_2 ! StartCheckMonitor()
       }
       else
-        self ! 10.0             //if you don't have raspberry
+        {
+
+          self ! 10.0             //if you don't have raspberry
+        }
 
     case msg : Double =>        //if you don't have raspberry
 
-      while(true)
-        {
+      var i = 0
+      while(i<6)
+        {i=i+1
           DataMerged.setCurrent(r.nextDouble(),0)
           DataMerged.setCurrent(r.nextDouble(),1)
           DataMerged.setCurrent(r.nextDouble(),2)
@@ -86,7 +92,16 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
           gui.updateGui(DataMerged,scenario.open_switchers.toArray)
         }
-      bridge.sendHead("failure(f1)")
+      if(test == 0 || test2 == 2)
+        {
+          bridge.sendHead("failure(f1)")
+          test = test + 1
+        }
+      else
+        {
+          self ! 10.0
+          test2 = test2 + 1
+        }
 
 
     case RaspDataVal(data,index_rasp) =>
@@ -113,7 +128,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         }
       if(index_rasp==0)
         {
-          if (data.getCurrent(0) < 0 & data.getCurrent(2) > 10 & sendH) {
+          if (data.getCurrent(0) < 1 & data.getCurrent(2) > 10 & sendH) {
             fault +="switchf1"
             fault +="switchf5"
             bridge.sendHead("failure(f1)")

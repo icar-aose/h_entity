@@ -10,10 +10,10 @@ import org.icar.h.sps_management.EvaluateSol
 
 
 object ReconfigurationEnactor {
-   def props(bridge : Akka2Jade,worker_sps : ActorRef) : Props = Props(classOf[ReconfigurationEnactor],bridge,worker_sps)
+   def props(bridge : Akka2Jade,worker_sps : ActorRef,sps_reconfigurator : ActorRef) : Props = Props(classOf[ReconfigurationEnactor],bridge,worker_sps,sps_reconfigurator)
 
 
-class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) extends Actor with ActorLogging {
+class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef, sps_reconfigurator : ActorRef) extends Actor with ActorLogging {
 
   var actuator : String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("actuator.actor")
   var ActuatorActor : ActorSelection = null
@@ -32,13 +32,18 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef) exte
       case Enact(plan_reference) =>
         log.info("i'm plan enactor, now contact worker_sps for require the plan for solution: "+plan_reference)
         worker_sps ! GetPlan(plan_reference)
-
+        //Thread.sleep(2000)
+        //worker_sps ! StopAll()
+        //sps_reconfigurator ! StopAll()
 
       case Plan(plan_reference,plan) =>
         log.info("Now enacting: "+plan_reference)
         //artifact for the execution of plan!!
         var acts : util.ArrayList[String] = EvaluateSol.solution_list(plan)
-        ActuatorActor ! EnactPlan(plan_reference,acts)
+        if(actuator.equals("true"))
+          ActuatorActor ! EnactPlan(plan_reference,acts)
+        else log.info("Enacted")
+
 
       case _ =>
         println("Enactor: unspecified message")

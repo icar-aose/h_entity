@@ -17,11 +17,11 @@ object TestSPSPlanGen extends App {
 
   val mission_manager : ActorRef = system.actorOf(MissionManager.props(bridge), "mission_manager")
   val sensor_checkers = system.actorOf(CircuitMonitor.props(bridge), "sensor_checkers")
-  val sps_reconfigurator = system.actorOf(SPSPlanGenerator.props(bridge,mission_manager,sensor_checkers), "sps_reconfigurator")
+  //val sps_reconfigurator = system.actorOf(SPSPlanGenerator.props(bridge,mission_manager,sensor_checkers), "sps_reconfigurator")
 
   Thread.sleep(2000 )
 
-  sps_reconfigurator ! FindSolutions("on_shore","f1")
+  //sps_reconfigurator ! FindSolutions("on_shore","f1")
 
 
 

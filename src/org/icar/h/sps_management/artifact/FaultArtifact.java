@@ -24,16 +24,10 @@ public class FaultArtifact extends Artifact {
 		// inizializzazione direzione dei PIN del GPIO
 		GPIO.pinMode(swf1Pin, GPIO.OUTPUT);
 		GPIO.pinMode(swf2Pin, GPIO.OUTPUT);
-//		GPIO.pinMode(swf3Pin, GPIO.OUTPUT);
-//		GPIO.pinMode(swf4Pin, GPIO.OUTPUT);
-//		GPIO.pinMode(swf5Pin, GPIO.OUTPUT);
 
 		//inizializzazione stato delle uscite (questi relais funzionano in logica negata; uscita alta= relais spento cioè su nc e viceversa)
 		GPIO.digitalWrite(swf1Pin, GPIO.HIGH);
 		GPIO.digitalWrite(swf2Pin, GPIO.HIGH);
-//		GPIO.digitalWrite(swf3Pin, GPIO.HIGH);
-//		GPIO.digitalWrite(swf4Pin, GPIO.HIGH);
-//		GPIO.digitalWrite(swf5Pin, GPIO.HIGH);
 
 	}
 

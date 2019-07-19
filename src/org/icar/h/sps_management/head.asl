@@ -46,7 +46,7 @@ mission(undefined).
 
 +failure(FailureDescription) : true
 <-  
-	//.print("Find failure: ", FailureDescription)
+	.print("Find failure: ", FailureDescription)
 	!management_and_recovery(FailureDescription)
 	.abolish(failure(FailureDescription))
 .
@@ -99,6 +99,7 @@ mission(undefined).
 <-
     //.print("messages failure: ",Fail);
     .fault(Fail);
+    .abolish(selected_failure(Fail));
 .
 
 

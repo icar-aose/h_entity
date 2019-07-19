@@ -87,6 +87,7 @@ public class FaultAmpGui {
                         //INVIA COMANDO AL FAULTENACTOR
                     }
                     else {
+                        System.out.println("close");
                         faultF1.setBackground(Color.GREEN);
                         boltLabelF1.setIcon(null);
                         bridge.sendHead("selected_failure(switchf1)");

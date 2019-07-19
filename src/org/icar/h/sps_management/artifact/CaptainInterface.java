@@ -54,8 +54,10 @@ public class CaptainInterface extends GUIArtifact {
 		int index = gui_1.getSelectedForExecution();
 		String selected_ref = plan_ref_index.get(index);
 		signal("selected",selected_ref);
-
-
+		plan_ref_index.clear();
+		model_1.clear();
+		model_2.clear();
+		gui_1.getTextField().setText("none");
 	}
 
 	@OPERATION

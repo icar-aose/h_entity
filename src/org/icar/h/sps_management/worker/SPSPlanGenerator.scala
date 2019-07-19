@@ -34,6 +34,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
   private val path: String = properties.getString("circuit.name")
   private val circuit = Circuit.load_from_file(path)
 
+  var pmr : ActorRef = _
   private val discovered_solutions: mutable.HashMap[String, Solution] = mutable.HashMap.empty[String, Solution]
 
   override def preStart: Unit = {
@@ -68,7 +69,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
 
       val problem_specification = SingleGoalProblemSpecification(assumptions, goal, quality_asset)
 
-      context.actorOf(PMRActor.props(problem_specification,wi,cap_set,term), "pmr_actor")
+      pmr = context.actorOf(PMRActor.props(problem_specification,wi,cap_set,term), "pmr_actor")
 
     case PMRFullSolution(sol) =>
       //println("discovered")
@@ -78,7 +79,14 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       discovered_solutions += (name -> sol)
       bridge.sendHead(s"discovered($name)")
 
-    case GetPlan(sol_ref) =>
+
+
+    case StopAll() =>
+      log.info("stopped pmr")
+      context.stop(pmr)
+      circ_sens_ref ! CheckFailure()
+
+    case GetPlan(sol_ref)  =>
       val sol: Solution = discovered_solutions(sol_ref)
       log.debug("sending back the requested solution!")
       sender() ! Plan(sol_ref, sol)
