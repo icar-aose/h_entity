@@ -32,8 +32,7 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef, sps_
       case Enact(plan_reference) =>
         log.info("i'm plan enactor, now contact worker_sps for require the plan for solution: "+plan_reference)
         worker_sps ! GetPlan(plan_reference)
-        //Thread.sleep(2000)
-        //worker_sps ! StopAll()
+        worker_sps ! StopAll()
         //sps_reconfigurator ! StopAll()
 
       case Plan(plan_reference,plan) =>

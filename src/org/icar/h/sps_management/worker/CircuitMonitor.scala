@@ -31,7 +31,9 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var DataMerged : AmpData = AmpData(current)
   var data_fetch : Int = 0
 
-  var sendH : Boolean = true
+  var working : Boolean = true  //FOR RESTART THE APPLICATION
+
+
   var SensorArrayMonitor_1 : ActorSelection = null
   var SensorArrayMonitor_2 : ActorSelection = null
   var SwitcherMonitor : ActorSelection = null
@@ -103,6 +105,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
           test2 = test2 + 1
         }
 
+    case Restart() =>
+      working = true
 
     case RaspDataVal(data,index_rasp) =>
 
@@ -128,17 +132,17 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         }
       if(index_rasp==0)
         {
-          if (data.getCurrent(0) < 1 & data.getCurrent(2) > 10 & sendH) {
+          if (data.getCurrent(0) < 1 & data.getCurrent(2) > 10 & working) {
             fault +="switchf1"
             fault +="switchf5"
             bridge.sendHead("failure(f1)")
-            sendH = false
+            working = false
           }
-          if (data.getCurrent(2) < 1 & sendH) {
+          if (data.getCurrent(2) < 1 & working) {
             fault +="switchf3"
             fault +="switchf5"
             bridge.sendHead("failure(f3)")
-            sendH = false
+            working = false
           }
         }
 

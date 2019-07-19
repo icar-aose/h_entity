@@ -37,6 +37,8 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
   var pmr : ActorRef = _
   private val discovered_solutions: mutable.HashMap[String, Solution] = mutable.HashMap.empty[String, Solution]
 
+  var working : Boolean = true
+
   override def preStart: Unit = {
     log.info("ready")
   }
@@ -44,6 +46,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
   override def receive: Receive = {
 
     case FindSolutions(mission_ref, failure_ref) =>
+      working = true
       //Thread.sleep(2000)    //find a solution
       log.info(s"finding solutions for the failure: $failure_ref in mission $mission_ref \n")
 
@@ -72,19 +75,21 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       pmr = context.actorOf(PMRActor.props(problem_specification,wi,cap_set,term), "pmr_actor")
 
     case PMRFullSolution(sol) =>
-      //println("discovered")
+      if(working)
+      { //println("discovered")
 
-      val num = discovered_solutions.size + 1
-      val name = "solution_"+num
-      discovered_solutions += (name -> sol)
-      bridge.sendHead(s"discovered($name)")
+        val num = discovered_solutions.size + 1
+        val name = "solution_" + num
+        discovered_solutions += (name -> sol)
+        bridge.sendHead(s"discovered($name)")
 
-
+      }
 
     case StopAll() =>
-      log.info("stopped pmr")
+      working = false
       context.stop(pmr)
-      circ_sens_ref ! CheckFailure()
+      Thread.sleep(2000)
+      circ_sens_ref ! Restart()
 
     case GetPlan(sol_ref)  =>
       val sol: Solution = discovered_solutions(sol_ref)
