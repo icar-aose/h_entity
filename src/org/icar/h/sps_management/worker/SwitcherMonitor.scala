@@ -20,7 +20,6 @@ class SwitcherMonitor extends Actor with ActorLogging {
   val swL1busPin = 16 //Relais 2 Load 1
   val swL2Pin = 12 //Relais 1 Load 2
   val swL2busPin = 21 //Relais 2 Load 2
-  val swL2plusPin = 23 //Relais 3 plus Load 2
   val swauxg1Pin = 26 //Relais1 aux gen 1
   val swauxg1busPin = 19 //Relais2 aux gen 1
 
@@ -36,7 +35,19 @@ class SwitcherMonitor extends Actor with ActorLogging {
   override def preStart(): Unit = {
 
     log.info("Ready")
-
+    import processing.io.GPIO
+    GPIO.pinMode(swm1Pin, GPIO.OUTPUT)
+    GPIO.pinMode(swm1busPin, GPIO.OUTPUT)
+    GPIO.pinMode(swm2Pin, GPIO.OUTPUT)
+    GPIO.pinMode(swm2busPin, GPIO.OUTPUT)
+    GPIO.pinMode(swmg1Pin, GPIO.OUTPUT)
+    GPIO.pinMode(swmg1busPin, GPIO.OUTPUT)
+    GPIO.pinMode(swauxg1Pin, GPIO.OUTPUT)
+    GPIO.pinMode(swauxg1busPin, GPIO.OUTPUT)
+    GPIO.pinMode(swL1Pin, GPIO.OUTPUT)
+    GPIO.pinMode(swL1busPin, GPIO.OUTPUT)
+    GPIO.pinMode(swL2Pin, GPIO.OUTPUT)
+    GPIO.pinMode(swL2busPin, GPIO.OUTPUT)
     self ! SwitcherMonitoring()
 
   }

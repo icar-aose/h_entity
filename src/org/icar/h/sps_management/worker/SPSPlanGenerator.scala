@@ -88,7 +88,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
     case StopAll() =>
       working = false
       context.stop(pmr)
-      Thread.sleep(2000)
+      Thread.sleep(5000)
       circ_sens_ref ! Restart()
 
     case GetPlan(sol_ref)  =>

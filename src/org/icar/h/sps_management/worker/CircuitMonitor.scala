@@ -52,9 +52,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   }
 
   val gui : FaultAmpGui= new FaultAmpGui(bridge)
-
-  var test : Int = 0
-  var test2 : Int = 0
+  var i = 0
 
   override def preStart: Unit = {
     log.info("ready")
@@ -81,7 +79,6 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
     case msg : Double =>        //if you don't have raspberry
 
-      var i = 0
       while(i<6)
         {i=i+1
           DataMerged.setCurrent(r.nextDouble(),0)
@@ -94,19 +91,20 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
           gui.updateGui(DataMerged,scenario.open_switchers.toArray)
         }
-      if(test == 0 || test2 == 2)
-        {
+      if(working) {
+        if (i == 6) {
           bridge.sendHead("failure(f1)")
-          test = test + 1
+          working = false
+          i = 0
         }
-      else
-        {
-          self ! 10.0
-          test2 = test2 + 1
-        }
+
+        self ! 10.0
+
+      }
 
     case Restart() =>
       working = true
+      print("RESTART!!")
 
     case RaspDataVal(data,index_rasp) =>
 
@@ -160,29 +158,4 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     case _ =>
       log.error("unspecified message")
   }
-
-
-//  val actionListener: ActionListener = new ActionListener() {
-//    override def actionPerformed(actionEvent: ActionEvent): Unit = {
-//      System.out.println(actionEvent.getActionCommand)
-//      if (actionEvent.getActionCommand == "F1") if (faultF1.getBackground eq Color.GREEN) {
-//        faultF1.setBackground(Color.RED)
-//        //System.out.println("invio messaggio switchf1");
-//        bridge.sendHead("selected_failure(switchf1)")
-//        //INVIA COMANDO AL FAULTENACTOR
-//      }
-//      else {
-//        faultF1.setBackground(Color.GREEN)
-//        bridge.sendHead("selected_failure(switchf1)")
-//      }
-//      if (actionEvent.getActionCommand == "F2") if (faultF2.getBackground eq Color.GREEN) {
-//        faultF2.setBackground(Color.RED)
-//        bridge.sendHead("selected_failure(switchf2)")
-//      }
-//      else {
-//        faultF2.setBackground(Color.GREEN)
-//        bridge.sendHead("selected_failure(switchf2)")
-//      }
-//    }
-//  }
 }

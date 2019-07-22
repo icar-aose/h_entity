@@ -25,6 +25,8 @@ public class FaultAmpGui {
 
     private JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
 
+    private JButton swm1busBut, swm2busBut, swmg1busBut, swL1busBut, swL2busBut, swauxg1busBut;
+
     private JFrame f = new JFrame();
 
     private JButton faultF1,faultF2;
@@ -107,6 +109,8 @@ public class FaultAmpGui {
                         bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
+                if(actionEvent.getActionCommand().equals("swm1busBut"))
+                    System.out.println("ciao");
             }
         };
 
@@ -163,7 +167,15 @@ public class FaultAmpGui {
         f.add(swauxg1);
 
         swm1bus = new JLabel();
-        //swm1bus.setBounds(41,182,30,20);
+
+        swm1busBut = new JButton("swm1busBut");
+        swm1busBut.setBounds(31,176,50,50);
+        swm1busBut.setOpaque(false);
+        swm1busBut.setBorderPainted(false);
+        swm1busBut.addActionListener(actionListener);
+        //swm1busBut.setVisible(false);
+        f.add(swm1busBut);
+
         //swm1bus.setOpaque(false);
         f.add(swm1bus);
 

@@ -10,7 +10,7 @@ mission(undefined).
 	true 
 <-
 	makeArtifact("CaptainGui","org.icar.h.sps_management.artifact.CaptainInterface",[],Id);
-	!failure_prediciton;
+	//!failure_prediciton;
 	!failure_detection;
     focus(Id);
 .
@@ -88,9 +88,9 @@ mission(undefined).
 <-
     .print("The CAPTAIN selected the reconfiguration: ",Plan_reference);
     .print("Now contacting the enactor");
-    .wait(2000);
     .term2string(Plan_ID, Plan_reference);
 	.enact(Plan_ID);
+	.print(Id);
 .
 
 /* soluzione da modificare - non ottimale - selezione fallimento da dashboard */

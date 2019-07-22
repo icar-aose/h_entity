@@ -49,6 +49,7 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
   var remote: String = ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("simulator.matlab")
   var RemoteMatActor: ActorSelection = null
 
+  var working : Boolean = true
   //Check if remote is active!
   if (remote.equals("true")) {
     RemoteMatActor = context.actorSelection("akka.tcp://RemoteSystem@" + properties.getString("simulator.actor.ip") + ":" + Integer.parseInt(properties.getString("simulator.actor.port")) + "/user/remote_matlab")  //IP of the PC remote
@@ -109,6 +110,7 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
             RemoteMatActor ! evaluateSolution(next.plan_reference, solution_for_matlab, all_switchers, open_switchers, circuit.loads.size)
           }
         }
+        else ResultSolution
       }
       // IF THE PLAN IS CORRECT THEN...
 
@@ -124,19 +126,17 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
       var sol = all_plans(plan_reference)
       var selected : List[String] = solution_list_gui(sol,sol.start)
-      if (result.get("genResult")==1) {
-        bridge.sendHead("validated(" + plan_reference +",["+selected.mkString(",")+ "])")
-
-        //GUI solution!!
-      }
-      else
-        {
-          bridge.sendHead("notvalidated(" + plan_reference +",["+selected.mkString(",")+ "])")
+      if(working) {
+        if (result.get("genResult") == 1) {
+          bridge.sendHead("validated(" + plan_reference + ",[" + selected.mkString(",") + "])")
         }
+        else {
+          bridge.sendHead("notvalidated(" + plan_reference + ",[" + selected.mkString(",") + "])")
+        }
+      }
 
     case StopAll() =>
-      log.info("stopped: planValidator")
-      context.stop(self)
+      working = false
 
     case _ =>
       log.error("unspecified message")
