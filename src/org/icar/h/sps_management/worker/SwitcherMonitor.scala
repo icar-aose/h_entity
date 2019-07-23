@@ -35,7 +35,6 @@ class SwitcherMonitor extends Actor with ActorLogging {
   override def preStart(): Unit = {
 
     log.info("Ready")
-    import processing.io.GPIO
     GPIO.pinMode(swm1Pin, GPIO.OUTPUT)
     GPIO.pinMode(swm1busPin, GPIO.OUTPUT)
     GPIO.pinMode(swm2Pin, GPIO.OUTPUT)
@@ -48,6 +47,19 @@ class SwitcherMonitor extends Actor with ActorLogging {
     GPIO.pinMode(swL1busPin, GPIO.OUTPUT)
     GPIO.pinMode(swL2Pin, GPIO.OUTPUT)
     GPIO.pinMode(swL2busPin, GPIO.OUTPUT)
+    GPIO.digitalWrite(swm1Pin, GPIO.HIGH)
+    GPIO.digitalWrite(swm1busPin, GPIO.HIGH)
+    GPIO.digitalWrite(swm2Pin, GPIO.HIGH)
+    GPIO.digitalWrite(swm2busPin, GPIO.HIGH)
+    GPIO.digitalWrite(swmg1Pin, GPIO.HIGH)
+    GPIO.digitalWrite(swmg1busPin, GPIO.HIGH)
+    GPIO.digitalWrite(swauxg1Pin, GPIO.HIGH)
+    GPIO.digitalWrite(swauxg1busPin, GPIO.HIGH)
+    GPIO.digitalWrite(swL1Pin, GPIO.HIGH)
+    GPIO.digitalWrite(swL1busPin, GPIO.HIGH)
+    GPIO.digitalWrite(swL2Pin, GPIO.HIGH)
+    GPIO.digitalWrite(swL2busPin, GPIO.HIGH)
+
     self ! SwitcherMonitoring()
 
   }
