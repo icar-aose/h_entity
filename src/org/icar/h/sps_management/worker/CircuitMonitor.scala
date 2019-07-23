@@ -134,8 +134,9 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         }
       if(index_rasp==0)
         {
-          if ((data.getCurrent(0) < 1 || data.getCurrent(1) < 1 ||data.getCurrent(2) < 1 || data.getCurrent(3) < 1) && working) {
+          if ((data.getCurrent(0) < 1 || data.getCurrent(2) < 1 ) && working) {
             FaultEn ! StatusFault()
+            Thread.sleep(100)
             bridge.sendHead("failure(f)")
             working = false
           }

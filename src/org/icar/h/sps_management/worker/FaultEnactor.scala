@@ -37,8 +37,9 @@ class FaultEnactor extends Actor with ActorLogging {
       if(GPIO.digitalRead(swf1Pin)==0)
         fault += "switchf1"
       if(GPIO.digitalRead(swf2Pin)==0)
-        fault += "switchf2"
+        fault += "switchf3"
       sender() ! UpdateFault(fault)
+
 
 
 
