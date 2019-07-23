@@ -33,7 +33,7 @@ class FaultEnactor extends Actor with ActorLogging {
     }
 
     case StatusFault() =>
-      var fault : ArrayBuffer[String] = null
+      var fault : ArrayBuffer[String] = new ArrayBuffer[String]
       if(GPIO.digitalRead(swf1Pin)==0)
         fault += "switchf1"
       if(GPIO.digitalRead(swf2Pin)==0)

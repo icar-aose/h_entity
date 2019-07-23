@@ -45,7 +45,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     println("That 's remote:" + SensorArrayMonitor_1)
     SensorArrayMonitor_2 = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.remote.ip")+":5150/user/sensor_2") //IP of the PC remote
     println("That 's remote:" + SensorArrayMonitor_2)
-    FaultEn = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.actor.ip")+":5151/user/fault") //IP of the PC remote
+    FaultEn = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.remote.ip")+":5151/user/fault") //IP of the PC remote
     println("That 's remote:" + FaultEn)
   }
 
@@ -149,7 +149,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
      // println("arrivato: "+open_switchers_current)
       scenario.open_switchers = open_switchers_current ++ fault
-     // println("salvato: "+scenario.open_switchers)
+      println("salvato: "+scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)
