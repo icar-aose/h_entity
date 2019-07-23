@@ -62,7 +62,15 @@ case class UpdateScenario(open_switchers : ArrayBuffer[String]) extends Action w
 @SerialVersionUID(121L)
 case class EnactFault(fault : String) extends Action with Serializable
 
+@SerialVersionUID(122L)
+case class StatusFault() extends Action with Serializable
+
+@SerialVersionUID(123L)
 case class RequestUpdateScenario() extends Action with Serializable
+
+@SerialVersionUID(123L)
+case class UpdateFault(fault : ArrayBuffer[String]) extends Action with Serializable
+
 
 case class SwitcherMonitoring() extends Action with NoSerializationVerificationNeeded
 

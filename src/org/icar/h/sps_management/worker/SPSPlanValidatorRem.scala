@@ -80,10 +80,11 @@ class SPSPlanValidatorRem(val bridge : Akka2Jade, worker_sps : ActorRef,circ_sen
 
       val future_scenario: Future[Any] = circ_sens_ref ? GetCurrentScenarioDescription()
       scenario = Await.result(future_scenario, timeout.duration).asInstanceOf[CurrentScenarioDescription].scenario
-      log.debug("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: " + plan_reference)
+      log.info("i'm the validator, now contacting the sps reconfigurator for obtaining the solution: " + plan_reference)
       worker_sps ! GetPlan(plan_reference)
 
     case Plan(plan_ref, plan) =>
+      working = true
       solutions_to_be_validated += Plan(plan_ref, plan)
       all_plans += (plan_ref -> plan)
 

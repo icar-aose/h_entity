@@ -66,6 +66,7 @@ mission(undefined).
 	//.print("contacting the validator")
 	//.wait(2000)
 	.validate(Plan);
+	.abolish(discovered(Plan));
 	//validate_emergency_management(Plan,/*-->*/Problems);
 	//notify_commander(Plan,Results,Problems);
 .
@@ -73,13 +74,15 @@ mission(undefined).
 +validated(Plan_reference,Plan_description)
 <-
     //.print("The ",Plan_reference," is valid according the Physical Simulator");
-    //.print(Plan_description);
+    .print(Plan_description);
     .term2string(Plan_description,String);
     addSolution(Plan_reference,String);
+    .abolish(validated(Plan_reference,Plan_description));
 .
 
 +notvalidated(Plan_reference,Plan_description)
 <-
+    .print(Plan_description);
     .term2string(Plan_description,String);
     addSolutionNotValidated(Plan_reference,String);
 .

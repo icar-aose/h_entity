@@ -78,8 +78,8 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       if(working)
       { //println("discovered")
 
-        val num = discovered_solutions.size + 1
-        val name = "solution_" + num
+         val num = discovered_solutions.size + 1
+         val name = "solution_" + num
         discovered_solutions += (name -> sol)
         bridge.sendHead(s"discovered($name)")
 
@@ -89,6 +89,7 @@ class SPSPlanGenerator(val bridge: Akka2Jade, val mission_man_ref: ActorRef, val
       working = false
       context.stop(pmr)
       Thread.sleep(5000)
+      discovered_solutions.clear()
       circ_sens_ref ! Restart()
 
     case GetPlan(sol_ref)  =>

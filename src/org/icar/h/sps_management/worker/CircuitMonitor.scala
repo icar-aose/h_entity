@@ -37,6 +37,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
   var SensorArrayMonitor_1 : ActorSelection = null
   var SensorArrayMonitor_2 : ActorSelection = null
   var SwitcherMonitor : ActorSelection = null
+  var FaultEn : ActorSelection = null
   val r = scala.util.Random
   //Check if remote is active!
   if(sensorActor.equals("true")) {
@@ -44,6 +45,8 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
     println("That 's remote:" + SensorArrayMonitor_1)
     SensorArrayMonitor_2 = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.remote.ip")+":5150/user/sensor_2") //IP of the PC remote
     println("That 's remote:" + SensorArrayMonitor_2)
+    FaultEn = context.actorSelection("akka.tcp://RemoteSystem@"+ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor_2.actor.ip")+":5151/user/fault") //IP of the PC remote
+    println("That 's remote:" + FaultEn)
   }
 
   if(switcherActor.equals("true")) {
@@ -104,6 +107,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
     case Restart() =>
       working = true
+      fault.clear()
       print("RESTART!!")
 
     case RaspDataVal(data,index_rasp) =>
@@ -130,23 +134,19 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         }
       if(index_rasp==0)
         {
-          if (data.getCurrent(0) < 1 & data.getCurrent(2) > 10 & working) {
-            fault +="switchf1"
-            fault +="switchf5"
-            bridge.sendHead("failure(f1)")
-            working = false
-          }
-          if (data.getCurrent(2) < 1 & working) {
-            fault +="switchf3"
-            fault +="switchf5"
-            bridge.sendHead("failure(f3)")
+          if ((data.getCurrent(0) < 1 || data.getCurrent(1) < 1 ||data.getCurrent(2) < 1 || data.getCurrent(3) < 1) && working) {
+            FaultEn ! StatusFault()
+            bridge.sendHead("failure(f)")
             working = false
           }
         }
 
+    case UpdateFault(fault_val) =>
+      fault = fault_val
 
 
     case UpdateScenario(open_switchers_current) =>
+
      // println("arrivato: "+open_switchers_current)
       scenario.open_switchers = open_switchers_current ++ fault
      // println("salvato: "+scenario.open_switchers)

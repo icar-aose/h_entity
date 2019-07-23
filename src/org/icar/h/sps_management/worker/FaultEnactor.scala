@@ -6,12 +6,16 @@ import akka.actor._
 import cartago.util.agent.CartagoBasicContext
 import cartago.{CartagoService, NodeId, Op}
 import com.typesafe.config.ConfigFactory
+import processing.io.GPIO
 
+import scala.collection.mutable.ArrayBuffer
 class FaultEnactor extends Actor with ActorLogging {
 
   val node: NodeId = CartagoService.startNode
   var my_context : CartagoBasicContext = new CartagoBasicContext("remote_agent")
   var my_device = my_context.makeArtifact("faultArtifact", "org.icar.h.sps_management.artifact.FaultArtifact")
+  private val swf1Pin = 26
+  private val swf2Pin = 13
 
   override def preStart() : Unit = {
 
@@ -27,6 +31,14 @@ class FaultEnactor extends Actor with ActorLogging {
       //println("abilito il fault")
       my_context.doAction(my_device, new Op("actFault",fault))
     }
+
+    case StatusFault() =>
+      var fault : ArrayBuffer[String] = null
+      if(GPIO.digitalRead(swf1Pin)==0)
+        fault += "switchf1"
+      if(GPIO.digitalRead(swf2Pin)==0)
+        fault += "switchf2"
+      sender() ! UpdateFault(fault)
 
 
 
