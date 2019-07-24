@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 
 
-public class FaultAmpGui {
+public class FaultAmpGui extends javax.swing.JFrame {
 
     private JLabel amp1,amp2,amp3, amp4, amp5, amp6;
 

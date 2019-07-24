@@ -134,7 +134,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
         }
       if(index_rasp==0)
         {
-          if ((data.getCurrent(0) < 1 || data.getCurrent(2) < 1 ) && working) {
+          if ((data.getCurrent(0) < 1 || data.getCurrent(3) < 1 ) && working) {
             FaultEn ! StatusFault()
             Thread.sleep(100)
             bridge.sendHead("failure(f)")
@@ -150,7 +150,7 @@ class CircuitMonitor(val bridge: Akka2Jade) extends Actor with ActorLogging {
 
      // println("arrivato: "+open_switchers_current)
       scenario.open_switchers = open_switchers_current ++ fault
-      println("salvato: "+scenario.open_switchers)
+      //println("salvato: "+scenario.open_switchers)
 
     case GetCurrentScenarioDescription() =>
       sender() ! CurrentScenarioDescription(scenario)

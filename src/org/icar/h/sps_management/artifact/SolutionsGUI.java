@@ -1,6 +1,9 @@
 package org.icar.h.sps_management.artifact;
+import org.icar.h.sps_management.rpi_ina219.SelectedSolutionGUI;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.DefaultListModel;
 
 /**
@@ -12,6 +15,16 @@ public class SolutionsGUI extends javax.swing.JFrame {
     //private ActionListener execute_listener;
     private int selected = -1;
     //private int selected_to_be_executed = -1;
+
+    SelectedSolutionGUI gui_test;
+
+    {
+        try {
+            gui_test = new SelectedSolutionGUI();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int getSelectedForExecution() {
         return selected;
@@ -129,6 +142,9 @@ public class SolutionsGUI extends javax.swing.JFrame {
         selected = SolutionList.getSelectedIndex();
         if (selected != -1) {
             SelectedTextField.setText(solution_model.elementAt(selected).toString());
+
+            gui_test.SelectSol(solution_model.elementAt(selected).toString());
+
         }
     }
 
