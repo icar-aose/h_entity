@@ -4,7 +4,7 @@ import org.icar.h.sps_management.rpi_ina219.SelectedSolutionGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 
 /**
  *
@@ -130,6 +130,13 @@ public class SolutionsGUI extends javax.swing.JFrame {
     public javax.swing.JButton getSelectButton() {
         return ExecuteButton;
     }
+
+    public void hide_frame()
+    {
+        gui_test.hide_frame();
+    }
+
+
     public javax.swing.JPanel getJPanel3() {
         return jPanel3;
     }
@@ -144,6 +151,9 @@ public class SolutionsGUI extends javax.swing.JFrame {
             SelectedTextField.setText(solution_model.elementAt(selected).toString());
 
             gui_test.SelectSol(solution_model.elementAt(selected).toString());
+
+
+
 
         }
     }

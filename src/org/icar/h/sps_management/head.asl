@@ -74,7 +74,7 @@ mission(undefined).
 +validated(Plan_reference,Plan_description)
 <-
     //.print("The ",Plan_reference," is valid according the Physical Simulator");
-    .print(Plan_description);
+    //.print(Plan_description);
     .term2string(Plan_description,String);
     addSolution(Plan_reference,String);
     .abolish(validated(Plan_reference,Plan_description));
@@ -89,8 +89,8 @@ mission(undefined).
 
 +selected(Plan_reference)[artifact_name(Id,Name)]
 <-
-    .print("The CAPTAIN selected the reconfiguration: ",Plan_reference);
-    .print("Now contacting the enactor");
+    //.print("The CAPTAIN selected the reconfiguration: ",Plan_reference);
+    //.print("Now contacting the enactor");
     .term2string(Plan_ID, Plan_reference);
 	.enact(Plan_ID);
 	.print(Id);

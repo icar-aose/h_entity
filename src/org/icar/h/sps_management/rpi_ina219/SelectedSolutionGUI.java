@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SelectedSolutionGUI extends javax.swing.JFrame{
+public class  SelectedSolutionGUI extends javax.swing.JFrame{
 
     private JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
     private JLabel swm1, swm2, swmg1, swL1, swL2, swauxg1;
@@ -42,7 +42,7 @@ public class SelectedSolutionGUI extends javax.swing.JFrame{
 
     private JFrame f = new JFrame();
 
-    public SelectedSolutionGUI() throws IOException {
+    public  SelectedSolutionGUI() throws IOException {
 
 
         Dimension size = new Dimension(100, 20);
@@ -109,11 +109,17 @@ public class SelectedSolutionGUI extends javax.swing.JFrame{
 
     }
 
+    public void hide_frame ()
+    {
+         f.setVisible(false);
+    }
+
+
     public void SelectSol(String sol)
     {
         ArrayList<String> sol_list = new ArrayList<>();
 
-        System.out.println(sol);
+        //System.out.println(sol);
         sol_list=SolParser(sol);
 
         swm1.setIcon(null);
@@ -131,7 +137,7 @@ public class SelectedSolutionGUI extends javax.swing.JFrame{
 
         for(int i=1;i<sol_list.size();i=i+2)
         {
-            System.out.println(sol_list.get(i));
+            //System.out.println(sol_list.get(i));
             switch(sol_list.get(i)){
                     case "switchswp1":
                         if(sol_list.get(i-1).equals("OPEN")) {
@@ -334,6 +340,7 @@ public class SelectedSolutionGUI extends javax.swing.JFrame{
         f.setVisible(true);
         f.pack();
     }
+
 
 
     public ArrayList SolParser (String sol)

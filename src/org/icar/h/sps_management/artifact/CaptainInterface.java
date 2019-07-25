@@ -3,6 +3,7 @@ package org.icar.h.sps_management.artifact;
 import cartago.INTERNAL_OPERATION;
 import cartago.OPERATION;
 import cartago.tools.GUIArtifact;
+import org.icar.h.sps_management.rpi_ina219.SelectedSolutionGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,7 @@ public class CaptainInterface extends GUIArtifact {
 		gui_2.getJPanel3().setVisible(false);
 		gui_2.setVisible(true);
 
+
 		linkActionEventToOp(gui_1.getSelectButton(),"select");
 	}
 
@@ -57,7 +59,9 @@ public class CaptainInterface extends GUIArtifact {
 		plan_ref_index.clear();
 		model_1.clear();
 		model_2.clear();
+		gui_1.hide_frame();
 		gui_1.getTextField().setText("none");
+
 	}
 
 	@OPERATION

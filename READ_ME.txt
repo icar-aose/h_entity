@@ -72,3 +72,5 @@ AGENT:
         dove: locale
         ruolo: controlla le varie comunicazioni
                gestisce le due GUI soluzioni validate e non validate ---> SolutionsGUI(CaptainInterface)
+
+
