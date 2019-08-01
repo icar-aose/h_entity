@@ -79,7 +79,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println(actionEvent.getActionCommand());
+                System.out.println(actionEvent.getModifiers());
                 if(actionEvent.getActionCommand().equals("F1"))
                     if(faultF1.getBackground()==Color.GREEN)
                     {
@@ -168,7 +168,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
         swm1bus = new JLabel();
 
-        swm1busBut = new JButton("swm1busBut");
+        swm1busBut = new JButton();
         swm1busBut.setBounds(31,176,50,50);
         swm1busBut.setOpaque(false);
         swm1busBut.setBorderPainted(false);
