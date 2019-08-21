@@ -145,8 +145,17 @@ public class SwitcherArtifact extends Artifact {
 		GPIO.digitalWrite(swauxg1Pin,flagAuxg1);   //turn on(depends of the result) the generator auxg1
 
 	}
+	@OPERATION
+	public void actSingle(String switcher) {
 
-	// GPIO.digitalWrite(swm1Pin, GPIO.HIGH)
+		int x = GPIO.digitalRead(NamePinNum.get(switcher));
+		if(x==1)
+			GPIO.digitalWrite(NamePinNum.get(switcher),0);
+		else
+
+			GPIO.digitalWrite(NamePinNum.get(switcher),1);
+
+	}
 
 
 }

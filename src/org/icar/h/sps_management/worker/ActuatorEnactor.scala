@@ -26,9 +26,9 @@ class ActuatorEnactor extends Actor with ActorLogging {
         my_context.doAction(my_device, new Op("actPlan",plan_reference,plan))
       }
 
-    case EnactSingle(switch)=>
+    case EnactSingle(switcher)=>
       {
-        print("enacted:"+switch)
+        my_context.doAction(my_device, new Op("actSingle",switcher))
       }
 
 
