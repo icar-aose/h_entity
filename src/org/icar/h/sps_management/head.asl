@@ -96,13 +96,20 @@ mission(undefined).
 	.print(Id);
 .
 
-/* soluzione da modificare - non ottimale - selezione fallimento da dashboard */
+/* soluzioni da modificare - non ottimale - selezione fallimento e selezione switch da dashboard  */
 
 +selected_failure(Fail) : true
 <-
     //.print("messages failure: ",Fail);
     .fault(Fail);
     .abolish(selected_failure(Fail));
+.
+
++selected_switch(Switch) : true
+<-
+    .print("messages Switch: ",Switch);
+    .enact_single(Switch);
+    .abolish(selected_switch(Switch));
 .
 
 

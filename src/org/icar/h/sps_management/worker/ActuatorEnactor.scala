@@ -26,6 +26,10 @@ class ActuatorEnactor extends Actor with ActorLogging {
         my_context.doAction(my_device, new Op("actPlan",plan_reference,plan))
       }
 
+    case EnactSingle(switch)=>
+      {
+        print("enacted:"+switch)
+      }
 
 
     case _ => println("Received unknown msg ")

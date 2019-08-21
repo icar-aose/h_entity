@@ -27,6 +27,8 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
     private JButton swm1busBut, swm2busBut, swmg1busBut, swL1busBut, swL2busBut, swauxg1busBut;
 
+    private JButton swm1But, swm2But, swmg1But, swL1But, swL2But, swauxg1But;
+
     private JFrame f = new JFrame();
 
     private JButton faultF1,faultF2;
@@ -79,7 +81,6 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println(actionEvent.getModifiers());
                 if(actionEvent.getActionCommand().equals("F1"))
                     if(faultF1.getBackground()==Color.GREEN)
                     {
@@ -109,8 +110,46 @@ public class FaultAmpGui extends javax.swing.JFrame {
                         bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
-                if(actionEvent.getActionCommand().equals("swm1busBut"))
-                    System.out.println("ciao");
+
+                    switch(actionEvent.getActionCommand())
+                    {
+                        case "swm1busBut":
+                            bridge.sendHead("selected_switch(swm1busPin)");
+                            break;
+                        case "swm1But":
+                            bridge.sendHead("selected_switch(swm1Pin)");
+                            break;
+                        case "swm2busBut":
+                            bridge.sendHead("selected_switch(swm2busPin)");
+                            break;
+                        case "swm2But":
+                            bridge.sendHead("selected_switch(swm2Pin)");
+                            break;
+                        case "swmg1busBut":
+                            System.out.println("swmg1busBut");
+                            break;
+                        case "swmg1But":
+                            System.out.println("swmg1But");
+                            break;
+                        case "swL1busBut":
+                            System.out.println("swL1busBut");
+                            break;
+                        case "swL2busBut":
+                            System.out.println("swL2busBut");
+                            break;
+                        case "swL1But":
+                            System.out.println("swL1But");
+                            break;
+                        case "swL2But":
+                            System.out.println("swL2But");
+                            break;
+                        case "swauxg1busBut":
+                            System.out.println("swauxg1busBut");
+                            break;
+                        case "swauxg1But":
+                            System.out.println("swauxg1But");
+                            break;
+                    }
             }
         };
 
@@ -168,14 +207,6 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
         swm1bus = new JLabel();
 
-        swm1busBut = new JButton();
-        swm1busBut.setBounds(31,176,50,50);
-        swm1busBut.setOpaque(false);
-        swm1busBut.setBorderPainted(false);
-        swm1busBut.addActionListener(actionListener);
-        //swm1busBut.setVisible(false);
-        f.add(swm1busBut);
-
         //swm1bus.setOpaque(false);
         f.add(swm1bus);
 
@@ -203,6 +234,90 @@ public class FaultAmpGui extends javax.swing.JFrame {
         //swauxg1bus.setBorder(border_green);
         //swauxg1bus.setBounds(1210,182,30,20);
         f.add(swauxg1bus);
+
+        swm1busBut = new JButton("swm1busBut");
+        swm1busBut.setBounds(26,176,50,50);
+        swm1busBut.setOpaque(false);
+        swm1busBut.setBorderPainted(false);
+        swm1busBut.addActionListener(actionListener);
+        f.add(swm1busBut);
+
+        swm1But = new JButton("swm1But");
+        swm1But.setBounds(131,176,50,50);
+        swm1But.setOpaque(false);
+        swm1But.setBorderPainted(false);
+        swm1But.addActionListener(actionListener);
+        f.add(swm1But);
+
+        swm2busBut = new JButton("swm2busBut");
+        swm2busBut.setBounds(261,176,50,50);
+        swm2busBut.setOpaque(false);
+        swm2busBut.setBorderPainted(false);
+        swm2busBut.addActionListener(actionListener);
+        f.add(swm2busBut);
+
+        swm2But = new JButton("swm2But");
+        swm2But.setBounds(356,176,50,50);
+        swm2But.setOpaque(false);
+        swm2But.setBorderPainted(false);
+        swm2But.addActionListener(actionListener);
+        f.add(swm2But);
+
+        swmg1busBut = new JButton("swmg1busBut");
+        swmg1busBut.setBounds(491,176,50,50);
+        swmg1busBut.setOpaque(false);
+        swmg1busBut.setBorderPainted(false);
+        swmg1busBut.addActionListener(actionListener);
+        f.add(swmg1busBut);
+
+        swmg1But = new JButton("swmg1But");
+        swmg1But.setBounds(611,176,50,50);
+        swmg1But.setOpaque(false);
+        swmg1But.setBorderPainted(false);
+        swmg1But.addActionListener(actionListener);
+        f.add(swmg1But);
+
+        swL1busBut = new JButton("swL1busBut");
+        swL1busBut.setBounds(731,176,50,50);
+        swL1busBut.setOpaque(false);
+        swL1busBut.setBorderPainted(false);
+        swL1busBut.addActionListener(actionListener);
+        f.add(swL1busBut);
+
+        swL1But = new JButton("swL1But");
+        swL1But.setBounds(841,176,50,50);
+        swL1But.setOpaque(false);
+        swL1But.setBorderPainted(false);
+        swL1But.addActionListener(actionListener);
+        f.add(swL1But);
+
+        swL2busBut = new JButton("swL2busBut");
+        swL2busBut.setBounds(961,176,50,50);
+        swL2busBut.setOpaque(false);
+        swL2busBut.setBorderPainted(false);
+        swL2busBut.addActionListener(actionListener);
+        f.add(swL2busBut);
+
+        swL2But = new JButton("swL2But");
+        swL2But.setBounds(1081,176,50,50);
+        swL2But.setOpaque(false);
+        swL2But.setBorderPainted(false);
+        swL2But.addActionListener(actionListener);
+        f.add(swL2But);
+
+        swauxg1busBut = new JButton("swauxg1busBut");
+        swauxg1busBut.setBounds(1191,176,50,50);
+        swauxg1busBut.setOpaque(false);
+        swauxg1busBut.setBorderPainted(false);
+        swauxg1busBut.addActionListener(actionListener);
+        f.add(swauxg1busBut);
+
+        swauxg1But = new JButton("swauxg1But");
+        swauxg1But.setBounds(1301,176,50,50);
+        swauxg1But.setOpaque(false);
+        swauxg1But.setBorderPainted(false);
+        swauxg1But.addActionListener(actionListener);
+        f.add(swauxg1But);
 
         amp1 =new JLabel(val[0]+" mA");
         // size = amp1.getPreferredSize();

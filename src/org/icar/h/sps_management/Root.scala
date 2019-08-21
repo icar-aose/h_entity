@@ -53,6 +53,10 @@ class Root(val bridge : Akka2Jade) extends Actor with ActorLogging {
           val par = get_structure_arg(structure,0)
           plan_executor ! Enact(par)
 
+        case "enact_single" if check_structure(structure,1) =>
+          val par = get_structure_arg(structure,0)
+          plan_executor ! EnactSingle(par)
+
         case "fault" if check_structure(structure,1) =>
           val par = get_structure_arg(structure,0)
           faultEnactor ! EnactFault(par)

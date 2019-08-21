@@ -22,6 +22,7 @@ case class CheckFailure() extends Action
 case class FindSolutions( mission_ref : String, failure_description : String ) extends Action
 case class Validate( plan_reference : String ) extends Action
 case class Enact( plan_reference : String ) extends Action
+case class EnactSingle( switch : String ) extends Action
 case class Restart() extends Action
 case class StartCheckMonitor () extends Action
 case class Check () extends Action

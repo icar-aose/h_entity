@@ -43,6 +43,11 @@ class ReconfigurationEnactor(val bridge : Akka2Jade, worker_sps : ActorRef, sps_
           ActuatorActor ! EnactPlan(plan_reference,acts)
         else log.info("Enacted")
 
+      case EnactSingle(switch) =>
+        if(actuator.equals("true"))
+          ActuatorActor ! EnactSingle(switch)
+        else log.info("Enacted")
+
 
       case _ =>
         println("Enactor: unspecified message")
