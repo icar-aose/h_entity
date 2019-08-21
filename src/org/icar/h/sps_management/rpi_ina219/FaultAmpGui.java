@@ -126,28 +126,28 @@ public class FaultAmpGui extends javax.swing.JFrame {
                             bridge.sendHead("selected_switch(swm2Pin)");
                             break;
                         case "swmg1busBut":
-                            System.out.println("swmg1busBut");
+                            bridge.sendHead("selected_switch(swmg1busPin)");
                             break;
                         case "swmg1But":
-                            System.out.println("swmg1But");
+                            bridge.sendHead("selected_switch(swmg1Pin)");
                             break;
                         case "swL1busBut":
-                            System.out.println("swL1busBut");
+                            bridge.sendHead("selected_switch(swL1busPin)");
                             break;
                         case "swL2busBut":
-                            System.out.println("swL2busBut");
+                            bridge.sendHead("selected_switch(swL2busPin)");
                             break;
                         case "swL1But":
-                            System.out.println("swL1But");
+                            bridge.sendHead("selected_switch(swL1Pin)");
                             break;
                         case "swL2But":
-                            System.out.println("swL2But");
+                            bridge.sendHead("selected_switch(swL2Pin)");
                             break;
                         case "swauxg1busBut":
-                            System.out.println("swauxg1busBut");
+                            bridge.sendHead("selected_switch(swauxg1busPin)");
                             break;
                         case "swauxg1But":
-                            System.out.println("swauxg1But");
+                            bridge.sendHead("selected_switch(swauxg1Pin)");
                             break;
                     }
             }
