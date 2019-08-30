@@ -236,6 +236,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swauxg1bus);
 
         swm1busBut = new JButton("swm1busBut");
+        swm1busBut.setForeground(Color.WHITE);
         swm1busBut.setBounds(26,176,50,50);
         swm1busBut.setOpaque(false);
         swm1busBut.setBorderPainted(false);
@@ -243,6 +244,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swm1busBut);
 
         swm1But = new JButton("swm1But");
+        swm1But.setForeground(Color.WHITE);
         swm1But.setBounds(131,176,50,50);
         swm1But.setOpaque(false);
         swm1But.setBorderPainted(false);
@@ -250,6 +252,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swm1But);
 
         swm2busBut = new JButton("swm2busBut");
+        swm2busBut.setForeground(Color.WHITE);
         swm2busBut.setBounds(261,176,50,50);
         swm2busBut.setOpaque(false);
         swm2busBut.setBorderPainted(false);
@@ -257,6 +260,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swm2busBut);
 
         swm2But = new JButton("swm2But");
+        swm2But.setForeground(Color.WHITE);
         swm2But.setBounds(356,176,50,50);
         swm2But.setOpaque(false);
         swm2But.setBorderPainted(false);
@@ -264,6 +268,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swm2But);
 
         swmg1busBut = new JButton("swmg1busBut");
+        swmg1busBut.setForeground(Color.WHITE);
         swmg1busBut.setBounds(491,176,50,50);
         swmg1busBut.setOpaque(false);
         swmg1busBut.setBorderPainted(false);
@@ -271,6 +276,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swmg1busBut);
 
         swmg1But = new JButton("swmg1But");
+        swmg1But.setForeground(Color.WHITE);
         swmg1But.setBounds(611,176,50,50);
         swmg1But.setOpaque(false);
         swmg1But.setBorderPainted(false);
@@ -278,6 +284,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swmg1But);
 
         swL1busBut = new JButton("swL1busBut");
+        swL1busBut.setForeground(Color.WHITE);
         swL1busBut.setBounds(731,176,50,50);
         swL1busBut.setOpaque(false);
         swL1busBut.setBorderPainted(false);
@@ -285,6 +292,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swL1busBut);
 
         swL1But = new JButton("swL1But");
+        swL1But.setForeground(Color.WHITE);
         swL1But.setBounds(841,176,50,50);
         swL1But.setOpaque(false);
         swL1But.setBorderPainted(false);
@@ -292,6 +300,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swL1But);
 
         swL2busBut = new JButton("swL2busBut");
+        swL2busBut.setForeground(Color.WHITE);
         swL2busBut.setBounds(961,176,50,50);
         swL2busBut.setOpaque(false);
         swL2busBut.setBorderPainted(false);
@@ -299,6 +308,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swL2busBut);
 
         swL2But = new JButton("swL2But");
+        swL2But.setForeground(Color.WHITE);
         swL2But.setBounds(1081,176,50,50);
         swL2But.setOpaque(false);
         swL2But.setBorderPainted(false);
@@ -306,6 +316,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swL2But);
 
         swauxg1busBut = new JButton("swauxg1busBut");
+        swauxg1busBut.setForeground(Color.WHITE);
         swauxg1busBut.setBounds(1191,176,50,50);
         swauxg1busBut.setOpaque(false);
         swauxg1busBut.setBorderPainted(false);
@@ -313,6 +324,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(swauxg1busBut);
 
         swauxg1But = new JButton("swauxg1But");
+        swauxg1But.setForeground(Color.WHITE);
         swauxg1But.setBounds(1301,176,50,50);
         swauxg1But.setOpaque(false);
         swauxg1But.setBorderPainted(false);
