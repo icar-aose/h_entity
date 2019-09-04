@@ -66,6 +66,7 @@ public class SwitcherArtifact extends Artifact {
 		NamePinNum.put("swL1Pin",20);
 		NamePinNum.put("swL1busPin",16);
 		NamePinNum.put("swL2Pin",12);
+		NamePinNum.put("swL2plusPin",23);
 		NamePinNum.put("swL2busPin",21);
 		NamePinNum.put("swauxg1Pin",26);
 		NamePinNum.put("swauxg1busPin",19);

@@ -101,6 +101,7 @@ public class  SelectedSolutionGUI extends javax.swing.JFrame{
 
         SelectedSolutionGUI test = new SelectedSolutionGUI();
 
+
         String sol = "solution_1: sol[\"CLOSE_switchswmg1\",\"OPEN_switchswp6_&_CLOSE_switchsws4\",\"OPEN_switchswp3_&_OPEN_switchsws3\",\"OPEN_switchswauxg1\"]";
 
 

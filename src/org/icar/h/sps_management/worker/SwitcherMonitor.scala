@@ -20,12 +20,13 @@ class SwitcherMonitor extends Actor with ActorLogging {
   val swL1busPin = 16 //Relais 2 Load 1
   val swL2Pin = 12 //Relais 1 Load 2
   val swL2busPin = 21 //Relais 2 Load 2
+  val swL2plusPin = 23 //Relais 3 plus Load 2
   val swauxg1Pin = 26 //Relais1 aux gen 1
   val swauxg1busPin = 19 //Relais2 aux gen 1
 
   val NamePinNum: Map[String, Int] = Map("swm1Pin" -> 25, "swm1busPin" -> 13, "swm2Pin" -> 27
     , "swm2busPin" -> 17, "swmg1Pin" -> 6, "swmg1busPin" -> 5,
-    "swL1Pin" -> 20, "swL1busPin" -> 16, "swL2Pin" -> 12, "swL2busPin" -> 21,
+    "swL1Pin" -> 20, "swL1busPin" -> 16, "swL2Pin" -> 12, "swL2busPin" -> 21,"swL2plusPin"->23,
     "swauxg1Pin" -> 26, "swauxg1busPin" -> 19)
 
   var open_switchers: ArrayBuffer[String] = new ArrayBuffer[String]
@@ -47,6 +48,7 @@ class SwitcherMonitor extends Actor with ActorLogging {
     GPIO.pinMode(swL1busPin, GPIO.OUTPUT)
     GPIO.pinMode(swL2Pin, GPIO.OUTPUT)
     GPIO.pinMode(swL2busPin, GPIO.OUTPUT)
+    GPIO.pinMode(swL2plusPin, GPIO.OUTPUT)
 
     GPIO.digitalWrite(swm1Pin, GPIO.LOW)
     GPIO.digitalWrite(swm1busPin, GPIO.HIGH)
@@ -58,6 +60,7 @@ class SwitcherMonitor extends Actor with ActorLogging {
     GPIO.digitalWrite(swauxg1busPin, GPIO.HIGH)
     GPIO.digitalWrite(swL1Pin, GPIO.LOW)
     GPIO.digitalWrite(swL1busPin, GPIO.HIGH)
+    GPIO.digitalWrite(swL2plusPin, GPIO.HIGH)
     GPIO.digitalWrite(swL2Pin, GPIO.HIGH)
     GPIO.digitalWrite(swL2busPin, GPIO.HIGH)
 

@@ -21,7 +21,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
     private JLabel swm1, swm2, swmg1, swL1, swL2, swauxg1;
 
-    private JLabel boltLabelF1,boltLabelF2;
+    private JLabel boltLabelF1,boltLabelF2,boltLabelF3;
 
     private JLabel swm1bus, swm2bus, swmg1bus, swL1bus, swL2bus, swauxg1bus;
 
@@ -31,7 +31,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
 
     private JFrame f = new JFrame();
 
-    private JButton faultF1,faultF2;
+    private JButton faultF1,faultF2,faultF3;
     private double[] val =new double[6];
 
     private URL url_lineDown = getClass().getResource("circuit_file/line_down.png");
@@ -110,6 +110,20 @@ public class FaultAmpGui extends javax.swing.JFrame {
                         bridge.sendHead("selected_failure(switchf2)");
                         //INVIA COMANDO AL FAULTENACTOR
                     }
+                if(actionEvent.getActionCommand().equals("F3"))
+                    if(faultF3.getBackground()==Color.GREEN)
+                    {
+                        faultF3.setBackground(Color.RED);
+                        boltLabelF3.setIcon(iconBolt);
+                        bridge.sendHead("selected_switch(swL2plusPin)");
+                        //INVIA COMANDO AL FAULTENACTOR
+                    }
+                    else {
+                        faultF3.setBackground(Color.GREEN);
+                        boltLabelF3.setIcon(null);
+                        bridge.sendHead("selected_switch(swL2plusPin)");
+                        //INVIA COMANDO AL FAULTENACTOR
+                    }
 
                     switch(actionEvent.getActionCommand())
                     {
@@ -174,6 +188,17 @@ public class FaultAmpGui extends javax.swing.JFrame {
         //swm1.setBorder(border_green);
         boltLabelF2.setBounds(540,175,30,45);
         f.add(boltLabelF2);
+
+        faultF3 = new JButton("F3");
+        faultF3.setBackground(Color.green);
+        faultF3.setBounds(1020, 250, 70, 30);
+        faultF3.addActionListener(actionListener);
+        faultF3.setOpaque(true);
+
+        boltLabelF3 = new JLabel();
+        //swm1.setBorder(border_green);
+        boltLabelF3.setBounds(1100,235,30,45);
+        f.add(boltLabelF3);
 
         swm1 = new JLabel(iconLineRect);
         //swm1.setBorder(border_green);
@@ -364,6 +389,7 @@ public class FaultAmpGui extends javax.swing.JFrame {
         f.add(amp6);
         f.add(faultF1,BorderLayout.NORTH);
         f.add(faultF2,BorderLayout.NORTH);
+        f.add(faultF3,BorderLayout.NORTH);
 
         f.setLocation(10,10);
         //if(ResourceBundle.getBundle("org.icar.h.sps_management.Boot").getString("sensor.actor").equals("true"))
