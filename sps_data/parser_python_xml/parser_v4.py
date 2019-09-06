@@ -206,7 +206,7 @@ def main():
 		#print aux2
 
 		#cominciamo con le connessioni fra 2 nodi
-		out_file = open("sps_data.txt","w")
+		out_file = open("sps_circuit.txt","w")
 
 		#step 1: connessioni nodo-nodo
 		out_file.write("[node-node]\n")
