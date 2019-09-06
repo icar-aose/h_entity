@@ -93,6 +93,7 @@ class SwitcherMonitor extends Actor with ActorLogging {
           case "swL2Pin" => if (readVal == 1) open_switchers += "switchsw4"
           case "swmg1Pin" => if (readVal == 1) open_switchers += "switchswmg1"
           case "swauxg1Pin" => if (readVal == 1) open_switchers += "switchswauxg1"
+          case "swL2plusPin" =>
         }
       }
 
